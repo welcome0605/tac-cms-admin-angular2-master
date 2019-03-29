@@ -1,0 +1,417 @@
+<!-- START: tables/datatables -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>App Admin Settings</strong>
+            <div class="pull-right">
+                      <!-- <button 
+                        #adminSaveBtn type="submit" 
+                        [disabled]="!asform.valid || this.firebase_ios_plist.length == 0 || this.firebase_android_json.length == 0" 
+                        class="btn btn-primary mr-3">Save</button> -->
+                        <button 
+                        #adminSaveBtn type="submit"                         
+                        class="btn btn-primary mr-3">Save</button>
+                    </div>
+        </span>
+    </div>
+    <div class="card-block">
+        <!-- <div class="row">
+            <div class="col-lg-12">
+                <h6 class="text-uppercase">
+                    <strong>STEPS TO CREATE OR SIGN IN TO YOUR GOOGLE ANALYTICS ACCOUNT:</strong>
+                </h6>
+
+                <label class="form-label">
+                    1. Create or sign in to your Google Analytics account:
+                    <br/> 2. Go to
+                    <a style="color: #0275d8;" target="_blank" href="https://www.google.com/analytics/">https://www.google.com/analytics/</a>
+                    <br/> 3. Click SIGN IN > Analytics.
+                    <br/> 4. Do one of the following:
+                    <br/> &nbsp;&nbsp;&nbsp;- To create an account, click More options > Create account.
+                    <br/> &nbsp;&nbsp;&nbsp;- To sign in to your account, enter the email address and password associated with
+                    the account.
+                    <br/> 5. After sign in click Admin.
+                    <br/> 6. Select an account from the menu in the ACCOUNT column.
+                    <br/> 7. Select a property from the menu in the PROPERTY column.
+                    <br/> 8. Under PROPERTY, click Tracking Info > Tracking Code.
+                    <br/> 9. Your tracking ID and property number are displayed at the top of the page.
+                    <br/> 10. The tracking code snippet for your website is displayed under Website tracking.
+                    <br/>
+                    <br/>
+                </label>
+
+            </div>
+        </div> -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="mb-5">
+              <form 
+                #basicInformationForm="ngForm" 
+                (ngSubmit)="adminSettingSubmit(basicInformationForm)" 
+                [formGroup]="asform">
+                      
+                <div class="card-header" style='padding:.75rem 0;'>
+                  <span class="cat__core__title">
+                    <strong>App Bundle Identifiers</strong>
+                  </span>
+                </div>
+
+                <div class="card-block" style='padding:1.25rem 0;'>                          
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="ios_app_id">
+                        iOS App ID
+                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter iOS App ID."></i>
+                        <span 
+                          class="mandatory-field"
+                          *ngIf="(asform.controls['ios_app_id'].hasError('required') && asform.controls['ios_app_id'].touched) || (asform.controls['ios_app_id'].hasError('matchCorrectSpace') && asform.controls['ios_app_id'].touched)">*</span>
+                      </label>                                    
+                      <div class="col-md-6">
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          name="ios_app_id" 
+                          placeholder="Enter iOS App Id" 
+                          [formControl]="asform.controls['ios_app_id']">
+                        <small 
+                          *ngIf="asform.controls['ios_app_id'].hasError('required') && asform.controls['ios_app_id'].touched" 
+                          class="form-message text-danger">
+                          This field is required.
+                        </small>
+                        <small 
+                          *ngIf="asform.controls['ios_app_id'].hasError('matchCorrectSpace') && asform.controls['ios_app_id'].touched" 
+                          class="form-message text-danger">
+                          Please enter valid ios app id
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="ios_appstore_id">
+                        iOS AppStore ID
+                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter iOS AppStore ID."></i>
+                        <span 
+                          class="mandatory-field"
+                          *ngIf="(asform.controls['ios_appstore_id'].hasError('required') && asform.controls['ios_appstore_id'].touched) || (asform.controls['ios_appstore_id'].hasError('matchCorrectSpace') && asform.controls['ios_appstore_id'].touched)">*</span>
+                      </label>                                    
+                      <div class="col-md-6">
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          name="ios_appstore_id" 
+                          placeholder="Enter iOS AppStore Id" 
+                          [formControl]="asform.controls['ios_appstore_id']">
+                        <small 
+                          *ngIf="asform.controls['ios_appstore_id'].hasError('required') && asform.controls['ios_appstore_id'].touched" 
+                          class="form-message text-danger">
+                          This field is required.
+                        </small>
+                        <small 
+                          *ngIf="asform.controls['ios_appstore_id'].hasError('matchCorrectSpace') && asform.controls['ios_appstore_id'].touched" 
+                          class="form-message text-danger">
+                          Please enter valid ios appstore id
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label 
+                        class="col-md-5 col-form-label" for="andr_app_id">
+                        Android App ID
+                        <i 
+                          class="fa fa-question-circle" 
+                          data-toggle="tooltip" 
+                          data-placement="right" 
+                          title="Enter Android App ID."></i>
+
+                        <span 
+                          *ngIf="(asform.controls['andr_app_id'].hasError('required') && asform.controls['andr_app_id'].touched) || (asform.controls['andr_app_id'].hasError('matchCorrectSpace') && asform.controls['andr_app_id'].touched)"
+                          class="mandatory-field">*</span>
+                      </label>
+                      <div class="col-md-6">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="andr_app_id"
+                            placeholder="Enter Android App id" 
+                            [formControl]="asform.controls['andr_app_id']">
+                        <small *ngIf="asform.controls['andr_app_id'].hasError('required') && asform.controls['andr_app_id'].touched" class="form-message text-danger">This field is required.</small>
+
+                        <small *ngIf="asform.controls['andr_app_id'].hasError('matchCorrectSpace') && asform.controls['andr_app_id'].touched" class="form-message text-danger">Please enter valid android app id</small>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                      
+                  <!-- firebase settings  -->
+                  <div class="card-header" style='padding:.75rem 0;'>
+                    <span class="cat__core__title">
+                      <strong>FireBase Infos</strong>
+                    </span>
+                  </div>
+
+                  <div class="card-block" style='padding:1.25rem 0;'>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label 
+                          class="col-md-5 col-form-label" for="firebase_id_iOS">
+                          Firebase id for iOS
+                          <i 
+                              class="fa fa-question-circle" 
+                              data-toggle="tooltip" 
+                              data-placement="right" 
+                              title="Retrieve ID tokens on clients. When a user or device successfully signs in, Firebase creates a corresponding ID token that uniquely identifies them and grants them access to several resources, such as Firebase Realtime Database and Cloud Storage."></i>
+
+                          <span 
+                            *ngIf="asform.controls['firebase_id_iOS'].hasError('required') && asform.controls['firebase_id_iOS'].touched"
+                            class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-6">
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            name="firebase_id_iOS" 
+                            placeholder="Enter Android App id" 
+                            [formControl]="asform.controls['firebase_id_iOS']">
+                          <small 
+                            *ngIf="asform.controls['firebase_id_iOS'].hasError('required') && asform.controls['firebase_id_iOS'].touched" 
+                            class="form-message text-danger">
+                            This field is required.
+                          </small>
+                          <small 
+                            *ngIf="asform.controls['firebase_id_iOS'].hasError('matchCorrectSpace') && asform.controls['firebase_id_iOS'].touched" 
+                            class="form-message text-danger">
+                            Please enter valid iOS Firebase id.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label 
+                          class="col-md-5 col-form-label" 
+                          for="server_key_iOS">
+                          Server Key for iOS
+                          <i 
+                            class="fa fa-question-circle" 
+                            data-toggle="tooltip" 
+                            data-placement="right"
+                            title="Register your app in the FCM Console: https://console.firebase.google.com (add project)
+                            1. Click on the newly added project, in the upper left menu is the 'Overview' and Gear Settings.                        
+                            2. Click on the GEAR settings icon, and then on 'Project Settings'                            
+                            3. In the main screen, click on 'Cloud Messaging'                            
+                            4. Here you will find your 'Server Key'">
+                          </i>
+                          <span 
+                          *ngIf="asform.controls['server_key_iOS'].hasError('required') && asform.controls['server_key_iOS'].touched" 
+                            class="mandatory-field">*</span>
+                        </label>                                    
+                        <div class="col-md-6">
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            name="server_key_iOS" 
+                            placeholder="Enter Server Key"
+                            [formControl]="asform.controls['server_key_iOS']">
+                          <small 
+                            *ngIf="asform.controls['server_key_iOS'].hasError('required') && asform.controls['server_key_iOS'].touched" 
+                            class="form-message text-danger">This field is required.</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 col-form-label" for="firebase_ios_plist_file">
+                          Firebase plist file
+                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right"
+                            title="Sign in to Firebase and open your project.
+                            Click the Settings icon and select Project settings.
+                            In the Your apps card, select the bundle ID of the app you need a config file for from the list.
+                            Click GoogleService-Info.plist.">
+                          </i>
+                          <span 
+                            *ngIf="firebase_ios_plist.length == 0"
+                            class="mandatory-field">*</span>
+                        </label>                                    
+                        <div class="col-md-6 firebase-upload-file">       
+                          <div class="row">
+                            <div class="col-md-12">
+                                <input 
+                                type="file" 
+                                class="file-upload"
+                                id="firebase_ios_plist_file" 
+                                name="firebase_ios_plist_file"
+                                (change)="filePlistSelect($event)" 
+                                accept=".plist">
+                              <input 
+                                name="firebase_ios_plist_file_value"
+                                class="form-control firebase_ios_plist_file_value" 
+                                type="hidden">
+                              <button 
+                                type="button" 
+                                class="btn btn-primary mr-3" 
+                                (click)="clickFireBaseiosPlist()">
+                                Upload File
+                              </button>
+                              <p>{{getPlistFileName()}}</p>
+                              <a 
+                                class="download-btn"
+                                href="{{firebase_ios_plist}}"
+                                [hidden]="!firebase_ios_plist || !firebase_ios_plist.length > 0">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          </div>                                                                     
+                          <div class="row">
+                            <div class="col-md-12">
+                              <small 
+                                class="form-message text-danger"
+                                *ngIf="firebase_ios_plist.length == 0">
+                                You need to add iOS Firebase Plist File.
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 col-form-label" for="firebase_id_android">Firebase id for Android
+                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right"
+                              title="Retrieve ID tokens on clients. When a user or device successfully signs in, Firebase creates a corresponding ID token that uniquely identifies them and grants them access to several resources, such as Firebase Realtime Database and Cloud Storage.">
+                          </i>
+                          <span 
+                            *ngIf="(asform.controls['firebase_id_android'].hasError('required') && asform.controls['firebase_id_android'].touched) || (asform.controls['firebase_id_android'].hasError('matchCorrectSpace') && asform.controls['firebase_id_android'].touched)" 
+                            class="mandatory-field">*</span>
+                        </label>                                    
+                        <div class="col-md-6">
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            name="firebase_id_android" 
+                            placeholder="Enter Android Firebase id"
+                            [formControl]="asform.controls['firebase_id_android']">
+                          <small 
+                            *ngIf="asform.controls['firebase_id_android'].hasError('required') && asform.controls['firebase_id_android'].touched" 
+                            class="form-message text-danger">
+                            This field is required.
+                          </small>
+
+                          <small 
+                            *ngIf="asform.controls['firebase_id_android'].hasError('matchCorrectSpace') && asform.controls['firebase_id_android'].touched" 
+                            class="form-message text-danger">
+                            Please enter valid android firebase id
+                          </small>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group form-group row">
+                        <label class="col-md-5 col-form-label" for="server_key_android">Server Key for Android
+                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right"
+                            title="Register your app in the FCM Console: https://console.firebase.google.com (add project)
+                            1. Click on the newly added project, in the upper left menu is the 'Overview' and Gear Settings.
+                        
+                            2. Click on the GEAR settings icon, and then on 'Project Settings'
+                            
+                            3. In the main screen, click on 'Cloud Messaging'
+                            
+                            4. Here you will find your 'Server Key'">
+                          </i>
+                          <span 
+                            *ngIf="asform.controls['server_key_android'].hasError('required') && asform.controls['server_key_android'].touched"
+                            class="mandatory-field">*</span>
+                        </label>                                    
+                        <div class="col-md-6">
+                          <input type="text" 
+                            class="form-control"
+                            name="server_key_android"
+                            placeholder="Enter Server Key"
+                            [formControl]="asform.controls['server_key_android']">
+                          <small 
+                            *ngIf="asform.controls['server_key_android'].hasError('required') && asform.controls['server_key_android'].touched" 
+                            class="form-message text-danger">This field is required.</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 col-form-label" for="firebase_android_json_file">
+                          Firebase json file
+                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right"
+                            title="Sign in to Firebase and open your project.
+                            Click the Settings icon and select Project settings.
+                            In the Your apps card, select the package name of the app you need a config file for from the list.
+                            Click google-services.json.">
+                          </i>
+                          <span 
+                            *ngIf="firebase_ios_plist.length == 0"
+                            class="mandatory-field">*</span>
+                        </label>                                    
+                        <div class="col-md-6 firebase-upload-file">   
+                          <div class="row">
+                            <div class="col-md-12">
+                                <input 
+                                class="file-upload"
+                                type="file" 
+                                id="firebase_android_json_file" 
+                                name="firebase_android_json_file"
+                                (change)="fileJsonSelect($event)"
+                                accept=".json">                                            
+                              <input 
+                                class="form-control firebase_android_json_file_value" 
+                                name="firebase_android_json_file_value" 
+                                type="hidden">
+                              <button 
+                                type="button" 
+                                class="btn btn-primary mr-3" 
+                                (click)="clickFireBaseAndroidJson()">
+                                Upload File
+                              </button>
+                              <p>{{getJsonFileName()}}</p>
+    
+                              <a 
+                                class="download-btn"
+                                href="{{firebase_android_json}}"
+                                [hidden]="!firebase_android_json || !firebase_android_json.length > 0">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <small 
+                                class="form-message text-danger"
+                                *ngIf="firebase_android_json.length == 0">
+                                You need to add Android Firebase Json File.
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-actions clearfix">
+                    
+                  </div>
+              </form>                      
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+
+<!-- END: tables/datatables -->

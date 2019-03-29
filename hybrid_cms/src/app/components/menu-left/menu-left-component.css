@@ -1,0 +1,16 @@
+.num_wrapper {
+	display: initial;
+	position: relative;
+}
+
+.num_wrapper .num {
+    left: -1px;
+    top: -7px;
+    background: #cf0c3a;
+    border-radius: 20px;
+    padding: 2px 6px;
+    font-size: 9px;
+    color: white;
+    position: absolute;
+    float: right;
+}

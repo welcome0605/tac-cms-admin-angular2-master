@@ -1,0 +1,656 @@
+<section id="section-setting" class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Settings</strong>
+        </span>
+        <div class="pull-right">
+          <button class="btn btn-primary mr-3" 
+          (click)="save_all()"  
+          style="width:150px" 
+          [disabled]="!biform.valid"
+          id = "btnSaveAll">
+          Save
+        </button>
+        </div>
+    </div>
+    <div class="card-block">
+      <div id="setting-content">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group-title-div">
+              <div class="h-line"></div>
+              <h4 class="panel-group-title" >App Images</h4>
+              <div class="h-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row setting-panel-group">
+          <!-- app icon panel start -->
+          <div id="appicon" class="col-lg-4">
+            <div class="setting-panel">
+              <h4 class="panel-title text-uppercase text-center">
+                <strong>App Icon</strong>
+              </h4>
+              <div class="panel-image-container">
+                <form #AppIconForm="ngForm" (ngSubmit)="onSubmitAppIcon(AppIconForm)" [formGroup]="appiconform">
+                  <label class="header-panel-description panel-description form-label">Your app icon will show in the App Store and Google Play Store as well as on
+                      the device when downloaded</label>
+                  <div class="panel-image-content">
+                    <div class="form-group app-icon-file-dropify">
+                      <input type="file" accept="image/*" data-max-file-size="8M" class="dropify" id="app_icon" name="app_icon" (change)="appIconFileChange($event)"
+                          data-allowed-file-extensions="png jpeg jpg" data-height="140" data-min-width="24"
+                          data-max-width="6000" data-min-height="24" data-max-height="6000" />
+
+                      <input type="hidden" name="fileHidden" formControlName="imageInput" />
+                    </div>
+                  </div>
+
+                  <label class="panel-description form-label requiredSizeLabel">Recommended Dimensions: 1024x1024</label>
+                  <!-- <div class="div-child-center" *ngIf="app_icon_error">
+                    <small class="app_icon_size_error text-danger"></small>
+                  </div> -->
+
+                  <div class="form-actions clearfix">
+                    <div class="pull-left">
+                      <button id = "btn_app_icon" #appIconSave type="submit" [disabled]="!appiconform.valid" class="btn btn-primary mr-3" style="display:none">Save</button>
+                    </div>
+                    <div *ngIf="is_superadmin" class="pull-right">
+                      <div *ngIf="downloadImgButtonFlag == true">
+                        <a href="{{appImgUrl}}">
+                          <button type="button" class="btn btn-primary">Download
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- splashscreen panel start -->
+          <div id="splashscreen" class="col-lg-4">
+            <div class="setting-panel">
+              <h4 class="panel-title text-uppercase text-center">
+                <strong>Splash Screen</strong>
+              </h4>
+              <div class="panel-image-container">
+                <form #splashScreenForm="ngForm" (ngSubmit)="splashScreenSubmit(splashScreenForm)" [formGroup]="spscreenform">
+                  <label class="header-panel-description panel-description">The splash screen will show when the app loads on the device</label>
+                  <div class="panel-image-content">
+                    <div class="background-image-dropify">
+                      <input type="file" accept="image/*" data-max-file-size="8M" class="dropify" id="background_image" name="background_image" (change)="bcfileChange($event)"
+                        data-allowed-file-extensions="png jpeg jpg" data-height="240" data-min-width="24"
+                        data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                      <input type="hidden" name="fileHidden" formControlName="bcimageInput" />
+                    </div>
+                  </div>
+
+                  <label class="panel-description form-label requiredSizeLabel">Recommended Dimensions: 1242x2208</label>
+                  <div class="form-actions clearfix">
+                    <div class="pull-left">
+                      <button id = "btn_app_splash" #appSplashSave type="submit" [disabled]="!spscreenform.valid" class="btn btn-primary mr-3" style="display:none">Save</button>
+                    </div>
+                    <div class="pull-right" *ngIf="is_superadmin">
+                      <div *ngIf="splashImgUrlFlag == true">
+                        <a href="{{splashImgUrl}}">
+                          <button type="button" class="btn btn-primary mr-3">Download</button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div id="sponsersplash" class="col-lg-4">
+            <div class="setting-panel">
+              <h4 class="panel-title text-uppercase text-center">
+                <strong>Sponsor Splash Screen</strong>
+              </h4>
+
+              <div class="panel-image-container">
+                <form #sponsorSplashForm="ngForm" (ngSubmit)="sponsorSplashSubmit(sponsorSplashForm)" [formGroup]="sponsorsplashform">
+                  <label class="panel-description form-label">The sponsor splash screen will show after the splash screen for the specified
+                        period of time assigned (Optional)
+                  </label>
+
+                  <div class="form-group">
+                    <label class="length-in-seconds-label col-form-label" for="l0">Length in Seconds</label>
+                    <div class="length-in-seoncds-content">
+                      <input class="form-control custom_css_duration_field_text" placeholder="Enter no of seconds" [formControl]="sponsorsplashform.controls['no_sec_display']"
+                            type="text" name="sponsor_splash_time" id="sponsor_splash_time" (change)="sponsorsplashtimeChange($event)" appOnlyNum>
+                            <input type="hidden" name="fileHidden" formControlName="no_sec_display" />
+                      <input class="form-control custom_css_duration_field_sec" type="text" value="seconds" name="" id="" disabled="">
+
+                      <small *ngIf="sponsorsplashform.controls['no_sec_display'].hasError('required') && sponsorsplashform.controls['no_sec_display'].touched"
+                          class="form-message text-danger">Please provide valid input in seconds.</small>
+                      <small *ngIf="sponsorsplashform.controls['no_sec_display'].touched && sponsorsplashform.controls['no_sec_display'].hasError('maxlength')"
+                          class="form-message text-danger">Please provide valid input in seconds upto 4 digits.</small>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="panel-image-content">
+                    <div class="form-group sponsor-splash-image-dropify">
+                      <input type="file" accept="image/*" data-max-file-size="8M" class="dropify" id="sponsor_splash_image" name="sponsor_splash_image" (change)="sponsorfileChange($event)"
+                                data-allowed-file-extensions="png jpeg jpg" data-height="240" data-min-width="24"
+                                data-max-width="6000" data-min-height="24" data-max-height="6000" />
+                      <input type="hidden" name="fileHidden" formControlName="ssimageInput" />
+                    </div>
+                  </div>
+                  <label class="panel-description form-label requiredSizeLabel">Recommended Dimensions: 1242x2208</label>
+
+                  <div class="form-actions clearfix">
+                    <div class="pull-left">
+                      <button id = "btn_sponsor_splash" type="submit" #appSponsorSplashSave [disabled]="!sponsorsplashform.valid" class="btn btn-primary mr-3" style="display:none">Save</button>
+                    </div>
+                    <div class="pull-right" *ngIf="is_superadmin">
+                      <div *ngIf="downloadButtonFlag == true" >
+                        <a href="{{sponsorSplashImgData}}">
+                          <button type="button" class="btn btn-primary mr-3">Download</button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group-title-div">
+              <div class="h-line"></div>
+              <h4 class="panel-group-title">App Info</h4>
+              <div class="h-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row setting-panel-group">
+          <div id="basic-information" class="col-md-12">
+            <form #basicInformationForm="ngForm" (ngSubmit)="basicInformatoinSubmit(basicInformationForm)" [formGroup]="biform">
+
+              <div class="setting-panel">
+                <h4 class="panel-title text-uppercase text-center">
+                  <strong>App Info</strong>
+                </h4>
+
+                <div class="row">
+
+                  <div class="col-lg-6">
+                    <div class="form-group row">
+                      <label class="col-md-4 col-form-label" for="l0">Name
+                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of your app as it will appear on the App Store. This can't be longer than 30 characters."></i>
+                        <span class="mandatory-field">*</span>
+                      </label>
+
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" minlength="2" maxlength="30" name="app_name" placeholder="Enter App Name" [formControl]="biform.controls['app_name']"
+                            (ngModelChange)="lengthCount($event,'appName')">
+                        <small *ngIf=" biform.controls['app_name'].hasError('maxlength')" class="form-message text-danger">Your App name is exceeds Google Play Store & Apple App Store Appname
+                            criteria </small>
+                        <small *ngIf="biform.controls['app_name'].hasError('minlength')" class="form-message text-danger">Please enter a valid app name</small>
+                        <small *ngIf="appNameSpaceCheck == true" class="form-message text-danger">Please enter a valid app name</small>
+                        <small *ngIf="biform.controls['app_name'].hasError('required') && biform.controls['app_name'].touched" class="form-message text-danger">This field is required.</small>
+                        <small *ngIf="appNameLengthErrMsg == true" class="form-message text-danger"></small>
+                        <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appLengthCnt == false">
+                            30</small>
+                        <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appLengthCnt == true">{{appCnt}}</small>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0">Promotional Text
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="This text will appear above your description on the App Store."></i>
+
+                            <span class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <textarea class="form-control" maxlength="170" name="app_promotional" [formControl]="biform.controls['app_promotional']"
+                                rows="3" placeholder="Enter Promotional Text " (ngModelChange)="lengthCount($event,'pramotionalText')"></textarea>
+                            <small *ngIf="biform.controls['app_promotional'].hasError('required') && biform.controls['app_promotional'].touched || promotionalTextSpaceCheck == true"
+                                class="form-message text-danger">You must include a valid promotional text.</small>
+                            <small *ngIf="appPromLengthErrMsg == true" class="form-message text-danger">
+                                This field is required.
+                            </small>
+                            <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appPromLengthCnt == false">170</small>
+                            <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appPromLengthCnt == true">{{appPromCnt}}</small>
+                        </div>
+                        <!-- You must provide an app promotional text for English (U.S.). -->
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0">Description
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="A description of your app, detailing features and functionality."></i>
+
+                            <span class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <textarea class="form-control" maxlength="4000" name="app_description" [formControl]="biform.controls['app_description']"
+                                rows="3" placeholder="Enter App Description " (ngModelChange)="lengthCount($event,'appDescription')"></textarea>
+                            <small *ngIf="biform.controls['app_description'].hasError('required') && biform.controls['app_description'].touched || appDescriptionSpaceCheck == true"
+                                class="form-message text-danger">You must provide an valid app description for {{defaultLangData}}</small>
+                            <small *ngIf="appDescLengthErrMsg == true" class="form-message text-danger">
+                                This field is required.
+                            </small>
+                            <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appDesLengthCnt == false">4000</small>
+                            <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appDesLengthCnt == true">{{appDesCnt}}</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0">Primary Language
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The primary language you will be using to enter app details for display on the App Store."></i>
+
+                            <span class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <select class="form-control show-tick" id="l13" data-selected-text-format="count" data-live-search="true" [formControl]="biform.controls['default_language']">
+                              <option [ngValue]="null" disabled>Please Select</option>
+                              <option *ngFor="let data of langData; let i = index " value="{{data}}" [selected]="data == defaultLangData">
+                                  {{data}}
+                              </option>
+                            </select>
+                            <small *ngIf="biform.controls['default_language'].hasError('required') && biform.controls['default_language'].touched" class="form-message text-danger">You must include a default language.</small>
+                        </div>
+                    </div>
+   
+
+                  </div>
+
+                  <div class="col-lg-6">
+                    
+                    <div class="form-group row">
+                      <label class="col-md-4 col-form-label" for="l0">Category
+                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The category that best describes this app."></i>
+
+                          <span class="mandatory-field">*</span>
+                      </label>
+                      <div class="col-md-7">
+                          <select class="form-control show-tick" id="l13" data-selected-text-format="count" data-live-search="true" [formControl]="biform.controls['app_category']"
+                              (ngModelChange)="appCategoryCheck($event)">
+                              <option [ngValue]="null" disabled>Please Select</option>
+                              <option *ngFor="let data of categoryTypeData" value="{{data.name}}" [selected]="data.name == categoryData">
+                                  {{data.name}}
+                              </option>
+                          </select>
+                          <small *ngIf="valueCategoryData == false" class="form-message text-danger">You must select a primary category for your app.</small>
+                      </div>
+                  </div>
+                  
+                   <div class="form-group row">
+                      <label class="col-md-4 col-form-label" for="l0">Secondary Category (Optional)
+                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The secondary category that best describes this app."></i>
+                      </label>
+                      <div class="col-md-7">
+                          <select class="form-control show-tick" id="l13" data-selected-text-format="count" data-live-search="true" [formControl]="biform.controls['app_industry']"
+                              (ngModelChange)="appSecondryData($event)">
+                              <option [ngValue]="null" disabled>Please Select</option>
+                              <option *ngFor="let data of industryTypeData" value="{{data.name}}" [selected]="data.name == industryData ">
+                                  {{data.name}}
+                              </option>
+                          </select>
+                          <small *ngIf="categoryDataFlag == true" class="form-message text-danger">The second category that best describes this app. This is optional.</small>
+                      </div>
+                  </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0">Keywords
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="One or more keywords that describe your app. Keywords make App Store search results more accurate."></i>
+
+                            <span class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <textarea class="form-control" id="app_keywords_tag" maxlength="100" name="app_keywords" [formControl]="biform.controls['app_keywords']"
+                                rows="3" placeholder="Enter App Keywords" (ngModelChange)="lengthCount($event,'appKeyword')"></textarea>
+                            <small *ngIf="(biform.controls['app_keywords'].hasError('required') && biform.controls['app_keywords'].touched) || appKeywordSpaceCheck == true"
+                                class="form-message text-danger">You must include a valid promotional text.</small>
+                            <small *ngIf="appKeywordcLengthErrMsg == true" class="form-message text-danger">
+                                This field is required.
+                            </small>
+                            <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appKeywordLengthCnt == false">100</small>
+                            <small style="color: #c0bdbd; display: block; text-align: right;" *ngIf="appKeywordLengthCnt == true">{{appKeywordCnt}}</small>
+
+                            <!-- <textarea class="form-control"  name="app_keywords" maxlength="100" rows="3" [formControl]="biform.controls['app_keywords']"></textarea> -->
+
+                            <!--  <small *ngIf="biform.controls['app_keywords'].hasError('required') && biform.controls['app_keywords'].touched || appKeywordcLengthErrMsg == true"
+                            class="form-message text-danger">You must enter one or more keywords for your app</small> -->
+
+                            <!-- <small *ngIf="keywordReqMsgFlag == true" class="form-message text-danger">You must enter one or more keywords for your app</small> -->
+                            <!-- <small *ngIf="appKeywordLengthCnt == false" style="color: #c0bdbd; display: block; text-align: right;">100</small> -->
+                            <!-- <small style="color: #c0bdbd; display: block; text-align: right;">{{appKeywordCnt}}</small> -->
+
+
+                        </div>
+                        <!-- You must enter one or more keywords for your app in English (U.S.). -->
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0">Support URL
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="A URL with support information for your app. This URL will be visible on the App Store."></i>
+
+                            <span class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <input class="form-control" id="custom_ow_textInput" [formControl]="biform.controls['official_website']" placeholder="Enter Official Website"
+                                (ngModelChange)="urlCheck($event,'officialwebsite')" type="text">
+                            <small *ngIf="biform.controls['official_website'].hasError('required') && biform.controls['official_website'].touched || supportUrlErr == true"
+                                class="form-message text-danger">You must provide a Support URL.</small>
+                            <small *ngIf="urlErrCheck == false" class="form-message text-danger">Please check your website url</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0"> Marketing URL (Optional)
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="A URL with marketing information about your app. This URL will be visible on the App Store."></i>
+
+                        </label>
+                        <div class="col-md-7">
+                            <input class="form-control" [formControl]="biform.controls['marketing_website']" placeholder="Enter Marketing Website" (ngModelChange)="urlCheck($event,'marketing')"
+                                type="text">
+                            <small *ngIf="marketingUrlErrCheck == false" class="form-message text-danger">Please check your website url</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="l0">Copyright
+                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of the person or entity that owns the exclusive rights to your app, preceded by the year the rights were obtained (for example, '2008 Acme Inc.'). Do not provide a URL."></i>
+
+                            <span class="mandatory-field">*</span>
+                        </label>
+                        <div class="col-md-7">
+                            <input class="form-control" [formControl]="biform.controls['copy_right']" placeholder="Enter Copyright" name="" type="text">
+                            <small *ngIf="biform.controls['copy_right'].hasError('required') && biform.controls['copy_right'].touched" class="form-message text-danger">You must provide copyright information for the app you are adding.</small>
+                        </div>
+                    </div>
+
+                      <!-- <div class="form-group row">
+                          <label class="col-md-5 col-form-label" for="l0">Price
+                              <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="You can set any price you want for your app, or you can give it away for free. Most paid apps range from $0.99 - $4.99"></i>
+
+                              <span class="mandatory-field">*</span>
+                          </label>
+                          <div class="col-md-7">
+                              <select class="form-control show-tick" id="l13" data-selected-text-format="count" data-live-search="true" [formControl]="biform.controls['app_price']">
+                                  <option *ngFor="let data of priceTypeData" value="{{data.name}}" [selected]="data.name == priceData">
+                                      {{data.name}}
+                                  </option>
+                              </select>
+                          </div>
+                      </div> -->
+
+                      <!-- <div class="form-group row">
+                          <label class="col-md-5 col-form-label" for="l0">Contact Email
+                              <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The person in your organization who should be emailed if the App Review team has any questions or needs additional information"></i>
+
+                              <span class="mandatory-field">*</span>
+                          </label>
+                          <div class="col-md-7">
+                              <input class="form-control" placeholder="Enter Contact Email" name="contact_email" [formControl]="biform.controls['contact_email']"
+                                  type="email" (ngModelChange)="emailCheck($event)">
+                              <small *ngIf="biform.controls['contact_email'].hasError('required') && biform.controls['contact_email'].touched" class="form-message text-danger">The email address must be in a valid format (for example, support@example.com).</small>
+                              <small *ngIf="emailErrCheck == false" class="form-message text-danger">Please check your email address.</small>
+                          </div>
+                      </div> -->
+
+                      <!-- <div class="form-group row">
+                          <label class="col-md-5 col-form-label" for="us-phone-mask-input">Phone Number
+                              <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The person in your organization who should be called if the App Review team has any questions or needs additional information"></i>
+
+                              <span class="mandatory-field">*</span>
+                          </label>
+                          <div class="col-md-7">
+                              <input class="form-control" [formControl]="biform.controls['phone_number']" id="us-phone-mask-input" name="" type="text"
+                                  (ngModelChange)="mobileNoCheck($event)">
+                              <small *ngIf="biform.controls['phone_number'].hasError('required') && biform.controls['phone_number'].touched || phoneNumberErrFlag == true"
+                                  class="form-message text-danger">The phone number must be in a valid format.</small>
+                              <small *ngIf="mobileNumberErrLen == true" class="form-message text-danger">Mobile number must be 10 digit</small>
+                          </div>
+                      </div> -->
+                  </div>
+
+                </div>
+
+                <div class="form-actions clearfix" style = "display:none">
+                    <div class="pull-left">
+                        <button id = "btn_app_info" #appInformationSave type="submit" class="btn btn-primary mr-3">Save</button>
+                    </div>
+                    <!-- [disabled]="!disableGenralFlag" -->
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group-title-div">
+              <div class="h-line"></div>
+              <h4 class="panel-group-title" >Screenshots</h4>
+              <div class="h-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row setting-panel-group">
+          <div id="iphone-screenshot" class="col-md-12">
+
+            <div class="setting-panel">
+              <h4 class="panel-title text-uppercase text-center">
+                <strong>IPHONE / ANDROID Screenshots</strong>
+              </h4>
+
+              <label class="panel-description form-label">
+                  Choose up to 5 screenshots that will showcase your app in the App Store and Google Play Store. Drag the screenshots in the order you wish for them to display.
+              </label>
+
+              <div class="panel-image-container">
+                  <div class="panel-image-group" id="my_screen">
+                    <div class="panel-image-content" style="width:145px" class="draggable-element" attr.data-id="1">
+                      <form id = "AddScreenShotForm1" #AddScreenShotForm1="ngForm" [formGroup]="addscreenshotform1">
+
+                        <div class="form-group add-screenshot-dropify1" id="add_screenshot_group1">
+                          <input type="file" accept="image/*" id="add_screenshot_image1" (change)="addScreenShotFileChanges($event,1)"   class="dropify"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="assimageInput" />
+                        </div>
+                        <button id = "AddScreenShotFormBtn1" type="submit" style="display:none">Save</button>
+                        
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:145px" class="draggable-element" attr.data-id="2">
+                      <form id = "AddScreenShotForm2" #AddScreenShotForm2="ngForm" [formGroup]="addscreenshotform2">
+
+                        <div class="form-group add-screenshot-dropify2" id="add_screenshot_group2">
+                          <input type="file" accept="image/*" id="add_screenshot_image2" (change)="addScreenShotFileChanges($event,2)"   class="dropify"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="assimageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:145px" class="draggable-element" attr.data-id="3">
+                      <form id = "AddScreenShotForm3" #AddScreenShotForm3="ngForm" [formGroup]="addscreenshotform3">
+
+                        <div class="form-group add-screenshot-dropify3" id="add_screenshot_group3">
+                          <input type="file" accept="image/*" id="add_screenshot_image3" (change)="addScreenShotFileChanges($event,3)"   class="dropify"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="assimageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:145px" class="draggable-element" attr.data-id="4">
+                      <form id = "AddScreenShotForm4" #AddScreenShotForm4="ngForm" [formGroup]="addscreenshotform4">
+
+                        <div class="form-group add-screenshot-dropify4" id="add_screenshot_group4">
+                          <input type="file" accept="image/*" id="add_screenshot_image4" (change)="addScreenShotFileChanges($event,4)"   class="dropify"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="assimageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:145px" class="draggable-element" attr.data-id="5">
+                      <form id = "AddScreenShotForm5" #AddScreenShotForm5="ngForm" [formGroup]="addscreenshotform5">
+
+                        <div class="form-group add-screenshot-dropify5" id="add_screenshot_group5">
+                          <input type="file" accept="image/*" id="add_screenshot_image5" (change)="addScreenShotFileChanges($event,5)"   class="dropify"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="assimageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                  </div>
+
+                  <label class="panel-description form-label requiredSizeLabel">Recommended Dimensions: 1242x2208</label>
+
+                  <div class="form-actions clearfix">
+                    <div class="pull-left">
+
+                    </div>
+                    <div class="pull-right" *ngIf="is_superadmin">
+                      <div class="row" *ngIf="add_screenshot_list_data?.length > 0" >
+                        <div class="col-md-12">
+                            <!-- <button #iphnSaveOrderBtn (click)="getOrderData()" class="btn btn-primary mr-3">Save Order</button> -->
+                            <button  (click)="downloadImg()" class="btn btn-primary mr-3">Download</button>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="row setting-panel-group">
+          <div id="iphone-screenshot" class="col-md-12">
+
+            <div class="setting-panel">
+              <h4 class="panel-title text-uppercase text-center">
+                <strong>IPAD/TABLET SCREENSHOTS</strong>
+              </h4>
+
+              <label class="panel-description form-label">
+                  Choose up to 5 screenshots that will showcase your app in the App Store and Google Play Store. Drag the screenshots in the order you wish for them to display.
+              </label>
+
+              <div class="panel-image-container" >
+                  <div class="panel-image-group" id = "my_screen_ipad">
+                    <div class="panel-image-content" style="width:195px" class="draggable-element" attr.data-id="1">
+                      <form id = "AddIpadScreenShotForm1" #AddIpadScreenShotForm1="ngForm" [formGroup]="addipadscreenshotform1">
+
+                        <div class="form-group add-ipad-screenshot-dropify1" id="add_ipad_screenshot_group1">
+                          <input type="file" accept="image/*" id="add_ipad_screenshot1" class="dropify" (change)="addPadScreenShotFileChanges($event,1)"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="asIpadImageInput" />
+                        </div>
+                        
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:195px" class="draggable-element" attr.data-id="2">
+                      <form id = "AddIpadScreenShotForm2" #AddIpadScreenShotForm2="ngForm" [formGroup]="addipadscreenshotform2">
+
+                        <div class="form-group add-ipad-screenshot-dropify2" id="add_ipad_screenshot_group2">
+                          <input type="file" accept="image/*" id="add_ipad_screenshot2" class="dropify" (change)="addPadScreenShotFileChanges($event,2)"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="asIpadImageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:195px" class="draggable-element" attr.data-id="3">
+                      <form id = "AddIpadScreenShotForm3" #AddIpadScreenShotForm3="ngForm" [formGroup]="addipadscreenshotform3">
+
+                        <div class="form-group add-ipad-screenshot-dropify3" id="add_ipad_screenshot_group3">
+                          <input type="file" accept="image/*" id="add_ipad_screenshot3" class="dropify" (change)="addPadScreenShotFileChanges($event,3)"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="asIpadImageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:195px" class="draggable-element" attr.data-id="4">
+                      <form id = "AddIpadScreenShotForm4" #AddIpadScreenShotForm4="ngForm" [formGroup]="addipadscreenshotform4">
+
+                        <div class="form-group add-ipad-screenshot-dropify4" id="add_ipad_screenshot_group4">
+                          <input type="file" accept="image/*" id="add_ipad_screenshot4" class="dropify" (change)="addPadScreenShotFileChanges($event,4)"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="asIpadImageInput" />
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="panel-image-content" style="width:195px" class="draggable-element" attr.data-id="5">
+                      <form id = "AddIpadScreenShotForm5" #AddIpadScreenShotForm5="ngForm" [formGroup]="addipadscreenshotform5">
+                        <div class="form-group add-ipad-screenshot-dropify5" id="add_ipad_screenshot_group5">
+                          <input type="file" accept="image/*" id="add_ipad_screenshot5" class="dropify" (change)="addPadScreenShotFileChanges($event,5)"
+                            data-allowed-file-extensions="png jpeg jpg" data-max-file-size="12M"
+                            data-height="240" data-min-width="24"
+                            data-max-width="6000" data-min-height="24" data-max-height="6000"/>
+                          <input type="hidden" name="fileHidden" formControlName="asIpadImageInput" />
+                        </div>
+                      </form>
+                    </div>
+          
+                  </div>
+
+                  <label class="panel-description form-label requiredSizeLabel">Recommended Dimensions: 2048x2732</label>
+
+                  <div class="form-actions clearfix">
+                    <div class="pull-left">
+
+                      
+
+                    </div>
+                    <div class="pull-right" *ngIf="is_superadmin">
+                      <div class="row" *ngIf="add_screenshot_list_ipad_data?.length > 0">
+                        <div class="col-md-12">
+                            <!-- <button #ipadBtnSave (click)="getIpadOrderScreenData()" class="btn btn-primary mr-3">Save Order</button> -->
+                            <button  (click)="downloadIpadImg()" class="btn btn-primary mr-3">Download</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+</section>

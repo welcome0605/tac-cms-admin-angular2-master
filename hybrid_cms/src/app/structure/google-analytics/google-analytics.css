@@ -1,0 +1,195 @@
+#section-google-analytics {
+  background-color: transparent;
+  border: none;
+}
+
+#section-google-analytics .card-header{
+  border-radius: calc(.25rem - 1px);
+  border: 1px solid #e4e9f0;
+}
+
+#section-google-analytics .card-block {
+  background-color: #fff;
+  border-radius: calc(.25rem - 1px);
+  display: block;
+  position: relative;
+  padding: 30px;  
+  margin: 20px 0;
+  border: 1px solid #e4e9f0;
+}
+
+#section-google-analytics .ga-row {
+
+}
+
+#section-google-analytics .ga-row .ga-panel-1 {
+  height: 600px;
+}
+
+#section-google-analytics .ga-row .ga-panel-1 .card-title {
+  margin-bottom: 30px;
+}
+
+.ga-panel-1 .device-radio-content {
+  display: block;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.ga-panel-1 .device-radio-content .label, 
+.ga-panel-1 .device-radio-content .input {
+  float: left;  
+}
+
+.ga-panel-1 .device-radio-content .label { 
+  margin-right: 10px;
+}
+
+.ga-panel-1 .device-radio-content .input {
+  margin-right: 20px;
+}
+
+#section-google-analytics .ga-row .ga-panel-2 {  
+  height: 240px;
+}
+
+#section-google-analytics .ga-panel-2 .card-title {
+  margin-bottom: 30px;
+}
+
+.ga-panel-2 .mobile-brand-div {
+  width: 100%;
+  height: 43px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+}
+
+.ga-panel-2 .mobile-brand {
+  flex: 0 0 100px;
+  text-align: center;
+}
+
+.ga-panel-2 .horizontal-line {
+  flex: 1;
+  height: 21px;
+  margin-top: 22px;
+  border-top: 1px solid #e4e9f0;
+  max-height: 20px;
+}
+
+.ga-panel-2 .download-count {
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#section-google-analytics .no-device-text {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+#app-session-graph-content,
+#feature-visit-graph-content {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.graph-component {
+  position: absolute; 
+  left: 0;
+  right: 0;
+  display: block; 
+  height: 400px;
+}
+
+#section-google-analytics .ga-row .ga-panel-3 {
+  min-height: 400px;
+}
+
+#section-google-analytics .averate-time-value p {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  border-left: 1px solid #e4e9f0;
+  border-right: 1px solid #e4e9f0;
+  line-height: 100px;
+}
+
+#section-google-analytics .devices-content p {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  line-height: 100px;
+}
+
+#section-google-analytics .language-content p {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  line-height: 100px;
+}
+
+#section-google-analytics .averate-time-value p:first-child {
+  border:none;
+}
+
+#section-google-analytics .averate-time-value p:last-child {
+  border:none;
+}
+
+#section-google-analytics .loadig-div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#section-google-analytics .loadig-div img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+  width: 50px;
+  height: 50px;
+}
+/* .daterangepicker:before {
+  left: auto !important;
+  right: 19px !important;
+}
+
+.daterangepicker:after {
+  left: auto !important;
+  right: 20px !important;
+} */
+
+#ga-apptype.ga-panel-2 .card-title {
+  margin-bottom: 0 !important;
+}
+
+#ga-apptype .graph-component {
+  height: 180px;
+}
+
+#ga-apptype .apptype-content {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+

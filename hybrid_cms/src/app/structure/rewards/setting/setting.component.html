@@ -1,0 +1,2242 @@
+<div class="app-reward-settings">
+    <ngb-tabset (tabChange)="beforeChange($event)">
+        <!-- START: setting/Punch Card System -->
+        <ngb-tab title="Punch Card System">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="user_punch_card_system">User Punch Card System</label>
+                    <div class="col-md-2">
+                        <select *ngIf="rewardsCount < 2" class="form-control" id="punch_card_status" name="punch_card_status" [(ngModel)]="SettingData['Punch_Card_System']['User_Punch_Card_System']['Type']" >
+                            <option value="1" >Enable</option>
+                            <option value="2" >Disable</option>
+                        </select>
+                        <select *ngIf="rewardsCount > 1" class="form-control" id="punch_card_status" name="punch_card_status" [(ngModel)]="SettingData['Punch_Card_System']['User_Punch_Card_System']['Type']" disabled>
+                            <option value="1" >Enable</option>
+                            <option value="2" >Disable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="user_punch_card_style">Style</label>
+                    <div class="col-md-2">
+                        <select class="form-control" id="punch_card_style" name="punch_card_style" [(ngModel)]="SettingData['Punch_Card_System']['Style']['Type']" >
+                            <option value="1" >Square</option>
+                            <option value="2" >Circle</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       Fill Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Punch_Card_System']['Style']['Fill_Color']"
+                            [(colorPicker)]="SettingData['Punch_Card_System']['Style']['Fill_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Punch_Card_System/Style/Fill_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Punch_Card_System']['Style']['Fill_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Punch_Card_System']['Style']['Fill_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Punch_Card_System']['Style']['Fill_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       Outline Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Punch_Card_System']['Style']['Outline_Color']"
+                            [(colorPicker)]="SettingData['Punch_Card_System']['Style']['Outline_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Punch_Card_System/Style/Outline_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Punch_Card_System']['Style']['Outline_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Punch_Card_System']['Style']['Outline_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Punch_Card_System']['Style']['Outline_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Punch Card System -->
+
+        <!-- START: setting/Points Per Check In -->
+        <ngb-tab title="Points Per Check In">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Minimum:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Points_Per_Check_In']['Minimum']">
+                </div> 
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Maximum:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Points_Per_Check_In']['Maximum']">
+                </div> 
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Increment:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Points_Per_Check_In']['Increment']">
+                </div> 
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Points Per Check In -->
+
+        <!-- START: setting/Rewards Card -->
+        <ngb-tab title="Rewards Card" id="tab-rewards-card">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Background Color
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_Card']['Background_Color']"
+                            [(colorPicker)]="SettingData['Rewards_Card']['Background_Color']" [cpOutputFormat]="'hex'"
+                            [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_Card/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_Card']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_Card']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_Card']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Background Image:
+                    </label>
+                    <div class="col-md-3">
+                        <div class="form-group background-image-dropify">
+                            <input type="file" accept="image/*"
+                            class="dropify"
+                            id="app_background_image"
+                            name="app_background_image"
+                            (change)="appBackGroundFileChange($event)"
+                            data-height="420"
+                            data-width="140"
+                            data-max-file-size="10M"
+                            data-allowed-file-extensions="png jpeg jpg"
+                            data-min-width="24" data-max-width="6000"
+                            data-min-height="24" data-max-height="6000"
+                            />
+                            <input type="hidden" name="fileHidden" />
+                            <small *ngIf="is_file" class="form-message text-danger">You must include a App Icon.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Header Image:
+                    </label>
+                    <div class="col-md-3">
+                        <div class="form-group header-image-dropify">
+                            <input type="file" accept="image/*"
+                            class="dropify"
+                            id="app_header_image"
+                            name="app_header_image"
+                            (change)="appHeaderFileChange($event)"
+                            data-height="80"
+                            data-width="140"
+                            data-max-file-size="10M"
+                            data-allowed-file-extensions="png jpeg jpg"
+                            data-min-width="24" data-max-width="6000"
+                            data-min-height="24" data-max-height="6000"
+                            />
+                            <input type="hidden" name="fileHidden" />
+                            <small *ngIf="is_file" class="form-message text-danger">You must include a App Icon.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Icon Image:
+                    </label>
+                    <div class="col-md-3">
+                        <div class="form-group icon-image-dropify">
+                            <input type="file" accept="image/*"
+                            class="dropify"
+                            id="app_icon_image"
+                            name="app_icon_image"
+                            (change)="appIconFileChange($event)"
+                            data-height="140"
+                            data-width="140"
+                            data-max-file-size="10M"
+                            data-allowed-file-extensions="png jpeg jpg"
+                            data-min-width="24" data-max-width="6000"
+                            data-min-height="24" data-max-height="6000"
+                            />
+                            <input type="hidden" name="fileHidden" />
+                            <small *ngIf="is_file" class="form-message text-danger">You must include a App Icon.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Points/Punch Text:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number"  [(ngModel)]="SettingData['Rewards_Card']['Points_Punch_Text']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Points/Punch Text Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_Card']['Points_Punch_Text']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_Card']['Points_Punch_Text']['Color']" [cpOutputFormat]="'hex'"
+                            [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Points_Punch_Text/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_Card']['Points_Punch_Text']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_Card']['Points_Punch_Text']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_Card']['Points_Punch_Text']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+                
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" onchange="ChangeTextModel($event, 'Rewards_Card/Points_Punch_Text/Font')" [(ngModel)]="SettingData['Rewards_Card']['Points_Punch_Text']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_Card']['Points_Punch_Text']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Points Card Check In Name:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Points_Card_Check_In_Name']['Singular']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Singular
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Points_Card_Check_In_Name']['Plural']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Plural
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Punch Card Check In Name:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Punch_Card_Check_In_Name']['Singular']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Singular
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Punch_Card_Check_In_Name']['Plural']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Plural
+                    </label>
+                </div> 
+                
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Punch Card Message:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Punch_Card_Message']['Text']">
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                         <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_Card']['Punch_Card_Message']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Punch Card Message Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_Card']['Punch_Card_Message']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_Card']['Punch_Card_Message']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_Card/Punch_Card_Message/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_Card']['Punch_Card_Message']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_Card']['Punch_Card_Message']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_Card']['Punch_Card_Message']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_Card']['Point_Card_Message']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_Card']['Point_Card_Message']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Point Card Message:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Point_Card_Message']['Text']">
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                         <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_Card']['Point_Card_Message']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Point Card Message Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_Card']['Point_Card_Message']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_Card']['Point_Card_Message']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_Card/Point_Card_Message/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_Card']['Point_Card_Message']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_Card']['Point_Card_Message']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_Card']['Point_Card_Message']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_Card']['Punch_Card_Message']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_Card']['Punch_Card_Message']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Rewards Earned Message:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Singular']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Singular
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Plural']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Plural
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                         <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Rewards Earned Message Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_Card/Rewards_Earned_Message/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_Card']['Rewards_Earned_Message']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_Card']['Rewards_Earned_Message']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_Card']['Rewards_Earned_Message']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_Card']['Rewards_Earned_Message']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Rewards Card -->
+
+        <!-- START: setting/Rewards List -->
+        <ngb-tab title="Rewards List">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Background Color
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Background_Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Total Points:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Total Points Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Total_Points']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Total_Points']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Total_Points/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Total_Points']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Total_Points']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Total_Points']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Total Points Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Total_Points']['Background_Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Total_Points']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Total_Points/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Total_Points']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Total_Points']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Total_Points']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Punch_Message_Singular']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                            Punch Message Singular
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Punch_Message_Plural']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                            Punch Message Plural
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Point_Message_Singular']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Point Message Singular
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Rewards_List']['Total_Points']['Point_Message_Plural']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        Point Message Plural
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Total/Remaining Balance:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_List']['Total_Remaining_Balance']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Total/Remaining Balance color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Total_Remaining_Balance']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Total_Remaining_Balance']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Total_Remaining_Balance/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Total_Remaining_Balance']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Total_Remaining_Balance']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Total_Remaining_Balance']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_List']['Total_Remaining_Balance']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_List']['Total_Remaining_Balance']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                 <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Reward Title:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_List']['Reward_Title']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Title Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Reward_Title']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Reward_Title']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Reward_Title/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Reward_Title']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Reward_Title']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Reward_Title']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_List']['Reward_Title']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_List']['Reward_Title']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Reward Description:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_List']['Reward_Description']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Description Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Reward_Description']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Reward_Description']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Reward_Description/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Reward_Description']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Reward_Description']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Reward_Description']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_List']['Reward_Description']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_List']['Reward_Description']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Reward Cost:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_List']['Reward_Cost']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Cost Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Reward_Cost']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Reward_Cost']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Reward_Cost/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Reward_Cost']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Reward_Cost']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Reward_Cost']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Rewards_List']['Reward_Cost']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Rewards_List']['Reward_Cost']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Line Separator Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Line_Separator']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Line_Separator']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Line_Separator/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Line_Separator']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Line_Separator']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Line_Separator']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Thickness:
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Rewards_List']['Line_Separator']['Thickness']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                            px
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Arrow Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Rewards_List']['Arrow']['Color']"
+                            [(colorPicker)]="SettingData['Rewards_List']['Arrow']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Rewards_List/Arrow/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Rewards_List']['Arrow']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Rewards_List']['Arrow']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Rewards_List']['Arrow']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Rewards List -->
+
+        <!-- START: setting/Redemption History -->
+        <ngb-tab title="Redemption History">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Background Color
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Background_Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Header Text:
+                    </label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Redemption_History']['Header_Text']['Text']">
+                    </div>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number"  [(ngModel)]="SettingData['Redemption_History']['Header_Text']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Header Text Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Header_Text']['Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Header_Text']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Header_Text/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Header_Text']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Header_Text']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Header_Text']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Header Text Background Color
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Header_Text']['Background_Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Header_Text']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Header_Text/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Header_Text']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Header_Text']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Header_Text']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Redemption_History']['Header_Text']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Redemption_History']['Header_Text']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Title
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Redemption_History']['Reward_Title']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Title Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Reward_Title']['Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Reward_Title']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Reward_Title/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Reward_Title']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Reward_Title']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Reward_Title']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Redemption_History']['Reward_Title']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Redemption_History']['Reward_Title']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Description
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Redemption_History']['Reward_Description']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Reward_Description']['Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Reward_Description']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Reward_Description/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Reward_Description']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Reward_Description']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Reward_Description']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-s">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Color
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Redemption_History']['Reward_Description']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Redemption_History']['Reward_Description']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Cost
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Redemption_History']['Reward_Cost']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Reward Cost Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Reward_Cost']['Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Reward_Cost']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Reward_Cost/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Reward_Cost']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Reward_Cost']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Reward_Cost']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Redemption_History']['Reward_Cost']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Redemption_History']['Reward_Cost']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Redeem Date
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Redemption_History']['Redeem_Date']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Redeem Date Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Redeem_Date']['Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Redeem_Date']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Redeem_Date/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Redeem_Date']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Redeem_Date']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Redeem_Date']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Redemption_History']['Redeem_Date']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Redemption_History']['Redeem_Date']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Line Separator Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Redemption_History']['Line_Separator']['Color']"
+                            [(colorPicker)]="SettingData['Redemption_History']['Line_Separator']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Redemption_History/Line_Separator/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Redemption_History']['Line_Separator']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Redemption_History']['Line_Separator']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Redemption_History']['Line_Separator']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Thickness
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Redemption_History']['Redeem_Date']['Font']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                            px
+                    </label>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Redemption History -->
+
+        <!-- START: setting/Login/Register -->
+        <ngb-tab title="Login/Register" id="tab-login-register" >
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Icon Image:
+                    </label>
+                    <div class="col-md-3">
+                        <div class="form-group login-icon-image-dropify">
+                            <input type="file" accept="image/*"
+                            class="dropify"
+                            id="app_login_icon_image"
+                            name="app_login_icon_image"
+                            (change)="appLoginIconFileChange($event)"
+                            data-height="140"
+                            data-width="140"
+                            data-max-file-size="10M"
+                            data-allowed-file-extensions="png jpeg jpg"
+                            data-min-width="24" data-max-width="6000"
+                            data-min-height="24" data-max-height="6000"
+                            />
+                            <input type="hidden" name="fileHidden" />
+                            <small *ngIf="is_file" class="form-message text-danger">You must include a App Icon.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Background Color
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Background_Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Title Login:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title"  [(ngModel)]="SettingData['Login_Register']['Title_Login']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Login_Register']['Title_Login']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Title Login Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Title_Login']['Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Title_Login']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Title_Login/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Title_Login']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Title_Login']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Title_Login']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Login_Register']['Title_Login']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Login_Register']['Title_Login']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Title Register:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title"  [(ngModel)]="SettingData['Login_Register']['Title_Register']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Login_Register']['Title_Register']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Title Register Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Title_Register']['Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Title_Register']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Title_Register/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Title_Register']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Title_Register']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Title_Register']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Login_Register']['Title_Register']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Login_Register']['Title_Register']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Title Reset Password
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title"  [(ngModel)]="SettingData['Login_Register']['Title_Reset_Password']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Login_Register']['Title_Reset_Password']['Font_size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Title Reset Password Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Title_Reset_Password']['Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Title_Reset_Password']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Title_Reset_Password/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Title_Reset_Password']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Title_Reset_Password']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Title_Reset_Password']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Login_Register']['Title_Reset_Password']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Login_Register']['Title_Reset_Password']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Login Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Login_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Login_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Login_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Login_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Login_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Login_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Register Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Register_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Register_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Register_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Register_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Register_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Register_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Reset Password Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Reset_Password_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Reset_Password_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Reset_Password_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Reset_Password_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Reset_Password_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Reset_Password_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            New Account Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['New_Account_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['New_Account_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/New_Account_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['New_Account_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['New_Account_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['New_Account_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Back To Login Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Login_Register']['Back_To_Login_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Login_Register']['Back_To_Login_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Login_Register/Back_To_Login_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Login_Register']['Back_To_Login_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Login_Register']['Back_To_Login_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Login_Register']['Back_To_Login_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            New Member Email Subject:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Login_Register']['New_Member_Email_Subject']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            New Member Email Message:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Login_Register']['New_Member_Email_Message']['Text']">
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Login/Register -->
+
+        <!-- START: setting/Settings -->
+        <ngb-tab title="Settings">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Gear Icon Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Settings']['Gear_Icon']['Color']"
+                            [(colorPicker)]="SettingData['Settings']['Gear_Icon']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Settings/Gear_Icon/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Settings']['Gear_Icon']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Settings']['Gear_Icon']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Settings']['Gear_Icon']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Background Color
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Settings']['Background_Color']"
+                            [(colorPicker)]="SettingData['Settings']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Settings/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Settings']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Settings']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Settings']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            Redemption History Button:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Settings']['Redemption_History_Button']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Settings']['Redemption_History_Button']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Redemption History Button Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Settings']['Redemption_History_Button']['Color']"
+                            [(colorPicker)]="SettingData['Settings']['Redemption_History_Button']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Settings/Redemption_History_Button/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Settings']['Redemption_History_Button']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Settings']['Redemption_History_Button']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Settings']['Redemption_History_Button']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+                
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Redemption History Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Settings']['Redemption_History_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Settings']['Redemption_History_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Settings/Redemption_History_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Settings']['Redemption_History_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Settings']['Redemption_History_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Settings']['Redemption_History_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text"  [(ngModel)]="SettingData['Settings']['Redemption_History_Button']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Settings']['Redemption_History_Button']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Logout Button:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Settings']['Logout_Button']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Settings']['Logout_Button']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Logout Button Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Settings']['Logout_Button']['Color']"
+                            [(colorPicker)]="SettingData['Settings']['Logout_Button']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Settings/Logout_Button/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Settings']['Logout_Button']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Settings']['Logout_Button']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Settings']['Logout_Button']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        Logout Button Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Settings']['Logout_Button']['Background_Color']"
+                            [(colorPicker)]="SettingData['Settings']['Logout_Button']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Settings/Logout_Button/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Settings']['Logout_Button']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Settings']['Logout_Button']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Settings']['Logout_Button']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text"  [(ngModel)]="SettingData['Settings']['Logout_Button']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Settings']['Logout_Button']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Settings -->
+
+
+        <!-- START: setting/Buttons -->
+        <ngb-tab title="Messages">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            CASHIER:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Messages']['CASHIER']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Messages']['CASHIER']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CASHIER Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Messages']['CASHIER']['Color']"
+                            [(colorPicker)]="SettingData['Messages']['CASHIER']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Messages']['CASHIER']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Messages']['CASHIER']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Messages']['CASHIER']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Messages']['CASHIER']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Messages']['CASHIER']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            CHECKIN SUCCESSFUL:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CHECKIN SUCCESSFUL Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Color']"
+                            [(colorPicker)]="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Messages']['CHECKIN_SUCCESSFUL']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Messages']['CHECKIN_SUCCESSFUL']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            CHECKIN FAILED:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Messages']['CHECKIN_FAILED']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Messages']['CHECKIN_FAILED']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CHECKIN FAILED Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Messages']['CHECKIN_FAILED']['Color']"
+                            [(colorPicker)]="SettingData['Messages']['CHECKIN_FAILED']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Messages']['CHECKIN_FAILED']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Messages']['CHECKIN_FAILED']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Messages']['CHECKIN_FAILED']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Messages']['CHECKIN_FAILED']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Messages']['CHECKIN_FAILED']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            REDEEM SUCCESSFUL:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Messages']['REDEEM_SUCCESSFUL']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Messages']['REDEEM_SUCCESSFUL']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM SUCCESSFUL Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Messages']['REDEEM_SUCCESSFUL']['Color']"
+                            [(colorPicker)]="SettingData['Messages']['REDEEM_SUCCESSFUL']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Messages']['REDEEM_SUCCESSFUL']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Messages']['REDEEM_SUCCESSFUL']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Messages']['REDEEM_SUCCESSFUL']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Messages']['REDEEM_SUCCESSFUL']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Messages']['REDEEM_SUCCESSFUL']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                        REDEEM FAILED:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Messages']['REDEEM_FAILED']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Messages']['REDEEM_FAILED']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM FAILED Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Messages']['REDEEM_FAILED']['Color']"
+                            [(colorPicker)]="SettingData['Messages']['REDEEM_FAILED']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Messages']['REDEEM_FAILED']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Messages']['REDEEM_FAILED']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Messages']['REDEEM_FAILED']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Messages']['REDEEM_FAILED']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Messages']['REDEEM_FAILED']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <!-- START: setting/Buttons -->
+        <ngb-tab title="Buttons">
+            <ng-template ngbTabContent>
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                        CHECK IN:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['CHECK_IN']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['CHECK_IN']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CHECK IN Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['CHECK_IN']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['CHECK_IN']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['CHECK_IN']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['CHECK_IN']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['CHECK_IN']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+              
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CHECK IN Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['CHECK_IN']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['CHECK_IN']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CHECK_IN/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['CHECK_IN']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['CHECK_IN']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['CHECK_IN']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                       <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['CHECK_IN']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Buttons']['CHECK_IN']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            REDEEM :
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['REDEEM']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['REDEEM']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['REDEEM']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['REDEEM']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/REDEEM/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['REDEEM']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['REDEEM']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['REDEEM']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['REDEEM']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['REDEEM']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/REDEEM/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['REDEEM']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['REDEEM']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['REDEEM']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['REDEEM']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Buttons']['REDEEM']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            REDEEM UNSELECTABLE:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM UNSELECTABLE Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/REDEEM_UNSELECTABLE/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['REDEEM_UNSELECTABLE']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM UNSELECTABLE Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/REDEEM_UNSELECTABLE/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['REDEEM_UNSELECTABLE']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"  [(ngModel)]="SettingData['Buttons']['REDEEM_UNSELECTABLE']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            REDEEM REWARDS_EARNED:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM REWARDS_EARNED Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/REDEEM_REWARDS_EARNED/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        REDEEM REWARDS_EARNED Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/REDEEM_REWARDS_EARNED/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"   [(ngModel)]="SettingData['Buttons']['REDEEM_REWARDS_EARNED']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            CONTINUE:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['CONTINUE']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['CONTINUE']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CONTINUE Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['CONTINUE']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['CONTINUE']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CONTINUE/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['CONTINUE']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['CONTINUE']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['CONTINUE']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        CONTINUE Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['CONTINUE']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['CONTINUE']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/CONTINUE/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['CONTINUE']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['CONTINUE']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['CONTINUE']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['CONTINUE']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"   [(ngModel)]="SettingData['Buttons']['CONTINUE']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            BACK:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['BACK']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['BACK']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        BACK Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['BACK']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['BACK']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/BACK/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['BACK']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['BACK']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['BACK']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        BACK Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['BACK']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['BACK']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/BACK/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['BACK']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['BACK']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['BACK']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['BACK']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"   [(ngModel)]="SettingData['Buttons']['BACK']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">       
+                            TRY AGAIN:
+                    </label>
+                    <input type="text" class="form-control col-md-3 text-stage" name="text" placeholder="Enter title" [(ngModel)]="SettingData['Buttons']['TRY_AGAIN']['Text']">
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                            <!-- Spacing -->
+                    </label>
+                    <input type="number" class="form-control col-md-2" name="number" placeholder="Enter number" [(ngModel)]="SettingData['Buttons']['TRY_AGAIN']['Font_Size']">
+                    <label class="col-md-3 col-form-label" for="l0">
+                        px
+                    </label>
+                </div> 
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        TRY AGAIN Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['TRY_AGAIN']['Color']"
+                            [(colorPicker)]="SettingData['Buttons']['TRY_AGAIN']['Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/TRY_AGAIN/Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['TRY_AGAIN']['Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['TRY_AGAIN']['Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['TRY_AGAIN']['Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        TRY AGAIN Background Color:
+                    </label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control cursor_pointer_input" [style.background]="SettingData['Buttons']['TRY_AGAIN']['Background_Color']"
+                            [(colorPicker)]="SettingData['Buttons']['TRY_AGAIN']['Background_Color']" [cpOutputFormat]="'hex'" [cpPosition]="'bottom'" (colorPickerChange)="rgbaText=ChangeColorPicker($event,'Buttons/TRY_AGAIN/Background_Color');"
+                            [readonly]="true" />
+                    </div>
+                    <label *ngIf="SettingData['Buttons']['TRY_AGAIN']['Background_Color']" class="col-md-3 col-form-label" for="l0">
+                        Hex: {{SettingData['Buttons']['TRY_AGAIN']['Background_Color']}}
+                    </label>
+                    <label *ngIf="SettingData['Buttons']['TRY_AGAIN']['Background_Color'] == ''" class="col-md-3 col-form-label" for="l0">
+                        Hex: #000000
+                    </label>
+                </div>
+
+                <div class="row setting-block-m">
+                    <label class="col-md-4 col-form-label" for="l0">
+                        <!-- Spacing -->
+                    </label>
+                    <!-- <input class="col-md-2 col-form-label font-picker" type="text" [(ngModel)]="SettingData['Buttons']['TRY_AGAIN']['Font']"> -->
+                    <div class="col-md-2">
+                        <select class="form-control"   [(ngModel)]="SettingData['Buttons']['TRY_AGAIN']['Font']" >
+                            <option *ngFor="let data of fontFamilyData; let i = index " value="{{data.value}}">
+                                {{data.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- End: setting/Buttons -->
+    </ngb-tabset>
+
+    <div class="form-group row setting-block-m buttons-region" >
+        <div class="col-md-1">
+            <button class="btn btn-primary" (click) = "postAllSettingData()">Save Changes</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" (click) = "resetAllSettingData(); clearDropify(); ">Reset Setting</button>
+        </div>
+    </div>
+</div>
+
+
+
+

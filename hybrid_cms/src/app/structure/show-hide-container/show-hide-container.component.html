@@ -1,0 +1,11 @@
+<!-- <ng-template *ngIf="!input_group_show">
+    <ng-content></ng-content>
+    <a (click)="toggleShow()">
+        <img src="assets/modules/sign-in/img/eye.png" </a>
+</ng-template> -->
+<div class="input-group" *ngIf="input_group_show">
+    <ng-content></ng-content>
+    <span (click)="toggleShow()" class="input-group-addon">
+        <i class="fa fa-1x" [ngClass]="{'fa-eye': show, 'fa-eye-slash': !show}"></i>
+    </span>
+</div>

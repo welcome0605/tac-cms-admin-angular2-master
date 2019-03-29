@@ -1,0 +1,110 @@
+<section class="card">
+	<div class="card-header">
+		<span class="cat__core__title">
+			<strong>Dashboard</strong>
+		</span>
+		<button *ngIf="is_access_app_operation" type="button" class="btn btn-primary mr-2 mb-2 pull-right" data-toggle="modal" data-target="#appcreate">
+			Create App
+		</button>
+	</div>
+	<div class="card-block">
+		<div class="row">
+			<div class="modal fade" id="appcreate" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">Create App</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label='Close' >
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form #createForm="ngForm" (ngSubmit)="onSubmit(createForm )" [formGroup]="form">
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-md-3 col-form-label" for="l0">App Name</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control" name="app_name" maxlength="30" placeholder="Enter App Name" [formControl]="form.controls['app_name']">
+										<small *ngIf="form.controls['app_name'].hasError('required') && form.controls['app_name'].touched" class="form-message text-danger">You must include an app name.</small>
+										<small *ngIf="form.controls['app_name'].hasError('matchCorrectSpace') && form.controls['app_name'].touched" class="form-message text-danger">You must include a valid app name.</small>										
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn" data-dismiss="modal">Close</button>
+								<button type="submit" #creatFormBtn [disabled]="!form.valid" class="btn btn-primary">Create App</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- <div *ngIf="appData?.length > 0" class="">
+				<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Click on App icon or name to configure it."></i>
+			</div> -->
+
+
+			<div *ngFor="let data of appData" class="col-xl-2">
+        <div 
+          class="cat__core__widget cat__core__widget--border cat__core__widget__1 px-3 py-5" 
+          style="height: 255px;">
+          <a class="cat__core__avatar cat__core__avatar--90 cat__core__avatar--border d-block mx-auto" 
+            (click)="navigateApp(data)"
+            href="javascript:void(0);">
+            <img 
+              *ngIf="data.basicDetail.app_icon.app_icon_thumb_url" 
+              src="{{data.basicDetail.app_icon.app_icon_thumb_url}}" 
+              alt="Alternative text to the image">
+					</a>
+					<div class="my-3 text-center">
+            <strong 
+              style="cursor: pointer;" 
+              class="font-size-18" 
+              (click)="navigateApp(data)">{{data.app_name}}</strong>
+					</div>
+					<div class="text-center">
+            <button 
+              *ngIf="is_access_app_operation" 
+              type="button" 
+              class="btn btn-sm" 
+              (click)="deleteApp(data)">
+							<i class="fa fa-trash-o"></i>
+						</button>
+					</div>
+					<div class="text-center">
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="appData?.length == 0" class="col-xl-2">
+				No record found.
+			</div>          
+    </div>
+    
+  	<!-- gjc pagination -->
+		<div class="row">
+			<div class="container">
+					<div class="text-center">
+							<!-- pager -->
+							<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+									<li [ngClass]="{disabled:pager.currentPage === 1}">
+											<a (click)="appListing(1)">First</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === 1}">
+											<a (click)="appListing(pager.currentPage - 1)">Previous</a>
+									</li>
+									<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+											<a (click)="appListing(page)">{{page}}</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+											<a (click)="appListing(pager.currentPage + 1)">Next</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+											<a (click)="appListing(pager.totalPages)">Last</a>
+									</li>
+							</ul>
+					</div>
+			</div>
+	</div>
+
+	</div>
+</section>

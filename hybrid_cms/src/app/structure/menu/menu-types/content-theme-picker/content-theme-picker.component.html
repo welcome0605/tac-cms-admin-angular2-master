@@ -1,0 +1,2 @@
+<h2>Please Select a Content Theme</h2>
+<img *ngFor="let theme of themes" src="/assets/images/theme_{{theme.name}}.png" (click)="themePick(theme.id)" [class.active]="theme.id == pickedTheme" />

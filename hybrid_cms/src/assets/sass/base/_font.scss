@@ -1,0 +1,152 @@
+.stage-wrap {
+  [class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "form-builder-font";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  }
+
+  .icon-autocomplete:before { content: '\e800'; } /* '' */
+  .icon-date:before { content: '\e801'; } /* '' */
+  .icon-checkbox:before { content: '\e802'; } /* '' */
+  .icon-checkbox-group:before { content: '\e803'; } /* '' */
+  .icon-radio-group:before { content: '\e804'; } /* '' */
+  .icon-rich-text:before { content: '\e805'; } /* '' */
+  .icon-select:before { content: '\e806'; } /* '' */
+  .icon-textarea:before { content: '\e807'; } /* '' */
+  .icon-textbox:before { content: '\e807'; } /* '' */
+  .icon-slideshow:before { 
+    content: "";
+    width: 18px;
+    height: 14px;
+    background-image: url(/assets/images/icon-slideshow.png);
+    background-size: cover;
+    top: 14px;
+  } /* '' */
+  .icon-text:before { content: '\e808'; } /* '' */
+  .icon-pencil:before { content: '\e809'; } /* '' */
+  .icon-file:before { 
+    content: "";
+    width: 18px;
+    height: 14px;
+    background-image: url(/assets/images/icon-image.png);
+    background-size: cover;
+    top: 14px;
+  } /* '' */
+  .icon-hidden:before { content: '\e80b'; } /* '' */
+  .icon-cancel:before {
+    content: '\e80c';
+  }
+
+  /* '' */
+  .icon-button:before { content: '\e80d'; } /* '' */
+  .icon-header:before { content: '\e80f'; } /* '' */
+  .icon-paragraph:before { content: '\e810'; } /* '' */
+  .icon-number:before { content: '\e811'; } /* '' */
+  .icon-copy:before { content: '\f24d'; } /* '' */
+}
+ 
+.cb-wrap {
+  [class^="icon-"] > span:after, [class*=" icon-"] > span:after {
+    font-family: "form-builder-font";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .5em;
+    color: #0190fe;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  }
+
+  .icon-autocomplete > span:after { content: '\e800'; } /* '' */
+  .icon-date > span:after { content: '\e801'; } /* '' */
+  .icon-checkbox > span:after { content: '\e802'; } /* '' */
+  .icon-checkbox-group > span:after { content: '\e803'; } /* '' */
+  .icon-radio-group > span:after { content: '\e804'; } /* '' */
+  .icon-rich-text > span:after { content: '\e805'; } /* '' */
+  .icon-select > span:after { content: '\e806'; } /* '' */
+  .icon-textarea > span:after { content: '\e807'; } /* '' */
+  .icon-textbox > span:after { content: '\e807'; } /* '' */
+  .icon-slideshow > span:after { 
+    content: "";
+    width: 18px;
+    height: 14px;
+    background-image: url(/assets/images/icon-slideshow.png);
+    background-size: cover;
+    top: 14px;
+  } /* '' */
+  .icon-text > span:after { content: '\e808'; } /* '' */
+  .icon-pencil > span:after { content: '\e809'; } /* '' */
+  .icon-file > span:after { 
+    content: "";
+    width: 18px;
+    height: 15px;
+    background-image: url(/assets/images/icon-image.png);
+    background-size: cover;
+    top: 14px;
+  } /* '' */
+  .icon-hidden > span:after { content: '\e80b'; } /* '' */
+  .icon-cancel > span:after {
+    content: '\e80c';
+  }
+
+  /* '' */
+  .icon-button > span:after { content: '\e80d'; } /* '' */
+  .icon-header > span:after { content: '\e80f'; } /* '' */
+  .icon-paragraph > span:after { content: '\e810'; } /* '' */
+  .icon-number > span:after { content: '\e811'; } /* '' */
+  .icon-copy > span:after { content: '\f24d'; } /* '' */
+}

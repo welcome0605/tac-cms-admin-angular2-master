@@ -1,0 +1,61 @@
+    .table tr td:first-child {
+        font-size: 1.7em;
+    }
+
+    .btn-info-custom {
+        background-color: transparent;
+        color: #099be6 !important;
+        border-color: #099be6;
+        font-weight: 600;
+        height: 40px;
+    }
+
+    .btn-warning-custom {
+        background-color: transparent;
+        border-color: #f5a751;
+        color: #f5a751 !important;
+        font-weight: 600;
+        height: 40px;
+    }
+
+    .btn-primary-custom {
+        background-color: transparent;
+        border-color: #2dba09;
+        color: #2dba09 !important;
+        font-weight: 600;
+        height: 40px;
+    }
+
+    .btn-primary-custom:focus,
+    .btn-primary-custom:hover,
+    .btn-primary-custom:hover:active {
+        background-color: transparent !important;
+        border-color: #2dba09 !important;
+        color: #2dba09 !important;
+    }
+
+    .btn-info-custom:hover {
+        background-color: transparent;
+    }
+
+    .btn-info-custom:focus {
+        background-color: transparent;
+        border-color: #099be6;
+    }
+
+    .btn-warning-custom:hover {
+        background-color: transparent;
+    }
+
+    .btn-info-custom:focus {
+        background-color: transparent;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: transparent;
+        border-color: #2dba09;
+    }
+
+    .btn-info-custom:focus {
+        background-color: transparent !important;
+    }

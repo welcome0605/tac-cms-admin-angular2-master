@@ -1,0 +1,42 @@
+<ol class="dd-list custom_dd_list_ol" id="my_screen">
+    <li 
+      *ngFor="let data of recursiveTreeViewData; let j = index" 
+      class="dd-item" 
+      data-id="{{data.id}}" 
+      appScrollNestable
+      [ngClass]="{'not-showtab': (menuType == 2 && data.tab_show == 0)}"> <!-- appScrollNestable -->
+
+        <div class="dd-handle dd3-handle">Drag</div>
+
+        <div class="dd3-content full_d3_content_click" (click)="sendEditMenuDetails(data)" attr.data-id="parent {{data.menu_name}}" attr.data-ide="{{data.id}}">
+            <span class="menu_title">{{data.menu_name | menupipe}}</span>
+            <span class="menuIconType"><i class="{{data.menu_type_icon}}"></i></span>
+            <span class="menu_action_icon">
+                <i class="fa fa-times-circle pull-right" (click)="sendRemoveMenu(data)"></i>
+                <i class="fa fa-pencil pull-right" (click)="sendEditMenuDetails(data)"></i>
+                <i class="fa fa-plus pull-right" *ngIf="data.menu_type == 1 || data.menu_type == 4" (click)="sendAddListItem(data)" data-toggle="modal" data-target="#createmenu"></i>
+                <!-- <i
+                  *ngIf="menuType == 2 && !data.tab_show" 
+                  class="fa fa-check pull-right" 
+                  aria-hidden="true">
+                </i> -->
+            </span>
+
+            <!-- <span 
+              *ngIf="menuType == 2 && " 
+              class="menu_showtab_check pull-right" 
+              style="padding-top: 3px; cursor: pointer;">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </span> -->
+        </div>
+
+        <div class="subClildTreeData" *ngIf="data.children?.length > 0">
+            <app-menu-recu-tree-view [recursiveTreeview]="data.children"
+            (editMenuDetails)="sendEditMenuDetails($event)"
+            (removeMenu)="sendRemoveMenu($event)"
+            (addListItem)="sendAddListItem($event)"
+            ></app-menu-recu-tree-view>
+        </div>
+
+    </li>
+</ol>

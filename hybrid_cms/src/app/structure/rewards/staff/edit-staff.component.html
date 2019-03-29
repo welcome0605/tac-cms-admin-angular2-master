@@ -1,0 +1,77 @@
+<h1>Edit Staff</h1>
+
+<div class="add-staff-container">
+  	<form #addStaffForm="ngForm" (ngSubmit)="onSubmit(addStaffForm)" [formGroup]="form" class="add-staff-form">
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Username</label>
+			<div class="col-md-9">
+				<input type="text" disabled class="form-control" name="username"
+				placeholder="Username" [formControl]="form.controls['username']">
+				<small class="form-message text-normal">Username cannot be changed.</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Email</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="email"
+				placeholder="Email" [formControl]="form.controls['email']">
+				<small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">You must include email.</small>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">First Name</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="first_name"
+				placeholder="First Name" [formControl]="form.controls['first_name']">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Last Name</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="last_name"
+				placeholder="Last Name" [formControl]="form.controls['last_name']">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Role</label>
+			<div class="col-md-9">
+				<select class="form-control" name="role" [formControl]="form.controls['role']">
+					<option *ngFor="let role of rolesArray" value="{{role.key}}">{{role.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">PassCode</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="passcode"
+				placeholder="PassCode" [formControl]="form.controls['passcode']">
+				<small class="form-message">Used for Check Ins</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Password</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="password"
+				placeholder="Password" [formControl]="form.controls['password']">
+				<small class="form-message">Used for Backend Access</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Send Email Notification</label>
+			<div class="col-md-9">
+				<input type="checkbox" class="form-control" name="notification" [formControl]="form.controls['notification']">
+			</div>
+		</div>
+	  	
+		<div class="form-actions">
+			<div class="form-group row">
+				<div class="col-md-12">
+					<button routerLink="/rewards/staff" type="button" class="btn btn-primary">cancel</button>
+					<button type="submit" #addStaffBtn class="btn btn-primary" [disabled]="!form.valid">save</button>
+				</div>
+			</div>
+		</div>	
+  	</form>
+</div>

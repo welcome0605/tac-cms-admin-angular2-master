@@ -1,0 +1,53 @@
+<h1>Edit Member</h1>
+
+<div class="add-member-container">
+  	<form #addMemberForm="ngForm" (ngSubmit)="onSubmit(addMemberForm)" [formGroup]="form" class="add-member-form">
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Username*</label>
+			<div class="col-md-9">
+				<input type="text" disabled class="form-control" name="username"
+				placeholder="Username" [formControl]="form.controls['username']">
+				<small class="form-message text-normal">Username cannot be changed.</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Email*</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="email"
+				placeholder="Email" [formControl]="form.controls['email']">
+				<small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">You must include email.</small>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">First Name</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="first_name"
+				placeholder="First Name" [formControl]="form.controls['first_name']">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Last Name</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="last_name"
+				placeholder="Last Name" [formControl]="form.controls['last_name']">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Points</label>
+			<div class="col-md-9">
+				<input type="number" class="form-control" name="point" [formControl]="form.controls['point']">
+			</div>
+		</div>
+	  	
+		<div class="form-actions">
+			<div class="form-group row">
+				<div class="col-md-12">
+					<button routerLink="/rewards/member" type="button" class="btn btn-primary">cancel</button>
+					<button type="submit" #addMemberBtn class="btn btn-primary" [disabled]="!form.valid">save</button>
+				</div>
+			</div>
+		</div>	
+  	</form>
+</div>

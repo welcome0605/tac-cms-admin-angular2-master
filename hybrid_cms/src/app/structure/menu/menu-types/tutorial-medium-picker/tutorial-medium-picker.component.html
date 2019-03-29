@@ -1,0 +1,32 @@
+<div class="form-group row">
+	<label class="col-md-3 col-form-label">Medium Type</label>
+	<div class="col-md-8">
+		<select class="form-control" name="type" [(ngModel)]="slideData.type">
+		    <option *ngFor="let type of mediaTypes" [value]="type.value">
+		        {{ type.name }}
+		    </option>
+		</select> 
+	</div>
+</div>
+<div class="form-group row" [hidden]="slideData.type != IMAGE">
+	<div class="col-md-11 upload_image">
+
+		<input type="file" accept="image/*" data-max-file-size="3M"
+		class="dropify" data-id="file_upload_{{index}}"
+		name="file_upload_{{index}}"
+		data-allowed-file-extensions="png jpeg jpg" />
+
+	</div>
+</div>
+
+<div class="form-group row" [hidden]="slideData.type != VIDEO">
+	<div class="col-md-11">
+		<input [(ngModel)]="slideData.url" class="form-control" placeholder="Enter Video URL" type="text" />
+	</div>
+</div>
+
+<div class='col-sm-8 control-label' *ngIf="removable">
+	<button type='button' class='btn btn-danger remove_property_field' (click)='removePicker();'>
+		<i class='fa fa-minus' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;Remove</button>
+</div>
+<br/>

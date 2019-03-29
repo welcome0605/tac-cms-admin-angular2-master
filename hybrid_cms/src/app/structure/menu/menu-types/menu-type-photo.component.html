@@ -1,0 +1,228 @@
+<section class="card">
+
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="mb-5 sub-menu-css-field-part">
+                    <form #menuTypePhoto="ngForm">
+                        <!-- <input type="hidden" name="cssDemo" value="{{getMenuSubCssJsonData | json}}"> -->
+                        <input type="hidden" name="menuTypeMenuSlugId" value="{{getMenuTypeMenuSlugId}}">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="album_url">Google Album Email
+                                <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Please enter the url id which is associated with your google/picasa account"></i>
+                            </label>
+                            <div class="col-md-8">
+                                <input id="album_url" name="album_url" [(ngModel)]="typeMenuform.album_url" (ngModelChange)="sendMenuTypePhotoFormData($event,null,null,menuTypePhoto)"
+                                class="form-control" placeholder="Enter Album Url" type="text"/>
+
+                                <!-- <label class="text-danger" for="error" *ngIf="email.errors && (email.dirty || email.touched)">
+                                    <p *ngIf="email.errors.appAllowValidEmail">Please enter correct email. ex. admin@admin.com</p>
+                                </label> -->
+                            </div>
+                        </div>
+                        <!-- <div calss="form-group row" >
+                            <div class="details" id="album-list" >
+                              <span class="select-title" style='font-family: "PT Sans", sans-serif; position: relative; z-index:9; color: #74708d; left: 20px; cursor: pointer;' (click)='showAlbumList()'>Select Album</span>
+                              <select placeholder="Select Album" name="AlbumList" class="list-group" [ngModel]="data" (ngModelChange)="itemSelected($event)" [ngModelOptions]="{standalone: true}" style="background:white; display: inline-block;padding: 4px 3px 3px 5px; border-radius: .25rem; border-color:#e4e9f0; margin-bottom: 15px; position: relative; left: -83px; color:#74708d;">
+                                 <option class="list-group-item" *ngFor="let item of data; let i = index;" [ngValue]="item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;"> {{item.title['$t']}} </option>
+
+                              </select>
+                            </div>
+                        </div> -->
+                        <!-- 1-30 -->
+                        <div calss="form-group row" id="album-list" style="display: flex; margin-top: 20px;">
+                            <label class="col-md-3 col-form-label" for="ALbumList" style="padding-left: 0;">Album</label>
+                            <div class="col-md-8" style="padding-left: 6px; padding-right: 0px;">
+
+                                <select class="form-control list-group" name="AlbumList" [ngModel]="data" (ngModelChange)="itemSelected($event)" [ngModelOptions]="{standalone: true}">
+
+                                    <option class="list-group-item" *ngFor="let item of data; let i = index;" [ngValue]="item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;" > {{item.title['$t']}}</option>
+                                </select>
+                                <!-- 2018.02.28 gjc -->
+                                <span class="select-title" style='font-family: "PT Sans", sans-serif;position: relative; left: 20px; top: -30px; z-index:9; cursor: default; color: #74708d;' (click)='expandList()'>{{currentSavedAlbumUrl}}</span>
+                                <!-- <select placeholder="Select Album" name="AlbumList" class="list-group" [ngModel]="data" (ngModelChange)="itemSelected($event)" [ngModelOptions]="{standalone: true}" style="background:white; display: inline-block;padding: 4px 3px 3px 5px; border-radius: .25rem; border-color:#e4e9f0; margin-bottom: 15px; position: relative; left: -83px; color:#74708d;">
+                                        <option class="list-group-item" *ngFor="let item of data; let i = index;" [ngValue]="item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;"> {{item.title['$t']}} </option>
+                                    </select> -->
+                            </div>
+                            <!-- <div class="col-md-9 details" id="album-list">
+                                <span class="select-title" style='font-family: "PT Sans", sans-serif; position: relative; z-index:9; color: #74708d; left: 20px; cursor: pointer;' (click)='showAlbumList()'>Select Album</span>
+                                <select placeholder="Select Album" name="AlbumList" class="list-group" [ngModel]="data" (ngModelChange)="itemSelected($event)" [ngModelOptions]="{standalone: true}" style="background:white; display: inline-block;padding: 4px 3px 3px 5px; border-radius: .25rem; border-color:#e4e9f0; margin-bottom: 15px; position: relative; left: -83px; color:#74708d;">
+                                    <option class="list-group-item" *ngFor="let item of data; let i = index;" [ngValue]="item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;"> {{item.title['$t']}} </option>
+                                </select>
+                            </div>     -->
+                                <!-- <ng-select [allowClear]="true" placeholder="Select Album" (selected)="itemSelected($event)">
+                                    <option class="list-group-item" *ngFor="let item of data" [ngValue]="item" style="cursor:pointer;"> {{item.title['$t']}} </option>
+                                </ng-select> -->
+                        </div>
+                        <div class="form-group row" style="display: none;">
+                            <label class="col-md-3 col-form-label" for="google_key">Selected Url
+                                <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="1. Login into your gmail account. 2. Then go to google developer console 3. Copy the google key from there"></i>
+                            </label>
+                            <div class="col-md-8">
+                                <input id="google_key" name="google_key" [(ngModel)]="typeMenuform.google_key"
+                                    class="form-control" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="display: none;">
+                            <label class="col-md-3 col-form-label" for="album_id">Album ID
+                                <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Lorem Ipsum"></i>
+                            </label>
+                            <div class="col-md-8">
+                                <input id="album_id" name="album_id" [(ngModel)]="typeMenuform.album_id"
+                                    class="form-control" placeholder="Enter Album ID" type="text" />
+                            </div>
+                        </div>
+
+                        <!-- <div class="accordion card_custome_accordion" id="accordion">
+
+                            <div class="card">
+
+                                <div class="card-header card_custome_collapsed " role="tab" id="headingOne" data-toggle="collapse" aria-expanded="true" [attr.data-target]="'#' + menuTypeMenuSlugId"
+                                    [attr.aria-controls]="menuTypeMenuSlugId" (click)="subMenuCollapseOpen(menuTypeMenuSlugId)"
+                                    [ngClass]="subMenuTypeCollapsed == menuTypeMenuSlugId ? '' : 'collapsed'">
+
+                                    <div class="card-title">
+                                        <span class="accordion-indicator pull-right">
+                                            <i class="plus fa fa-plus"></i>
+                                            <i class="minus fa fa-minus"></i>
+                                        </span>
+                                        <a>Advanced Options</a>
+                                    </div>
+
+                                </div>
+
+                                <div id="{{subMenuTypeCollapsed}}" class="custom-collapse-margin-top card-collapse collapse" role="tabcard" aria-labelledby="headingOne"
+                                    [ngClass]="subMenuTypeCollapsed == menuTypeMenuSlugId ? 'show' : ''">
+
+                                    <div class="sub-menu-css-json-fields sub-menu-css-json-field-block">
+
+                                        <div class="form-group row" *ngFor="let cssData of typeMenuform.css_string_json; let i = index ">
+
+                                            <label                                                     
+                                              class="col-md-3 col-form-label" 
+                                              for="{{cssData.key}}"
+                                              [hidden]="cssData.type == 'borderStyle' || cssData.key == 'listBannerBackground' || cssData.key == 'listBannerBorderStyle' || cssData.key == 'bottomBorderStyle'">
+                                              {{cssData.label}}
+                                            </label>
+
+                                            <div class="col-sm-8" *ngIf="cssData.type == 'size'">
+                                                <input id="{{cssData.key}}" name="{{cssData.key}}" [(ngModel)]="typeMenuform.css_string_json[i]['value']" (ngModelChange)="sendMenuTypePhotoFormDataStyle($event,null,null,menuTypePhoto)"
+                                                class="form-control custom_css_size_field_text" placeholder="Enter {{cssData.label}}"
+                                                type="text" appOnlyNum/>
+
+                                                <input class="form-control custom_css_size_field_px" value="px" name="field_size_px_{{i}}" id="field_size_px_{{i}}" [disabled]="true"
+                                                type="text">
+                                            </div>
+
+
+                                            <div class="col-md-4" *ngIf="cssData.type == 'color' && cssData.key == 'borderColor'">
+                                                <input type="text" name="{{cssData.key}}" id="{{cssData.key}}"
+                                                class="form-control cursor_pointer_input"
+                                                [style.background]="cssData.value"
+                                                [(colorPicker)]="cssData.value"
+                                                [cpOutputFormat]="'hex'"
+                                                [cpPositionRelativeToArrow]='true'
+                                                (colorPickerChange)="rgbaText=onChangeBordercolor($event);sendMenuTypePhotoFormDataStyle($event,i,cssData.key,menuTypePhoto)"
+                                                [readonly]="true"
+                                                />
+                                            </div>
+                                            <label *ngIf="cssData.type == 'color' && cssData.key == 'borderColor' && cssData.value" class="col-md-4 col-form-label" for="{{cssData.key}}">
+                                                Hex: {{cssData.value}}
+                                            </label>
+                                            <label *ngIf="cssData.type == 'color' && cssData.key == 'borderColor' && cssData.value == ''" class="col-md-4 col-form-label"
+                                                for="{{cssData.key}}">
+                                                Hex: #000000
+                                            </label>
+
+
+                                            <div class="col-md-4" *ngIf="cssData.type == 'color' && cssData.key == 'fontColor'">
+                                                <input type="text" id="{{cssData.key}}" name="{{cssData.key}}"
+                                                class="form-control cursor_pointer_input" type="text"
+                                                [style.background]="cssData.value"
+                                                [(colorPicker)]="cssData.value"
+                                                [cpOutputFormat]="'hex'"
+                                                [cpPositionRelativeToArrow]='true'
+                                                (colorPickerChange)="rgbaText=onChangefontcolor($event);sendMenuTypePhotoFormDataStyle($event,i,cssData.key,menuTypePhoto)"
+                                                [readonly]="true"
+                                                />
+                                            </div>
+                                            <label *ngIf="cssData.type == 'color' && cssData.key == 'fontColor' && cssData.value" class="col-md-4 col-form-label" for="{{cssData.key}}">
+                                                Hex: {{cssData.value}}
+                                            </label>
+                                            <label *ngIf="cssData.type == 'color' && cssData.key == 'fontColor' && cssData.value == ''" class="col-md-4 col-form-label"
+                                            for="{{cssData.key}}">
+                                            Hex: #000000
+                                            </label>
+
+
+                                            <div class="col-md-8" *ngIf="cssData.type == 'font'">
+
+                                                <select class="form-control" id="menu_location_type" name="menu_location_type" [(ngModel)]="typeMenuform.css_string_json[i]['value']"
+                                                    (ngModelChange)="sendMenuTypePhotoFormDataStyle($event,null,null,menuTypePhoto)">
+                                                    <option value="" selected="">Select Font Name</option>
+                                                    <option *ngFor="let fontType of subMenuFontTypeData" [ngValue]="fontType.value">{{fontType.name}}</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-md-8" *ngIf="cssData.type == 'align'">
+
+                                                <select class="form-control" id="alignment" name="alignment" [(ngModel)]="typeMenuform.css_string_json[i]['value']" (ngModelChange)="sendMenuTypePhotoFormDataStyle($event,null,null,menuTypePhoto)">
+                                                    <option *ngFor="let align of subMenuAlignmentArray" [ngValue]="align.key" [selected]="align.key == 1">{{align.name}}</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-md-8" *ngIf="cssData.type == 'borderStyle'">
+
+                                                <select class="form-control" id="{{cssData.key}}" name="{{cssData.key}}" [(ngModel)]="typeMenuform.css_string_json[i]['value']"
+                                                    (ngModelChange)="sendData($event,null,null,menuTypePhoto)">
+                                                    <option value="" selected="">Select Border Style</option>
+                                                    <option *ngFor="let style of subMenuBorderStyleArray" [ngValue]="style.name">{{style.name}}</option>
+
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label class="col-md-4 col-form-label" for="caption_check">
+                                                Caption
+                                            </label>
+                                            <input id="caption_check" name="caption_check" [(ngModel)]="caption_check" (ngModelChange)="sendMenuTypePhotoFormDataStyle($event,null,null,menuTypePhoto)"
+                                                class="form-control" type="checkbox" style="position: relative; top: -25px; left: -35px;"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div> -->
+                    </form>
+                    <div style="margin-top: 50px; margin-bottom: -170px; display:none;">
+                        <button class="btn btn-primary" (click)="viewAlbumList()">Available Albums</button>
+                    </div>
+                    <!-- <div style="float: right; margin-right: 20px;">
+                        <button [disabled]="!selectButtonStatus" class="btn btn-primary" id="btn-select" (click)="showAlbumList()" style="margin-top: -35px; margin-bottom: -170px;">Select Album</button>
+                    </div> -->
+                    <!-- <div class="details" id="album-list" style="margin-top: 5px;">
+                        <ul class="list-group">
+                            <li *ngFor="let item of data" class="list-group-item">
+                                <a> <span (click)="itemSelected(item)" style="cursor:pointer;">  {{item.title['$t']}}  </span> </a>
+                            </li>
+                        </ul>
+                        <select class="list-group" [ngModel]="data" (ngModelChange)="itemSelected($event)" style="background:white; display: inline-block;padding: 4px 3px 3px 5px;">
+                            <option class="list-group-item" *ngFor="let item of data" [ngValue]="item" style="cursor:pointer;"> {{item.title['$t']}} </option>
+                        </select>
+                        <label><strong>Select Album</strong></label>
+                    </div> -->
+                    <!-- 2018-2-23 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

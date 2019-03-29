@@ -1,0 +1,58 @@
+<!-- START: tables/datatables -->
+<section class="card">
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <h5 class="text-black clearfix">
+                  <!-- <strong>User Listing</strong> -->
+                  <div class="col-md-4">
+                    <select class="form-control" name="staff" (change)="selectStaff($event.target.value)">
+                        <option value="-1">Select Staff</option>
+                        <option *ngFor="let staff of staffs" value="{{staff.id}}">{{staff.name}}</option>
+                    </select>
+                  </div>
+                  <button (click)="export()" class="btn btn-primary pull-right">Export</button>
+                  
+                </h5>
+
+                <div class="mb-5">
+                    <table class="table table-hover" id="modified_transactionsDatatable" width="100%">
+                        <thead>
+                          <tr>
+                              <th>Member Name</th>
+                              <th>Member Email</th>
+                              <th>Reward</th>
+                              <th>Staff</th>
+                              <th>Points</th>
+                              <th>Note</th>
+                              <th>Date</th>
+                              <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let modified_transaction of modified_transactions">
+                                <tr>
+                                    <td>{{modified_transaction.member_name}} </td>
+                                    <td>{{modified_transaction.member_email}}</td>
+                                    <td>{{modified_transaction.bonus_name}}</td>
+                                    <td>{{modified_transaction.staff_name}}</td>
+                                    <td>{{modified_transaction.points}}</td>
+                                    <td>{{modified_transaction.note}}</td>
+                                    <td>{{modified_transaction.created_at}}</td>
+                                    <td>
+                                        <span class="btn-cursor-pointer swal-btn-cancel" (click)="deleteModifiedTransaction(modified_transaction.id)"><i class="i_delete fa fa-trash"></i></span>
+        
+                                    </td>
+                                </tr>
+                            </ng-container>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+<!-- END: tables/datatables -->
+

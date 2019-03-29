@@ -1,0 +1,30 @@
+<h1>Update</h1>
+
+<div class="edit-checkin-container">
+  	<form #editCheckinForm="ngForm" (ngSubmit)="onSubmit(editCheckinForm)" [formGroup]="form" class="edit-checkin-form">
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Status</label>
+			<div class="col-md-9">
+				<select class="form-control" name="status" [formControl]="form.controls['status']">
+					<option value="1">Active</option>
+					<option value="2">Deactive</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Note</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="note"
+				placeholder="Note" [formControl]="form.controls['note']">
+			</div>
+		</div>
+		<div class="form-actions">
+			<div class="form-group row">
+				<div class="col-md-12">
+					<button routerLink="/rewards/checkin" type="button" class="btn btn-primary">cancel</button>
+					<button type="submit" #editCheckinBtn class="btn btn-primary" [disabled]="!form.valid">save</button>
+				</div>
+			</div>
+		</div>	
+  	</form>
+</div>

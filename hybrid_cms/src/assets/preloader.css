@@ -1,0 +1,46 @@
+.cat__app-loader {
+  width: 44px;
+  height: 44px;
+  border-radius: 40px;
+
+  position: fixed;
+  z-index: 1100;
+
+  top: 50%;
+  left: 50%;
+  margin-left: -20px;
+  margin-top: -50px;
+
+  background: #0b80b2;
+  background: -moz-linear-gradient(-45deg,  #0b80b2 0%, #fb328d 80%);
+  background: -webkit-linear-gradient(-45deg,  #0b80b2 0%,#fb328d 80%);
+  background: linear-gradient(135deg,  #0b80b2 0%,#fb328d 80%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b80b2', endColorstr='#fb328d',GradientType=1 );
+
+  animation: rotating 1s linear infinite;
+}
+
+.cat__app-loader div {
+  background: #f2f4f8;
+  width: 34px;
+  height: 34px;
+  border-radius: 30px;
+  margin: 5px;
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

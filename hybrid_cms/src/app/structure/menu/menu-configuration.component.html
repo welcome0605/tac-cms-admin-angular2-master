@@ -1,0 +1,373 @@
+<!-- START: components/nestable -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Menu</strong>
+        </span>
+    </div>
+
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-5">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <button 
+                          type="button" 
+                          class="btn btn-primary pull-left custom_create_menu" 
+                          data-toggle="modal" 
+                          (click)="clickCreateMenu()"
+                          data-target="#createmenu">
+                            Add Feature
+                        </button>
+
+                        <div class="modal fade" id="createmenu" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myModalLabel">Add Feature</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm)" [formGroup]="form">
+                                        <div class="modal-body">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label" for="l0">Menu Name</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" name="menu_name" placeholder="Enter Menu name" [formControl]="form.controls['menu_name']">
+
+                                                    <small *ngIf="form.controls['menu_name'].hasError('required') && form.controls['menu_name'].touched" class="form-message text-danger">You must include an menu name.</small>
+
+                                                    <small *ngIf="form.controls['menu_name'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid menu name.</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label" for="l0">Menu Type</label>
+                                                <div class="col-md-9">
+
+                                                    <select 
+                                                      class="form-control" 
+                                                      id="selMenuType" 
+                                                      name="selMenuType" 
+                                                      [formControl]="form.controls['menu_type']">
+                                                        <option value="" selected>Select Menu Type</option>
+                                                        <option 
+                                                          *ngFor="let menu_type of menuTypeData;let mtIndex = index"
+                                                          [ngValue]="menu_type.menuTypeId">
+                                                          {{menu_type.menuTypeName}}
+                                                        </option>
+                                                    </select>
+
+                                                    <small *ngIf="form.controls['menu_type'].hasError('required') && form.controls['menu_type'].touched" class="form-message text-danger">You must select any menu type.</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                                            <button 
+                                              #addMenuSaveBtn 
+                                              type="submit" 
+                                              [disabled]="!form.valid" 
+                                              class="btn btn-primary">
+                                                Save changes
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-5">
+
+                    <div class="dd" id="nestable1">
+                        <app-menu-recu-tree-view 
+                            [menuType] ="currentAppData['menu_location_type']"
+                            [recursiveTreeview]="menuData" 
+                            (editMenuDetails)="editMenuDetails($event)" 
+                            (removeMenu)="removeMenu($event)"
+                            (addListItem)="clickAddListItem($event)"
+                            >
+                        </app-menu-recu-tree-view>
+
+                        <div *ngIf="menuData.length > 0" class="row">
+                          <button 
+                            #saveMenuOrderDisableBtn 
+                            type="submit" 
+                            (click)="getOrderData()" 
+                            class="btn btn-primary save_order_btn ladda-button mr-3 mb-3" 
+                            data-style="expand-down">
+                            <span class="ladda-label">Save Order</span>
+                          </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-7">
+
+                <form #editMenuForm="ngForm" (ngSubmit)="onMenuFormSubmit(editMenuForm)" [formGroup]="menuForm" *ngIf="menuFound">
+
+                    <div class="row">
+                      <div class="col-md-12 pull-right">
+                        <!-- <button type="submit" [disabled]="!menuForm.valid || boolSaveDisable" class="btn btn-primary mr-2 mb-2 pull-right" #saveMenuDisbleBtn>Save</button> -->
+                        <button type="submit" class="btn btn-primary mr-2 mb-2 pull-right" [disabled]="boolSaveDisable" #saveMenuDisbleBtn>Save</button>
+                        <!-- <button type="reset" class="btn btn-primary mr-2 mb-2 pull-right">Revert</button> -->
+                        <button type="button" class="btn btn-primary mr-2 mb-2 pull-right" (click)="revertBack()">Revert</button>
+                      </div>
+                    </div>
+
+                    <div class="mb-5 main_menu_custom_block_mb_5">
+
+                        <div class="form-group row">
+                            <div class="card-header card_custome_header">
+                                <span class="cat__core__title card_custome_cat_core_title">
+                                    <strong class="custom_font_size">Configuration options for : {{ menu_name }}({{menu_icon_name}})</strong>
+                                </span>
+                                <span class="custom_icon custom_icon_">
+                                    <i class="{{menu_font_icon}}"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Name</label>
+                            <div class="col-md-8">
+                                <input type="hidden" name="menu_id" formControlName="menuId" />
+                                <input type="hidden" name="parent_id" formControlName="parentId" />
+                                <input class="form-control" placeholder="Menu Name" type="text" name="menu_text" [formControl]="menuForm.controls['menu_text']">
+                            </div>
+                        </div>
+
+                        <div class="form-group row custom_add_menuType" *ngIf="menuOriginalDataOnclick.menu_type == 1 || menuOriginalDataOnclick.menu_type == 4"
+                            [ngClass]="menuOriginalDataOnclick.menu_type == 4 ? 'custom_list_type_add_menu' : 'custom_panel_type_add_menu'">
+                            <div class="col-md-12">
+                                <button 
+                                  type="button" 
+                                  class="addMenuTypebtn btn btn-sm btn-outline-primary mr-2 mb-2" 
+                                  *ngIf="menuOriginalDataOnclick.menu_type == 1"
+                                  (click)="clickAddAnimatedPanel(menuOriginalDataOnclick)" 
+                                  data-toggle="modal" 
+                                  data-target="#createmenu">
+                                    Add Animated Panel
+                                </button>
+
+                                <button 
+                                  type="button" 
+                                  class="addMenuTypebtn btn btn-sm btn-outline-primary mr-2 mb-2s" 
+                                  *ngIf="menuOriginalDataOnclick.menu_type == 4"
+                                  (click)="clickAddListItem(menuOriginalDataOnclick)" 
+                                  data-toggle="modal" 
+                                  data-target="#createmenu">
+                                  Add List Item
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="parentImageMenu" *ngIf="(currentAppData.menu_location_type == 2) && (menu_level == 1)">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <label class="col-form-label">
+                                  Show Tab Menu
+                                  <i 
+                                    class="fa fa-question-circle" 
+                                    data-toggle="tooltip" 
+                                    data-placement="right" 
+                                    title="This menul will showed on TabMenu.">
+                                  </i>
+                              </label>
+                            </div>
+                            <div class="col-md-8">
+                              <!-- <input class="form-control pull-left" type="checkbox" name="tab_show" checked="tab_show"> -->
+                              <span 
+                                class="tab-show-checkbox" 
+                                (click)="clickTabShow()"
+                                style="cursor: pointer; line-height: 38px; font-size: 20px;">
+                                <i 
+                                  [hidden]="tab_show == 0" 
+                                  class="fa fa-check-square-o tabshow-checkbox-enabled" 
+                                  style="color:#0190fe"
+                                  aria-hidden="true"></i>
+                                <i 
+                                  [hidden]="tab_show == 1"
+                                  class="fa fa-square-o tabshow-checkbox-disabled" 
+                                  aria-hidden="true"></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="parentImageMenu" [hidden]="!(currentAppData.menu_location_type == 2)">
+                            <div id="tabmenu-image-upload" class="form-group row panel-image-dropify-box">
+                                <label class="col-md-3 col-form-label">Tab Menu Image
+                                    <i 
+                                        class="fa fa-question-circle" 
+                                        data-toggle="tooltip" 
+                                        data-placement="right" 
+                                        title="This is the panel image that will show for the menu option.">
+                                    </i>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="image-upload-dropify">
+                                        <input type="file" accept="image/*" 
+                                            class="dropify" 
+                                            name="tabmenu_image_upload_{{dropifyId}}"
+                                            id="tabmenu_image_upload_{{dropifyId}}"
+                                            data-max-file-size="8M"
+                                            data-allowed-file-extensions="png jpeg jpg"
+                                            data-width="200"
+                                            data-height="200"
+                                            data-min-width="24" data-max-width="6000"
+                                            data-min-height="24" data-max-height="6000"
+                                            (change)="tabmenuIconFileChange($event)" />                                    
+                                        <div class="hiddenFieldInput" *ngIf="(currentAppData.menu_location_type == 2)">
+                                            <input type="hidden" name="fileHidden" formControlName="tabImageInput" />
+                                            <input type="hidden" name="tabExistingFile" formControlName="tabExistingFile" />
+                                        </div>
+    
+                                        <small *ngIf="is_tabFile" class="form-message text-danger">You must include a Panel Image</small>                                        
+                                    </div>
+                                    <p class="custom_panel_img_size text-center">Recommended Dimensions: 128x128</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="parentImageMenu" [hidden]="!imageMenuTitle">
+
+                            <div id="panel-image-upload" class="form-group row panel-image-dropify-box">
+                                <label class="col-md-3 col-form-label">Panel Image
+                                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="This is the panel image that will show for the menu option."></i>
+                                </label>
+                                <div class="col-md-8 image-upload-dropify">
+                                    <input type="file" accept="image/*" class="dropify" name="image_upload_{{dropifyId}}"
+                                        id="image_upload_{{dropifyId}}"
+                                        data-max-file-size="8M"
+                                        data-allowed-file-extensions="png jpeg jpg"
+                                        data-min-width="24" data-max-width="6000"
+                                        data-min-height="24" data-max-height="6000"
+                                        (change)="appIconFileChange($event)" />
+                                    <!-- [attr.data-default-file]="menu_icon_image" -->
+                                    <div class="hiddenFieldInput" *ngIf="imageMenuTitle">
+                                        <input type="hidden" name="fileHidden" formControlName="imageInput" />
+                                        <input type="hidden" name="existingFile" formControlName="existingFile" />
+                                    </div>
+
+                                    <small *ngIf="is_file" class="form-message text-danger">You must include a Panel Image</small>
+                                    <p class="custom_panel_img_size text-center">Recommended Dimensions: 1240x646</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="form-group row">
+                            <label class="col-md-6 col-form-label custom-form-label-right">Configuration options for :</label>
+
+                            <div class="menu_type_block col-md-6">
+                               <div class="btn-group custom-radio-group" data-toggle="buttons">
+                                    <div class="custom-radio-btn-row custom-radio-rowblock1">
+
+                                        <label *ngFor="let menuType of menuTypeData;let i = index" class="btn btn-default"
+                                        [ngClass]="menuType.menuTypeId == menuTypeSelValue ? 'active' : ''"
+                                        [class.disabled]="menuNotSelected !== null && menuNotSelected !== 0 && menuType.menuTypeId !== menuTypeSelValue"
+                                        [hidden]="menuType.menuTypeId !== menuTypeSelValue"
+                                        (click)="showMenuTypesForm(menuType,i,menuType.menuTypeId,menuType.menuTypeSlug)"
+                                        >
+                                            <span class="menu_type_text">{{menuType.menuTypeName}}</span>
+
+                                            <span class="custom_icon custom_icon_{{menuType.menuTypeSlug}}">
+                                                <i class="{{menuType.menuTypeIcon}}"></i>
+                                            </span>
+
+                                            <input type="radio" name="selct_menu_type" [value]="menuType.menuTypeId"
+                                            formControlName="selct_menu_type"
+                                            [checked]="menuType.menuTypeId === menuTypeSelValue"
+                                            class="input_radio_btn">
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="show_card" *ngIf="menuTypeHtml">
+
+                        <div class="row">
+
+                            <div class="col-lg-12 custom_show_card_design">
+
+                                <app-menu-types *ngIf="menuTypeHtmlHidden[0]" (childData)="handleEvent($event)" [menuTypeSubImageCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypeMenuSlugId]="menuTypeMenuSlugId"></app-menu-types>
+
+                                <app-menu-type-video *ngIf="menuTypeHtmlHidden[1]" (childVideoData)="handleEvent($event)" [menuTypeSubVideoCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypeVideoSlugId]="menuTypeMenuSlugId"></app-menu-type-video>            
+
+                                <app-menu-type-youtube-video *ngIf="menuTypeHtmlHidden[2]" (childYoutubeVideoData)="handleEvent($event)" [menuTypeSubYouTubeCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypeYoutubeSlugId]="menuTypeMenuSlugId"></app-menu-type-youtube-video>
+
+                                <app-menu-type-list-menu *ngIf="menuTypeHtmlHidden[3]" (listMenuFormData)="handleEvent($event)" [menuIsChild]="menuTypeIsChild"
+                                    [menuTypeSubListingCssJsonData]="menuTypeSubCssJsonData" [menuTypeListingMenuSlugId]="menuTypeMenuSlugId"></app-menu-type-list-menu>
+
+                                <app-menu-type-rss *ngIf="menuTypeHtmlHidden[4]" (childRSSFormData)="handleEvent($event)" [menuTypeSubRssCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypeRssSlugId]="menuTypeMenuSlugId"></app-menu-type-rss>
+
+                                <app-menu-type-notification *ngIf="menuTypeHtmlHidden[5]" (childNotificationFormData)="handleEvent($event)" [menuTypeSubNotificationCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypeNotificationSlugId]="menuTypeMenuSlugId"></app-menu-type-notification>
+
+                                <app-menu-type-photo *ngIf="menuTypeHtmlHidden[6]" (childPhotoFormData)="handleEvent($event)" [menuTypeSubPhotoCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypePhotoSlugId]="menuTypeMenuSlugId"></app-menu-type-photo>
+
+                                <app-menu-type-pdf *ngIf="menuTypeHtmlHidden[7]" (childPDFFormData)="handleEvent($event)" [menuTypeSubPdfCssJsonData]="menuTypeSubCssJsonData" #pdf></app-menu-type-pdf>
+
+                                <app-menu-type-website *ngIf="menuTypeHtmlHidden[8]" (childWebsiteFormData)="handleEvent($event)" [menuTypeSubWebsiteCssJsonData]="menuTypeSubCssJsonData" #website></app-menu-type-website>
+
+                                <app-menu-type-tutorial *ngIf="menuTypeHtmlHidden[9]" (childTutorialFormData)="handleEvent($event)" [menuTypeSubTutorialCssJsonData]="menuTypeSubCssJsonData"
+                                    [menuTypeTutorialSlugId]="menuTypeMenuSlugId" #tutorial></app-menu-type-tutorial>
+
+                                <app-menu-type-contact *ngIf="menuTypeHtmlHidden[10]" (childContactFormData)="handleEvent($event)" [menuTypeSubContactCssJsonData]="menuTypeSubCssJsonData" #contentEditor></app-menu-type-contact>
+
+                                <app-menu-type-content-editor *ngIf="menuTypeHtmlHidden[11]" (childContentFormData)="handleEvent($event)" [menuTypeSubContentCssJsonData]="menuTypeSubCssJsonData" #contentEditor></app-menu-type-content-editor>
+                                <app-menu-type-rewards *ngIf="menuTypeHtmlHidden[12]"></app-menu-type-rewards>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="no-menu-type-data" *ngIf="noMenuFound">
+                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Add Feature to add menu items or click on menu items below to edit."></i>
+                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Oh snap!</strong> Please first click on edit button of any menu. -->
+                </div>
+
+                <div class="no-menu-type-data" *ngIf="menuCreateMsg">
+                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" data-html="true" title="<strong>Oh snap!</strong> Please first create menu."></i>
+                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Oh snap!</strong> Please first create menu. -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- END: components/carousel -->

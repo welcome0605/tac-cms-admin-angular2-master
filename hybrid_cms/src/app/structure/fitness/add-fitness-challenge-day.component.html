@@ -1,0 +1,83 @@
+<!-- START: forms/basic-forms-elements -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Add Fitness Challenge Day</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <!-- Horizontal Form -->
+                    <form #addFitnessDayForm="ngForm" (ngSubmit)="onSubmit(addFitnessDayForm)" [formGroup]="form">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Select Challenge</label>
+                            <div class="col-md-9">
+                                <select  class="form-control" name="challenge_id" [formControl]="form.controls['challenge_id']">
+                                <option value="" selected>Select Challenge</option>
+                                <option *ngFor = "let data of fitnessData" value="{{data.id}}">{{data.title}}</option>
+                                </select>
+                                <small *ngIf="form.controls['challenge_id'].hasError('required') && form.controls['challenge_id'].touched" class="form-message text-danger">You must select one option.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Day No</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="title" placeholder="Enter Fitness Challenge Day" [formControl]="form.controls['day_no']">
+                                <small *ngIf="form.controls['day_no'].hasError('required') && form.controls['day_no'].touched" class="form-message text-danger">You must include a day number.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Title</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="title" placeholder="Enter Fitness Challenge Title" [formControl]="form.controls['title']">
+                                <small *ngIf="form.controls['title'].hasError('required') && form.controls['title'].touched" class="form-message text-danger">You must include a title.</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Image</label>
+                                <div class="col-md-4">
+                                    <input type="file" accept="image/*" data-max-file-size="3M" class="dropify" id="image" name="image" (change)="imagefileChange($event)" data-allowed-file-extensions="png jpeg jpg"  />
+                                    <input type="hidden" name="fileHidden" formControlName="image"/>
+                                    <small *ngIf="is_image_file" class="form-message text-danger">You must include a image.</small>
+                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Video URL</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="title" placeholder="Enter Video URL" [formControl]="form.controls['video_url']">
+                                <small *ngIf="form.controls['video_url'].hasError('required') && form.controls['video_url'].touched" class="form-message text-danger">You must include a video URL.</small>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="status">Status</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="status" [formControl]="form.controls['status']">
+                                   <option *ngFor="let status of statusArray" value="{{status.key}}">{{status.name}}</option>
+                                </select>
+                                <small *ngIf="form.controls['status'].hasError('required') && form.controls['status'].touched" class="form-message text-danger">You must select at least one option .</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+                                    <button routerLink="/fitness-challenge-day" type="button" class="btn btn-primary pull-right">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END: forms/basic-forms-elements -->

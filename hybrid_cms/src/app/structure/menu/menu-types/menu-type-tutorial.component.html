@@ -1,0 +1,170 @@
+<section class="card">
+
+	<div class="card-block">
+		<div class="mb-5 sub-menu-css-field-part">
+			<form #menuTypeTutorial="ngForm">
+
+				<input type="hidden" name="menuTypeMenuSlugId" value="{{getMenuTypeMenuSlugId}}">
+
+				<div class="form-check" style="display: none;">
+				    <input type="checkbox" class="form-check-input" id="show_tutorial" name="show_tutorial" [(ngModel)]="typeMenuform.show_tutorial">
+				    <label class="form-check-label" for="show_tutorial">Show Tutorial on First Use</label>
+				</div>
+
+				<h4>Slide Data</h4>
+
+				<div class="dynamicAddHtml addMoreHtmlBlock">
+
+					<div class="preDefineHtml" *ngFor="let htmlData of typeMenuform.media_data; let index = index; ">
+						<tutorial-medium-picker 
+							[removable]="typeMenuform.media_data.length > 1"
+							(remove)="removeHtmlForm($event)"
+							(corruptImage)="addCorruptImage($event)"
+							[index]="index"
+							[(slideData)]="typeMenuform.media_data[index]"
+							>
+						</tutorial-medium-picker>
+					</div>
+
+					<div class="row">
+						<div class="col-md-11">
+							<a (click)="addFormHtml();" class="btn btn-primary pull-right" style="cursor: default">Add Field +</a>
+						</div>
+					</div>
+
+				</div>
+				<hr/>
+
+				<div class="accordion card_custome_accordion" id="accordion">
+
+					<div class="card">
+
+						<div class="card-header card_custome_collapsed" role="tab" id="headingOne" data-toggle="collapse" aria-expanded="true" [attr.data-target]="'#' + menuTypeMenuSlugId"
+						    [attr.aria-controls]="menuTypeMenuSlugId" (click)="subMenuCollapseOpen(menuTypeMenuSlugId)" [ngClass]="subMenuTypeCollapsed == menuTypeMenuSlugId ? '' : 'collapsed'">
+
+							<div class="card-title">
+								<span class="accordion-indicator pull-right">
+									<i class="plus fa fa-plus"></i>
+									<i class="minus fa fa-minus"></i>
+								</span>
+								<a>Advanced Options</a>
+							</div>
+
+						</div>
+
+						<div id="{{subMenuTypeCollapsed}}" class="card-collapse collapse" role="tabcard" aria-labelledby="headingOne" [ngClass]="subMenuTypeCollapsed == menuTypeMenuSlugId ? 'show' : ''">
+
+							<div class="sub-menu-css-json-fields sub-menu-css-json-field-block">
+
+								<ng-container *ngFor="let cssData of typeMenuform.css_string_json; let i = index ">
+									<div class="form-group row"
+									*ngIf="typeMenuform.css_string_json[i]['time'] !== 'always'">
+										<label class="col-md-3 col-form-label" for="{{cssData.key}}">{{cssData.label}}
+												<i *ngIf="cssData.type == 'checkbox'"
+													class="fa fa-question-circle" data-toggle="tooltip" data-placement="right"
+													title="You can enable or disable First time start using this checkbox.">
+												</i>
+										</label>
+
+										<div class="col-sm-8" *ngIf="cssData.type == 'size'">
+											<input id="{{cssData.key}}" name="{{cssData.key}}"
+												[(ngModel)]="typeMenuform.css_string_json[i]['value']"
+												(ngModelChange)="sendMenuTypeTutorialFormData($event,i,cssData.key,menuTypeTutorial)"
+												class="form-control custom_css_size_field_text" placeholder="Enter {{cssData.label}}"
+												type="text" appOnlyNum/>
+
+											<input class="form-control custom_css_size_field_px" value="px" name="field_size_px_{{i}}" id="field_size_px_{{i}}" [disabled]="true"
+											    type="text">
+										</div>
+
+										<!-- <label class="col-md-6 col-form-label" for="title">First Time Start
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="You can enable or disable First time start using this checkbox."></i>
+	
+											<span class="mandatory-field">*</span>
+										</label> -->
+
+										<div class="col-md-6" style="padding-top: 15px;"  *ngIf="cssData.type == 'checkbox'">
+											<!-- <div *ngIf="cssData.value == true">
+												<input type="checkbox" name="enable" value="true" checked (change)="radioSave()">
+											</div>
+											<div *ngIf="cssData.value == false">
+												<input type="checkbox" name="enable" value="false" (change)="radioSave()">
+											</div> -->
+											<input type="checkbox" name="enable" value={{cssData.value}}
+												[(ngModel)]="this.typeMenuform.css_string_json[i]['value']"
+												(ngModelChange)="changeRadioBtn(i, menuTypeTutorial)">
+										</div>
+
+										<!-- <div class="col-md-4" *ngIf="cssData.type == 'color' && cssData.key == 'backgroundColor'">
+											<input type="text" name="{{cssData.key}}" id="{{cssData.key}}"
+											class="form-control cursor_pointer_input"
+											[style.background]="cssData.value"
+											[(colorPicker)]="cssData.value"
+											[cpOutputFormat]="'hex'"
+											[cpPosition]="'bottom'"
+											[cpPositionRelativeToArrow]="true"
+											(colorPickerChange)="rgbaText=onChangeclosebtncolor($event);sendMenuTypeTutorialFormData($event,i,cssData.key,menuTypeTutorial)"
+											[readonly]="true"
+											/>
+										</div>
+
+										<label *ngIf="cssData.type == 'color' && cssData.key == 'backgroundColor' && cssData.value" class="col-md-4 col-form-label"
+										    for="{{cssData.key}}">
+											Hex: {{cssData.value}}234
+										</label>
+										<label *ngIf="cssData.type == 'color' && cssData.key == 'backgroundColor' && cssData.value == ''" class="col-md-4 col-form-label"
+										    for="{{cssData.key}}">
+											Hex: #000000234
+										</label> -->
+
+										<div class="col-md-4" *ngIf="cssData.type == 'color' && cssData.key == 'bottomFontColor'">
+											<input type="text" name="{{cssData.key}}" id="{{cssData.key}}"
+											class="form-control cursor_pointer_input"
+											[style.background]="cssData.value"
+											[(colorPicker)]="cssData.value"
+											[cpOutputFormat]="'hex'"
+											[cpPosition]="'bottom'"
+											[cpPositionRelativeToArrow]="true"
+											(colorPickerChange)="rgbaText=onChangeBottomFontcolor($event);sendMenuTypeTutorialFormData($event,i,cssData.key,menuTypeTutorial)"
+									    [readonly]="true"
+											/>
+										</div>
+
+										<label *ngIf="cssData.type == 'color' && cssData.key == 'bottomFontColor' && cssData.value" class="col-md-4 col-form-label"
+										    for="{{cssData.key}}">
+											Hex: {{cssData.value}}
+										</label>
+										<label *ngIf="cssData.type == 'color' && cssData.key == 'bottomFontColor' && cssData.value == ''" class="col-md-4 col-form-label"
+										    for="{{cssData.key}}">
+											Hex: #000000
+										</label>
+
+										<!-- <div class="col-md-8" *ngIf="cssData.type == 'positionType'">
+
+											<select class="form-control" id="{{cssData.key}}" name="{{cssData.key}}" [(ngModel)]="typeMenuform.css_string_json[i]['value']"
+											    (ngModelChange)="sendMenuTypeTutorialFormData($event,null,null,menuTypeTutorial)">
+												<option value="" selected="">Select Image Position Type</option>
+												<option *ngFor="let position of subMenuPositionTypeArray" [ngValue]="position.name">{{position.name}}</option>
+											</select>
+
+										</div> -->
+
+									</div>
+
+								</ng-container>
+
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+</section>

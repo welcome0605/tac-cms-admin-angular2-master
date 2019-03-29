@@ -1,0 +1,68 @@
+<!-- START: forms/basic-forms-elements -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Add Fitness Challenge Day Loop</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <!-- Horizontal Form -->
+                    <form #addFitnessLoopForm="ngForm" (ngSubmit)="onSubmit(addFitnessLoopForm)" [formGroup]="form">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Select Day</label>
+                            <div class="col-md-9">
+                                <select  class="form-control" name="day" [formControl]="form.controls['day']">
+                                <option value="" selected>Select Day</option>
+                                <option *ngFor = "let data of dayData" value="{{data.id}}">{{data.title}}</option>
+                                </select>
+                                <small *ngIf="form.controls['day'].hasError('required') && form.controls['day'].touched" class="form-message text-danger">You must select one option.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Loop Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="loop_name" placeholder="Enter Fitness Challenge loop name" [formControl]="form.controls['loop_name']">
+                                <small *ngIf="form.controls['loop_name'].hasError('required') && form.controls['loop_name'].touched" class="form-message text-danger">You must include a loop name.</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Video URL</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="title" placeholder="Enter Video URL" [formControl]="form.controls['video_url']">
+                                <small *ngIf="form.controls['video_url'].hasError('required') && form.controls['video_url'].touched" class="form-message text-danger">You must include a video URL.</small>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="status">Status</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="status" [formControl]="form.controls['status']">
+                                   <option *ngFor="let status of statusArray" value="{{status.key}}">{{status.name}}</option>
+                                </select>
+                                <small *ngIf="form.controls['status'].hasError('required') && form.controls['status'].touched" class="form-message text-danger">You must select at least one option .</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+                                    <button routerLink="/fitness-challenge-loops" type="button" class="btn btn-primary pull-right">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END: forms/basic-forms-elements -->
+

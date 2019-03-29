@@ -1,0 +1,35 @@
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>App Create</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <!-- Horizontal Form -->
+                    <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm )" [formGroup]="form">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">App Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="app_name" placeholder="Enter App Name" [formControl]="form.controls['app_name']">
+                                <small *ngIf="form.controls['app_name'].hasError('required') && form.controls['app_name'].touched" class="form-message text-danger">You must include an app name.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

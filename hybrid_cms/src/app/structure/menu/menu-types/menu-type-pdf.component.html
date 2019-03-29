@@ -1,0 +1,55 @@
+<section class="card">
+
+	<!-- <div class="card-header card_custome_header">
+    <span class="cat__core__title card_custome_cat_core_title">
+			<strong>Configuration options for : PDF</strong>
+		</span>
+		<span class="custom_icon custom_icon_">
+      <i class="fa fa-file-powerpoint-o"></i>
+    </span>
+	</div> -->
+
+	<div class="card-block">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="mb-5 sub-menu-css-field-part">
+
+					<!-- <input type="hidden" name="cssDemo" value="{{getMenuSubCssJsonData | json}}"> -->
+
+					<!-- <div class="form-group row">
+						<label class="col-md-3 col-form-label" for="url">Enter PDF URL</label>
+						<div class="col-md-8">
+							<input type="text" id="url" name="url"
+							[(ngModel)]="typeMenuform.url"
+							(ngModelChange)="sendMenuTypePdfFormData($event)"
+							class="form-control" placeholder="Enter PDF URL"/>
+						</div>
+					</div> -->
+					<form #menuTypePdf="ngForm">
+						<div class="form-group row">
+							<label class="col-md-3 col-form-label">PDF Upload</label>
+							<div class="col-md-8">
+								<input type="file" accept=".pdf" data-max-file-size="3M" class="dropify" id="pdf_upload" name="pdf_upload" data-allowed-file-extensions="pdf"
+									[attr.data-default-file]="setdefaultPDfUrl"
+									(change)="fileUploadFileChange($event);sendMenuTypePdfFormData($event)"
+								/>
+							</div>
+						</div>
+					</form>
+
+					<!-- <div class="form-group row" *ngFor="let cssData of subMenuCssJsonData; let i = index ">
+						<label class="col-md-3 col-form-label" for="{{cssData.key}}">{{cssData.key}}</label>
+						<div class="col-md-4">
+							<input id="{{cssData.key}}" name="{{cssData.key}}"
+							[(ngModel)]="subMenuCssJsonData[i]['value']"
+							(ngModelChange)="sendMenuTypePdfFormData($event)"
+							class="form-control" placeholder="{{cssData.key}}" type="text"/>
+						</div>
+					</div> -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

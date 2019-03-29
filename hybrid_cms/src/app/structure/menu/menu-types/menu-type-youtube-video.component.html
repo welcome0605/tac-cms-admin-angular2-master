@@ -1,0 +1,191 @@
+<section class="card">
+
+	<div class="card-block">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="mb-5 sub-menu-css-field-part">
+					<form #menuTypeYouTube="ngForm">
+						<!-- <input type="hidden" name="cssDemo" value="{{getMenuSubCssJsonData | json}}"> -->
+
+						<input type="hidden" name="menuTypeMenuSlugId" value="{{getMenuTypeMenuSlugId}}">
+
+						<div class="form-group row">
+							<label class="col-md-3 col-form-label" for="video_url" style="padding-right: 0px !important;">YouTube Playlist URL   <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="To find your YouTube Playlist ID, go to the desired YouTube playlist and look at the URL. After (list=) you will see a combination of letters and numbers often starting with PL. For example, if the URL was https://www.youtube.com/watch?v=asgkfskNFfc&list=PLxaqM8O_SyW5Y51T0VxVb44JotJ3dT22q the YouTube Playlist ID would be PLxaqM8O_SyW5Y51T0VxVb44JotJ3dT22q"></i>
+							</label>
+							<div class="col-md-8">
+								<input id="video_url" name="video_url" [(ngModel)]="typeMenuform.video_url" (paste)="sendMenuTypeChannelData($event,null,null,menuTypeYouTube)" (ngModelChange)="sendMenuTypeChannelData($event,null,null,menuTypeYouTube)"
+								    class="form-control" placeholder="Enter YouTube Playlist Url" type="text" />
+							</div>
+						</div>
+
+						<div class="accordion card_custome_accordion" id="accordion">
+
+							<div class="card">
+
+								<div class="card-header card_custome_collapsed " role="tab" id="headingOne" data-toggle="collapse" aria-expanded="true" [attr.data-target]="'#' + menuTypeMenuSlugId"
+								    [attr.aria-controls]="menuTypeMenuSlugId" (click)="subMenuCollapseOpen(menuTypeMenuSlugId)" [ngClass]="subMenuTypeCollapsed == menuTypeMenuSlugId ? '' : 'collapsed'">
+
+									<div class="card-title">
+										<span class="accordion-indicator pull-right">
+											<i class="plus fa fa-plus"></i>
+											<i class="minus fa fa-minus"></i>
+										</span>
+										<a>Advanced Options</a>
+									</div>
+
+								</div>
+
+								<div id="{{subMenuTypeCollapsed}}" class="custom-collapse-margin-top card-collapse collapse" role="tabcard" aria-labelledby="headingOne"
+								    [ngClass]="subMenuTypeCollapsed == menuTypeMenuSlugId ? 'show' : ''">
+
+									<div class="sub-menu-css-json-fields sub-menu-css-json-field-block">
+
+										<ng-container *ngFor="let cssData of typeMenuform.css_string_json; let i = index ">
+
+											<div class="form-group row"
+											*ngIf="typeMenuform.css_string_json[i]['time'] !== 'always'">
+
+                        <label 
+                          class="col-md-3 col-form-label" 
+                          for="{{cssData.key+i}}"
+                          [hidden]="cssData.type == 'borderStyle' || cssData.key == 'listBannerBackground' || cssData.key == 'listBannerBorderStyle' || cssData.key == 'bottomBorderStyle' || cssData.key == 'positionLeft'">
+                          {{cssData.label}}
+                        </label>
+
+                        <div 
+                          class="col-sm-8" 
+                          *ngIf="cssData.type == 'size' && cssData.key != 'positionLeft'">
+                          <input 
+                            id="{{cssData.key+i}}" 
+                            name="{{cssData.key+i}}" 
+                            [(ngModel)]="typeMenuform.css_string_json[i]['value']" 
+                            (ngModelChange)="sendMenuTypeChannelData($event,null,null,menuTypeYouTube)"
+                            class="form-control custom_css_size_field_text" 
+                            placeholder="Enter {{cssData.label}}" 
+                            type="text" 
+                            appOnlyNum/>
+
+                          <input 
+                            class="form-control custom_css_size_field_px" 
+                            value="px" 
+                            name="field_size_px_{{i}}" 
+                            id="field_size_px_{{i}}" 
+                            [disabled]="true"
+                            type="text">
+												</div>
+
+
+                        <div 
+                          class="col-md-4" 
+                          *ngIf="cssData.type == 'color' && cssData.key == 'fontColor'">
+                          <input 
+                            type="text" 
+                            id="{{cssData.key+i}}" 
+                            name="{{cssData.key+i}}" 
+                            class="form-control" 
+                            type="text" 
+                            [style.background]="cssData.value"
+                            [(colorPicker)]="cssData.value" 
+                            [cpOutputFormat]="'hex'" 
+                            [cpPosition]="'bottom'" 
+                            [cpPositionRelativeToArrow]="true"
+                            (colorPickerChange)="rgbaText=onChangefontcolor($event);sendMenuTypeChannelData($event,i,cssData.key,menuTypeYouTube)"
+                            [readonly]="true" />
+												</div>
+                        <label 
+                          *ngIf="cssData.type == 'color' && cssData.key == 'fontColor' && cssData.value" 
+                          class="col-md-4 col-form-label" 
+                          for="{{cssData.key+i}}">
+													Hex: {{cssData.value}}
+												</label>
+                        <label 
+                          *ngIf="cssData.type == 'color' && cssData.key == 'fontColor' && cssData.value == ''" 
+                          class="col-md-4 col-form-label"
+                          for="{{cssData.key+i}}">
+													Hex: #000000
+												</label>
+
+
+                        <div 
+                          class="col-md-4" 
+                          *ngIf="cssData.type == 'color' && cssData.key == 'borderColor'">
+                          <input 
+                            type="text" 
+                            id="{{cssData.key+i}}" 
+                            name="{{cssData.key+i}}" 
+                            class="form-control cursor_pointer_input" 
+                            type="text" 
+                            [style.background]="cssData.value"
+                            [(colorPicker)]="cssData.value" 
+                            [cpOutputFormat]="'hex'" 
+                            [cpPosition]="'bottom'" 
+                            [cpPositionRelativeToArrow]="true"
+                            (colorPickerChange)="rgbaText=onChangeBorderColor($event);sendMenuTypeChannelData($event,i,cssData.key,menuTypeYouTube)"
+                            [readonly]="true" />
+												</div>
+                        <label 
+                          *ngIf="cssData.type == 'color' && cssData.key == 'borderColor' && cssData.value" 
+                          class="col-md-4 col-form-label" 
+                          for="{{cssData.key+i}}">
+													Hex: {{cssData.value}}
+												</label>
+                        <label 
+                          *ngIf="cssData.type == 'color' && cssData.key == 'borderColor' && cssData.value == ''" 
+                          class="col-md-4 col-form-label"
+                          for="{{cssData.key+i}}">
+													Hex: #000000
+												</label>
+
+
+												<div class="col-md-8" *ngIf="cssData.type == 'font'">
+
+                          <select 
+                            class="form-control" 
+                            id="{{cssData.key+i}}" 
+                            name="{{cssData.key+i}}" 
+                            [(ngModel)]="typeMenuform.css_string_json[i]['value']"
+                            (ngModelChange)="sendMenuTypeChannelData($event,null,null,menuTypeYouTube)">
+														<option value="" selected="">Select Font Name</option>
+                            <option 
+                              *ngFor="let fontType of subMenuFontTypeData" 
+                              [ngValue]="fontType.value">{{fontType.name}}</option>
+													</select>
+
+												</div>
+
+												<div class="col-md-8" *ngIf="cssData.type == 'align'">
+
+													<select class="form-control" id="alignment" name="alignment" [(ngModel)]="typeMenuform.css_string_json[i]['value']" (ngModelChange)="sendMenuTypeChannelData($event,null,null,menuTypeYouTube)">
+														<option value="" selected="">Select Content Alignment</option>
+														<option *ngFor="let align of subMenuAlignmentArray" [ngValue]="align.key" [selected]="align.key == 1">{{align.name}}</option>
+													</select>
+
+												</div>
+
+												<!-- <div class="col-md-8" *ngIf="cssData.type == 'borderStyle'">
+
+													<select class="form-control" id="{{cssData.key}}" name="{{cssData.key}}" [(ngModel)]="typeMenuform.css_string_json[i]['value']"
+													    (ngModelChange)="sendMenuTypeChannelData($event,null,null,menuTypeYouTube)">
+														<option value="" selected="">Select Video List Border Style</option>
+														<option *ngFor="let style of subMenuBorderStyleArray" [ngValue]="style.name">{{style.name}}</option>
+													</select>
+
+												</div> -->
+
+											</div>
+
+										</ng-container>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

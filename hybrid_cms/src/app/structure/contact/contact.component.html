@@ -1,0 +1,225 @@
+<section class="card">
+        <div class="card-header">
+            <span class="cat__core__title">
+            <strong>Contact Us</strong>
+            </span>
+        </div>
+        
+        <div class="card-block">
+            <div class="row">
+                <!-- left -->
+                <div class="col-md-2">
+                    <p class="support_p">Support</p>
+                </div>
+                <!-- center -->
+                <div class="col-md-8">
+                    <!-- arrow status -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <p class="hand_cursor" data-toggle="collapse" data-target="#demo" (click)="changeArrwDir()">
+                                    {{status_select[SelectedStatus]}} Tickets
+                                    <span *ngIf="changeClick" class="icmn-arrow-down2"></span>
+                                    <span *ngIf="!changeClick" class="icmn-arrow-up2"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal satus -->
+                    <div id="demo" class="row collapse">
+                        <div class="col-sm-12">
+                            <h6>Ticket Status</h6>
+                            <form #selectStatusForm="ngForm" (ngSubmit)="itemSelected(selectStatusForm)" [formGroup]="formStatus">
+                                <select class="form-control fixed-theme" name="StatusList" [formControl]="formStatus.controls['search_state']">
+                                    <option class="list-group-item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;" *ngFor="let status_sel of status_select" [ngValue]="status_sel"> {{status_sel}} </option>
+                                </select>
+                                <div class="row">
+                                    <div class="col-sm-12 pull-right btn-search">
+                                        <button type="submit" class="btn btn-default pull-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- create btn tickets -->
+                    <div *ngIf="!is_Admin" class="row">
+                        <div class="pull-left">
+                            <button type="button" class="btn-Create-Ticket pull-left" data-toggle="modal" data-target="#createticket">
+                                <span class="icmn-plus"></span>
+                                Create Tickets&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </div>
+                        
+                        <div class="modal fade" id="createticket" tabindex="1" role="dialog" aria-labelledby="" aria-hidden="true">
+                            
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myModalLabel">Create a new ticket</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm)" [formGroup]="form">
+                                        <div class="modal-body">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">Subject</label>
+                                                <input type="text" id="idSubject" class="form-control fixed-theme" maxlength="5000" name="subject_name" [formControl]="form.controls['ticket_subject']">
+                                                <small *ngIf="form.controls['ticket_subject'].hasError('required') && form.controls['ticket_subject'].touched" class="form-message text-danger">&nbsp;&nbsp;&nbsp;**You must insert subject.</small>
+                                                <small *ngIf="form.controls['ticket_subject'].hasError('matchCorrectSpace')" class="form-message text-danger">&nbsp;&nbsp;&nbsp;**Please enter a valid menu name.</small>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">Body</label>
+                                                <textarea class="fixed-theme" id="idBody" rows="3" maxlength="5000" cols="70" name="body" [formControl]="form.controls['ticket_body']" placeholder="Max length is 5000 characters."></textarea>
+                                                <small *ngIf="form.controls['ticket_body'].hasError('required') && form.controls['ticket_body'].touched" class="form-message text-danger">&nbsp;&nbsp;&nbsp;**You must insert body.</small>
+                                                <small *ngIf="form.controls['ticket_body'].hasError('matchCorrectSpace')" class="form-message text-danger">&nbsp;&nbsp;&nbsp;**Please enter a valid menu name.</small>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <label>Department</label>
+                                                    <select class="form-control list-group fixed-theme" name="DepartmentList" [formControl]="form.controls['ticket_department']">
+                                                        <option *ngFor="let data of department" class="list-group-item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;"> {{data}} </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Priority</label>
+                                                    <select class="form-control list-group fixed-theme" name="PriorityList"  [formControl]="form.controls['ticket_priority']">
+                                                        <option *ngFor="let data of priority" class="list-group-item" style="cursor:pointer; color: #74708d; font-family: 'PT Sans', sans-serif;"> {{data}} </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="modal-body">
+                                            <div class="form-group row">
+                                                <div class="col-md-4 pull-left">
+                                                    <p>Attachment</p>
+                                                    <button type="button" class="btn btn-default pull-left"><span class="icmn-attachment"></span>Attach File</button>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <button #addMenuSaveBtn type="submit" class="btn btn-success">Submit Ticket</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div>
+                    <!-- tickets -->
+                    <div *ngIf="is_Admin" name="ticket_row_admin">
+                        <div *ngFor="let data of cTicket_array_data">
+                            <div class="ticket-div-admin row" *ngIf="SelectedStatus == data.state || SelectedStatus == 3">
+                                <div class="col-sm-1">
+                                    <div class="ticket-status">
+                                        <p>{{state[data.state]}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <img class="img_avarta" src="assets/modules/dummy-assets/common/img/avatars/user_default.png">
+                                    </div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="ticket_id_subject row" [routerLink]="['./contact-msg']" (click)="getMsgOfTicket(data.ticket_id, data.subject, data.state)">
+                                        <label class="hand-cursor">#{{pad(data.ticket_id, 6)}}   {{data.subject}}</label>
+                                    </div>
+                                    <div class="ticket_body row">
+                                        <label maxlength="30">Body : {{(data.body.toString().substring(0,50))}}..</label>
+                                    </div>
+                                    <div class="ticket_body row">
+                                        <label>Department : {{data.department}}</label>
+                                    </div>
+                                    <div class="ticket_body row">
+                                        <label>Priority : {{priority[data.priority]}}</label>
+                                    </div>
+                                    <div class="ticket_date row">
+                                        <label>By {{data.sender_name}}   {{calculateTime(data.created_at)}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="row controlBtn">
+                                        <button class=" mr-2 mb-2 pull-right btn-ticket-custom-1" (click)="closedStateTicket(data.ticket_id)" *ngIf="data.state != 1">Close</button> 
+                                        <button class=" mr-2 mb-2 pull-right btn-ticket-custom-2">
+                                            <a class="btn-cursor-pointer swal-btn-cancel" (click)="deleteTicket(data.ticket_id)">
+                                                <i class="i_delete fa fa-trash"></i>
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="!is_Admin" name="ticket_row_user">
+                        <div *ngFor="let data of cTicket_array_data">
+                            <div class="ticket-div-user row" *ngIf="SelectedStatus == data.state || SelectedStatus == 3">
+                                <div class="col-sm-1">
+                                    <div class="ticket-status">
+                                        <p>{{state[data.state]}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <img class="img_avarta" src="assets/modules/dummy-assets/common/img/avatars/user_default.png">
+                                    </div>
+                                </div>
+                                <div class="col-sm-11">
+                                    <div class="ticket_id_subject row" [routerLink]="['./contact-msg']" (click)="getMsgOfTicket(data.ticket_id, data.subject)">
+                                        <p class="hand-cursor">#{{pad(data.ticket_id, 6)}}   {{data.subject}}</p>
+                                    </div>
+                                    <div class="ticket_body row">
+                                        <label maxlength="30">{{(data.body.toString().substring(0,50))}}..</label>
+                                    </div>
+                                    <div class="ticket_date row">
+                                        <label>By {{data.sender_name}}   {{calculateTime(data.created_at)}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- pagination -->
+                    <div class="row">
+                        <div class="container">
+                            <div class="text-center">
+                                <!-- pager -->
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="ticketsListing(1)">First</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="ticketsListing(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="ticketsListing(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="ticketsListing(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="ticketsListing(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- right -->
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <!-- test -->
+            <div class="empty-ticket"  *ngIf="emptyTicket">
+                <h3>Nothing exists</h3>
+            </div>
+            <!-- test -->
+            <!-- <form [formGroup]="countryForm">
+                <select id="country" formControlName="country">
+                    <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option>
+                </select>
+            </form> -->
+        </div>
+</section>
+          

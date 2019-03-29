@@ -1,0 +1,125 @@
+<section class="card">
+  <div class="card-header">
+    <span class="cat__core__title">
+      <strong>Contact Us</strong>
+    </span>
+  </div>
+
+  <div class="card-block">
+        <div class="row">
+            <!-- left -->
+            <div class="col-md-2">
+            </div>
+            <!-- center -->
+            <div class="col-md-8">
+                <!-- ticket subject -->
+                <div class="row">
+                    <p class="support_msg">#{{pad(this.ticketId, 6)}}  {{ticket_subject}}</p>
+                </div>
+                <!-- edit msg -->
+                <div class="row">
+                    <form 
+                        #createForm="ngForm" 
+                        (ngSubmit)="onSubmit(createForm )" 
+                        [formGroup]="form"
+                        class="col-md-12">
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-msg-owner-avarta" src="assets/modules/dummy-assets/common/img/avatars/user_default.png">
+                            </div>
+                            <div class="col-md-11">
+                                Enter a reply:
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <textarea
+                                            id="edit_msg"
+                                            class="msg-edit"
+                                            maxlength="5000"
+                                            name="body" 
+                                            [formControl]="form.controls['msg_content']" 
+                                            placeholder="**You must insert Message"
+                                            style="width: 100%;"
+                                            >
+                                        </textarea>
+                                    </div>   
+                                    <!-- <div class="col-md-6">
+                                        <button type="button" class="btn btn-default pull-left msg-btn-attach"><span class="icmn-attachment"></span>Attach File</button>
+                                    </div> -->
+                                    <div class="col-md-12">
+                                        <h6 class="pull-right">Max length is 5000.</h6>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 pull-right">
+                                        <button type="submit" class="pull-right btn-custom">Reply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </form>
+                </div>
+                <!-- msg list -->
+                <div *ngFor="let data of pagedItemsMsg">
+                    <div class="msg_list row" >
+                        <div class="col-md-1">
+                            <img class="img-msg-list-avarta" src="assets/modules/dummy-assets/common/img/avatars/user_default.png">
+                        </div>
+                        <!-- if user -->
+                        <div *ngIf="is_msg_Admin == false" class="col-md-11">
+                            <div class="msg-content-user" *ngIf="data.sender_id != 1">
+                                <pre>{{data.msg_content}}</pre>
+                                <p>By {{data.sender_name}} {{calculateTimeMsg(data.created_at)}}<p>
+                            </div>
+                            <div class="msg-content-other" *ngIf="data.sender_id == 1">
+                                <pre>{{data.msg_content}}</pre>
+                                <p>By {{data.sender_name}} {{calculateTimeMsg(data.created_at)}}<p>
+                            </div>
+                        </div>
+                        <!-- if admin -->
+                        <div *ngIf="is_msg_Admin == true" class="col-md-11">
+                            <div class="msg-content-other" *ngIf="data.sender_id != 1">
+                                <pre>{{data.msg_content}}</pre>
+                                <p>By {{data.sender_name}} {{calculateTimeMsg(data.created_at)}}<p>
+                            </div>
+                            <div class="msg-content-user" *ngIf="data.sender_id == 1">
+                                <pre>{{data.msg_content}}</pre>
+                                <p>By {{data.sender_name}} {{calculateTimeMsg(data.created_at)}}<p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pagination -->
+                <div class="row">
+                    <div class="container">
+                        <div class="text-center">
+                            <!-- pager -->
+                            <ul *ngIf="pagerMsg.pages && pagerMsg.pages.length" class="pagination">
+                                <li [ngClass]="{disabled:pagerMsg.currentPage === 1}">
+                                    <a (click)="setPage(1)">First</a>
+                                </li>
+                                <li [ngClass]="{disabled:pagerMsg.currentPage === 1}">
+                                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li *ngFor="let page of pagerMsg.pages" [ngClass]="{active:pagerMsg.currentPage === page}">
+                                    <a (click)="setPage(page)">{{page}}</a>
+                                </li>
+                                <li [ngClass]="{disabled:pagerMsg.currentPage === pagerMsg.totalPages}">
+                                    <a (click)="setPage(pagerMsg.currentPage + 1)">Next</a>
+                                </li>
+                                <li [ngClass]="{disabled:pagerMsg.currentPage === pagerMsg.totalPages}">
+                                    <a (click)="setPage(pagerMsg.totalPages)">Last</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- right -->
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+
+</section>    

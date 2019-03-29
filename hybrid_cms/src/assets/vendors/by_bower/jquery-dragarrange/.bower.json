@@ -1,0 +1,39 @@
+{
+  "name": "jquery-dragarrange",
+  "version": "0.2.0",
+  "homepage": "https://github.com/vishalok12/jquery-dragarrange",
+  "authors": [
+    "Vishal Kumar <vishal.rgiit@gmail.com>"
+  ],
+  "description": "A Basic jQuery library to arrange/order DOM elements by dragging",
+  "main": "drag-arrange.js",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "arrange",
+    "drag",
+    "drop",
+    "shift",
+    "move"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.0",
+    "commit": "18241c4f306d62d0a7ac464aa57e544bb3d23b06"
+  },
+  "_source": "https://github.com/vishalok12/jquery-dragarrange.git",
+  "_target": "*",
+  "_originalSource": "jquery-dragarrange"
+}

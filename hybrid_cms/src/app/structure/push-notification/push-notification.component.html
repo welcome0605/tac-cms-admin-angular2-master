@@ -1,0 +1,402 @@
+<!-- Start New Design -->
+
+<style>
+        /* Center the loader */
+        #loader {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          width: 150px;
+          height: 150px;
+          margin: -75px 0 0 -75px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 120px;
+          height: 120px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }
+        
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        /* Add animation to "page content" */
+        .animate-bottom {
+          position: relative;
+          -webkit-animation-name: animatebottom;
+          -webkit-animation-duration: 1s;
+          animation-name: animatebottom;
+          animation-duration: 1s
+        }
+        
+        @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 } 
+          to { bottom:0px; opacity:1 }
+        }
+        
+        @keyframes animatebottom { 
+          from{ bottom:-100px; opacity:0 } 
+          to{ bottom:0; opacity:1 }
+        }
+        
+        #all_messages {
+          display: none;
+          
+        }
+
+        #selected_list .active {
+           font-weight: 600;
+        }
+        #selected_list a {
+            font-weight: 600;
+        }
+      
+</style>
+<section class="card">
+
+	<div class="card-header">
+		<span class="cat__core__title">
+			<strong>Push Notification Settings</strong>
+		</span>
+	</div>
+
+	<div class="card-block">
+		<div class="row" [hidden]=domloaded>
+			<div class="col-lg-12">
+				<div class="mb-5">
+					<div class="nav-tabs-horizontal">
+
+            <div class="modal fade" id="send_preview" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Preview & Send</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label='Close' >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <form #createForm="ngForm" (ngSubmit)="pushNotificationSubmit(createForm)">
+                      <div class="modal-body">
+                        <div class="alert alert-info formodal"><span class="alert-icon info"></span><p>Users will only receive this message if they have accepted push notes.</p></div>
+                        <label class="col-md-12 col-form-label" for="l3">Here’s a schematic preview of your message</label>
+                        <div 
+                          class="form-group row"  
+                          style="border: 1px solid #cecece; border-radius: 3px;">
+                          <div 
+                            class="col-md-12" 
+                            style = "border-bottom: 1px solid #cecece; padding: 8px 10px;">
+                            <h4>Title: </h4><p class = "msg-body">{{firebase_title}}</p>
+                          </div>
+                          <div 
+                            class="col-md-12" 
+                            style="padding: 14px 10px; max-height: 300px; overflow-y: scroll;">
+                            <h4>Description:  </h4>
+                            <p class = "msg-body">{{firebase_text}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <!-- <button type="button" class="btn" data-dismiss="modal">OK</button> -->
+                        <button 
+                          id="notification_send" 
+                          type="submit" 
+                          #creatFormBtn 
+                          class="btn btn-primary">
+                          Send
+                        </button>
+                        <button class="btn btn-success mt-sweetalert" data-dismiss="modal">Cancel</button>
+                        <!-- <button type="submit" #creatFormBtn [disabled]="!form.valid" class="btn btn-primary">Send</button> -->                                           
+                      </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+
+            <div [hidden] = "!is_compose">
+              <div class="form-group row">
+                <label class="col-md-12 col-form-label" for="l0">
+                  <h4 class="text-uppercase">
+                      <a (click) = "changeScreen()" style="cursor: pointer;"> < BACK </a>
+                  </h4>
+                </label>
+              </div>
+
+              <div class="row send-pushnotification-div">
+                <div class="col-md-6">                                      
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row device-radio-content">      
+                        <div class="col-md-5">
+                          <label>Device:</label>
+                          <span class="mandatory-field" *ngIf="!ios_check && !android_check">*</span>                          
+                        </div>                  
+                        <div class="col-md-7">                          
+                          <input 
+                            id="push-device-ios"
+                            type="checkbox" 
+                            [(ngModel)]="ios_check"
+                            (change)="changeiOSDevice($event)" >
+                          <label class="device-label" for="push-device-ios">iOS</label>
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                          <input 
+                            id="push-device-android"                
+                            type="checkbox" 
+                            [(ngModel)]="android_check" 
+                            (change)="changeAndroidDevice($event)">
+                          <label class="device-label" for="push-device-android">ANDROID</label>
+                          <p class="required-text" *ngIf="!ios_check && !android_check">
+                            You need to select any device.
+                          </p>
+                        </div>                        
+                      </div>
+                    </div>                    
+                  </div>                  
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-5 col-form-label" for="firebase_title">Title
+                          <i 
+                            class="fa fa-question-circle" 
+                            data-toggle="tooltip" 
+                            data-placement="right" 
+                            title="Enter Push Notification Title.">
+                          </i>
+                          <span class="mandatory-field" *ngIf="firebase_title?.length == 0">*</span>
+                        </label>
+                        <div class="col-md-6">
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            name="firebase_title" 
+                            placeholder="Enter Title"  
+                            [(ngModel)] = "firebase_title">
+                          <p class="required-text" *ngIf="firebase_title?.length == 0">Push Notification Title is required.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-5 col-form-label" for="firebase_text">Text
+                          <i 
+                            class="fa fa-question-circle" 
+                            data-toggle="tooltip" 
+                            data-placement="right" 
+                            title="Enter Push Notifiaction Message Body.">
+                          </i>
+                          <span class="mandatory-field" *ngIf="firebase_text?.length == 0">*</span>
+                        </label>
+                        <div class="col-md-6">
+                          <textarea 
+                            class="form-control" 
+                            name="firebase_text" 
+                            placeholder="Enter Text" 
+                            [(ngModel)] = "firebase_text" 
+                            maxlength="2048">
+                          </textarea>
+                          <label>{{2048 - firebase_text.length}} Characters left</label>
+                          <p class="required-text" *ngIf="firebase_text?.length == 0">Push Notification Message is required.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions clearfix">
+                <div class="pull-left">
+                  <button #saveBtn type="submit"  
+                    class="btn btn-primary mr-3" 
+                    data-toggle="modal" 
+                    data-target="#send_preview"
+                    [disabled]="firebase_text?.length == 0 || firebase_title?.length == 0 || (!ios_check && !android_check)">
+                    Send Message & Preview
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id = "notificationstatusform" [hidden] = "is_compose">
+              <div class="col-md-12">
+                  <div class="form-group row">
+                      <label class="col-md-12 col-form-label" for="l0">
+                          <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4" >
+                              <button 
+                                class="btn btn-primary mr-3 pull-right" 
+                                (click) = "changeScreen()">
+                                New Compose
+                              </button>
+                            </div>
+                          </div>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-12" style="border: 1px solid #D3D3D3;
+                                              border-radius: 5px;
+                                              background-color: #FFFFFF;
+                                              color: #666666;
+                                              font-size: 14px;">
+                <div class="portlet box blue">
+                  <div class="portlet-title row">
+                    <div class="col-md-2" style="display:flex; align-items:center; justify-content:center; border-right: solid 1px #D2D2D2; border-bottom: solid 1px #D2D2D2; height:50px;">
+                        <strong style="font-size:16px;">FILTER BY</strong>
+                    </div>
+                    <div class="col-md-8" style="display:flex; align-items:center; justify-content:center; border-bottom: solid 1px #D2D2D2;" >
+                        <strong style="font-size:17px;"> {{app_type_string}} </strong> &nbsp;&nbsp;
+                        <span style="font-size:17px;" id="text_count">({{count}})</span>
+                    </div>
+                    <div class="col-md-2" style="display:flex; justify-content:flex-end; border-bottom: solid 1px #D2D2D2; align-items: center;">
+                        <label class="fa fa-search"></label>
+                        &nbsp;&nbsp;
+                        <input 
+                          type="text" 
+                          [(ngModel)]="term" 
+                          placeholder="Search Message" 
+                          style="border: none;  border-bottom: 2px solid #D2D2D2;"/>
+                    </div>
+                  </div>
+                  <div class="portlet-body">
+                    <div class="row">
+                      <div 
+                        class="selected_list_div col-md-2">
+                        <ul 
+                          id = "selected_list" 
+                          class="tabs-left nav nav-tabs" 
+                          role="tablist">
+                          <li 
+                            class="device-kind-li"
+                            [ngClass]="{'active':app_type == 4}"
+                            (click)="GetNotifications(4)">
+                            <a href="#all_messages" data-toggle="tab" role="tab"> All Messages </a>
+                          </li>
+                          <li 
+                            class="device-kind-li"
+                            [ngClass]="{'active':app_type == 3}"
+                            (click)="GetNotifications(3)">
+                            <a 
+                              href="#all_messages" 
+                              data-toggle="tab" 
+                              role="tab"> 
+                              All App Types 
+                            </a>
+                          </li>
+                          <li  
+                            class="device-kind-li"
+                            [ngClass]="{'active':app_type == 2}"
+                            (click)="GetNotifications(2)">
+                            <a href="#all_messages" data-toggle="tab" role="tab"> iOS App </a>
+                          </li>
+                          <li  
+                            class="device-kind-li"
+                            [ngClass]="{'active':app_type == 1}"
+                            (click)="GetNotifications(1)">
+                            <a href="#all_messages" data-toggle="tab" role="tab"> Android App </a>
+                          </li>
+                          <!-- <li  (click)="GetWebMessages('Web Apps')" style="height:50px; font-size:15px; display:flex; align-items:center; justify-content:center;">
+                              <a href="#all_messages" data-toggle="tab" role="tab">Web App</a>
+                          </li> -->
+                        </ul>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-content">
+                          <div id = "loader"></div>
+                          <div 
+                            class="tab-pane fade active in" 
+                            id="all_messages" 
+                            style="display: inline;">
+                            
+                            <div class="no-message" *ngIf="count==0">
+                              <strong>No Message</strong>
+                            </div>
+                              
+                            <div   
+                              *ngFor = "let item of allData |reverse |filter:term |paginate: { itemsPerPage: 5, currentPage: p }; let i = index" 
+                              class="message_content" 
+                              id = "{{item.id}}">
+                              <div class="row message_content_div">
+                                <div class="col-md-12">
+                                  <div class="pull-left">
+                                    <input 
+                                      type="checkbox"  
+                                      class="select_item_checkbox" 
+                                      id = "select_item{{item.id}}"  
+                                      (change) = "check_item($event, item.id)"/>
+                                  </div>
+                                  <div class="pull-left" *ngIf="count>0 && (item.notify_text).length<30">
+                                    <strong>{{item.notify_title}}</strong>
+                                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                                    {{item.notify_text}}
+                                  </div>
+                                  <div class="pull-left" *ngIf="count>0 && (item.notify_text).length>30">
+                                    <strong>{{item.notify_title}}</strong>
+                                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                                    {{(item.notify_text).substr(0,30)}}...
+                                  </div>
+                                  <div class="push-message-time pull-right" *ngIf="count>0">
+                                    <span>{{item.created_at}}</span> 
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <pagination-controls (pageChange)="p = $event" style="float:right; padding-top:5px;"></pagination-controls>
+            </div>
+                 
+					</div>
+				</div>
+			</div>
+    </div>
+  </div>
+
+  <div 
+    id = "footer_support"    
+    [hidden] = "selected_item_count == 0">
+    <div class="col-md-12">
+      <div class="row">
+        <div class= "col-md-4 message-selected-div">
+          <span>{{selected_item_count}}</span> &nbsp; 
+          <strong>Message Seleted</strong>
+        </div>
+        <div class="col-md-4 message-selected-div">
+          <button 
+            id="delete_button" 
+            class="fa fa-trash" 
+            (click) = "deleteConfirm(checked_elements)" 
+            [disabled] = "selected_item_count == 0">
+          </button>
+        </div>
+        <div class="col-md-4 message-selected-div" >
+          <a class="fa fa-close" (click)="Init()"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- End New Design -->

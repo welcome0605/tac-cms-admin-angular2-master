@@ -1,0 +1,45 @@
+.tac-pagination {
+
+  .page-item {
+    
+    box-shadow: 0;
+    border-style: solid;
+    outline: none;
+    cursor: pointer;
+    color: #636c72;
+    background: #f2f4f8;
+    border: 1px solid #ddd;
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    float: left;
+    border-right: none;
+    &:hover {
+      color: #ffffff;
+    }
+
+  }
+
+  .page-item.active {
+    background: #0190fe;
+    border-color: #0190fe;
+    color: #ffffff;
+  }
+
+  .pagination-prev {
+    margin-left: 0;
+    border-bottom-left-radius: .25rem;
+    border-top-left-radius: .25rem;
+    border-right: none;
+  }
+
+  .pagination-next {
+    margin-left: 0;
+    border-bottom-right-radius: .25rem;
+    border-top-right-radius: .25rem;    
+  }
+
+  .page-item.pagination-next {
+    border-right: 1px solid #ddd; 
+  }
+}

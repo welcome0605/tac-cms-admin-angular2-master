@@ -1,0 +1,226 @@
+<div class="bg_top">
+    <div class="container">
+        <div class="applogo_main">
+            <div class="app_logo">
+                <img src="assets/modules/sign-up/img/TAC-logo.png" class="img-responsive">
+            </div>
+        </div>
+    </div>
+    <img src="assets/modules/sign-up/img/bg_top.png" class="img-responsive">
+
+
+    <div class="app_section">
+        <div class="container">
+            <div class="app_section_view">
+                <h1>Start building your app today!</h1>
+                <!-- *ngIf="is_loading" -->
+                <!-- <h5>
+                    <div class="alert alert-default">
+                        <strong class="row">
+                            <span class="col-sm-7 pull-left">Please Wait....</span>
+                            <span class=" col-sm-5">
+                                <a class="pull-right" href="javascript: void(0);">
+                                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                                </a>
+                            </span>
+                        </strong>
+                    </div>
+                </h5> -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="left_section">
+                            <img src="assets/modules/sign-up/img/screens.png" class="img-responsive">
+                            <div class="plan_section">
+                                <div class="title">Change Plan Selection :</div>
+                            </div>
+                            <div class="tab_section">
+                                <ul class="nav nav-tabs">
+                                    <!-- <li class="active">
+                                        <a data-toggle="tab" href="#bronze">bronze</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#silver">silver</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#gold">gold</a>
+                                    </li> -->
+                                    <li *ngFor="let data of packagesList; let i = index " [class.active]="data.unique_id === plan_form_unique_id">
+                                        <a (click)=setPlan(data.unique_id)>{{data.pa_name | uppercase}}</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a data-toggle="tab" href="#custom">custom</a>
+                                    </li> -->
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="setting_plan" *ngIf="setting_plan && setting_plan.pa_name != 'Custom' ">
+                                        <div class="tab_box silver_main">
+                                            <div *ngIf="recommand_plan === setting_plan.unique_id" class="recomend_box">RECOMMENDED</div>
+                                            <h3 class="silver_cst">{{setting_plan.pa_name | uppercase}}</h3>
+                                            <h2>$ {{setting_plan.pa_price}}</h2>
+                                            <span class="price_desc">$149 MONTHLY SERVICE CONTRACT</span>
+                                            <ul [innerHtml]='setting_plan.pa_desc'>
+                                            </ul>
+                                        </div>
+                                        <!--tab_box end-->
+                                    </div>
+                                    <div id="custom" *ngIf="setting_plan && setting_plan.pa_name === 'Custom' ">
+                                        <div class="tab_box silver_main">
+                                            <h3 class="silver_cst">{{setting_plan.pa_name | uppercase}}</h3>
+                                            <div class="custom_box" [innerHtml]="setting_plan.pa_desc">
+                                            </div>
+                                        </div>
+                                        <!--tab_box end-->
+                                    </div>
+                                    <div id="custom" *ngIf="!setting_plan && is_plan_set">
+                                        <div class="tab_box">
+                                            <div class="custom_box">
+                                                <a href="http://theappcompany.com/app-platform-sales-page/">
+                                                    <h2>Contact Us</h2>
+                                                </a>
+                                                <p>Please select plan first </p>
+                                            </div>
+                                        </div>
+                                        <!--tab_box end-->
+                                    </div>
+                                </div>
+                                <!---tab-content end-->
+                            </div>
+                            <!---tab_section end-->
+                        </div>
+                        <!---left_section end-->
+                    </div>
+                    <!---col-sm-6 end-->
+                    <div class="col-md-6">
+                        <div class="right_section">
+                            <div class="register_form">
+
+                                <form *ngIf="customActive" #customForm="ngForm" (ngSubmit)="sendCustom(customForm)" [formGroup]="customform" method="POST">
+
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <small *ngIf="customform.controls['name'].hasError('pattern')" class="form-message text-danger">Please enter valid name</small>
+                                        <small *ngIf="customform.controls['name'].hasError('required') && customform.controls['name'].touched" class="form-message text-danger">Please enter a valid name</small>
+                                        <input type="text" pattern="[a-zA-Z][a-zA-Z ]+" class="form-control" id="name" placeholder="Enter your name" [formControl]="customform.controls['name']"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <small *ngIf="customform.controls['email'].hasError('required') && customform.controls['email'].touched" class="form-message text-danger">Please enter an valid email address</small>
+                                        <small *ngIf="customform.controls['email'].errors?.email && customform.controls['email'].touched" class="form-message text-danger">Please enter an valid email address</small>
+                                        <input type="email" class="form-control" id="email" placeholder="Enter your email address" [formControl]="customform.controls['email']"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="budget">Estimated Budget</label>
+                                        <input type="text" appOnlyNum class="form-control" id="estimated-budget" placeholder="000.000.000" [formControl]="customform.controls['budget']"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="appDescription">Describe Your App</label>
+                                        <small *ngIf="customform.controls['app_desc'].hasError('required') && customform.controls['app_desc'].touched" class="form-message text-danger">Please enter an app description.</small>
+                                        <textarea class="form-control textarea_custom_height" rows="6" id="app_desc" placeholder="Enter Text here" [formControl]="customform.controls['app_desc']">
+                                        </textarea>
+                                    </div>
+                                    <div class="register_btn">
+                                        <button type="submit" class="btn btn-default" [disabled]="!customform.valid">Send</button>
+                                        <span>Already have an account?
+                                            <a href="javascript:void(0);" routerLink="/sign-in"> Sign In</a>
+                                        </span>
+                                    </div>
+                                </form>
+
+                                <!-- package form start here -->
+                                <form *ngIf="!customActive" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" [formGroup]="form" method="POST">
+                                    <div class="form-group">
+                                        <label for="name">First Name</label>
+                                        <small *ngIf="form.controls['first_name'].hasError('required') && form.controls['first_name'].touched" class="form-message text-danger">Please enter a valid first name</small>
+                                        <small *ngIf="form.controls['first_name'].hasError('pattern')" class="form-message text-danger">Please enter a valid first name</small>
+                                        <input type="text" pattern="[a-zA-Z][a-zA-Z ]+" class="form-control" id="name" placeholder="Enter your first name" [formControl]="form.controls['first_name']"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lname">Last Name</label>
+                                        <small *ngIf="form.controls['last_name'].hasError('pattern')" class="form-message text-danger"> Please enter a valid last name</small>
+                                        <small *ngIf="form.controls['last_name'].hasError('required') && form.controls['last_name'].touched" class="form-message text-danger">Please enter a valid last name</small>
+                                        <input type="text" pattern="[a-zA-Z][a-zA-Z ]+" class="form-control" id="lname" placeholder="Enter your last name" [formControl]="form.controls['last_name']"
+                                        />
+                                    </div>
+                                    <div class="form-group" [class.has-danger]="email_exist.status">
+                                        <label for="email">Email Address</label>
+                                        <small *ngIf="email_exist.status" class="form-message text-danger">{{email_exist.text}}</small>
+                                        <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">Please enter an valid email address</small>
+                                        <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">Please enter an valid email address</small>
+                                        <input [class.form-control-danger]="email_exist.status" type="email" class="form-control" id="email" placeholder="Enter your email address"
+                                            [formControl]="form.controls['email']" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Password</label>
+                                        <small *ngIf="(form.controls['password'].hasError('required') && form.controls['password'].touched) || form.controls['password'].hasError('minlength')"
+                                            class="form-message text-danger">Please enter a password with at least 6 characters</small>
+                                        <!-- <small class="form-message text-danger" *ngIf="form.controls['password'].hasError('pattern')">success</small> -->
+                                        <input type="password" class="form-control" id="pwd" placeholder="********************" minlength="6" [formControl]="form.controls['password']"
+                                        />
+                                        <small class="form-message text-danger" *ngIf="form.controls['password'].touched && form.controls['password'].hasError('matchCorrectPass')">Your password contain atleast one Uppercase Letter and one number</small>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rpwd">Repeat Password</label>
+                                        <small *ngIf="form.controls['cnf_password'].hasError('required') && form.controls['cnf_password'].touched" class="form-message text-danger">Please enter a confirm password.</small>
+                                        <small *ngIf="form.controls['cnf_password'].errors?.equalTo" class="form-message text-danger">Passwords do not match.</small>
+                                        <input type="password" class="form-control" id="rpwd" placeholder="********************" [formControl]="form.controls['cnf_password']"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Phone Number</label>
+                                        <small *ngIf="form.controls['mob_number'].hasError('required') && form.controls['mob_number'].touched" class="form-message text-danger">Please enter a valid 10 digit phone number</small>
+                                        <small *ngIf="form.controls['mob_number'].hasError('minlength')" class="form-message text-danger">Please enter a valid 10 digit phone number</small>
+                                        <input type="text" minlength="14" class="form-control" id="us-phone-mask-input" [formControl]="form.controls['mob_number']"
+                                        />
+                                    </div>
+                                    <div class="form-group" [class.has-danger]="app_name_exist.status">
+                                        <label for="appname">App Name</label>
+                                        <small *ngIf="app_name_exist.status" class="form-message text-danger">{{app_name_exist.text}}</small>
+                                        <input (focus)='app_name_exist.status = false' [class.form-control-danger]="app_name_exist.status" type="text" class="form-control"
+                                            id="appname" placeholder="Enter your app name" [formControl]="form.controls['app_name']"
+                                        />
+                                        <small *ngIf="form.controls['app_name'].hasError('required') && form.controls['app_name'].touched" class="form-message text-danger">Please enter the name of your app</small>
+                                        <small *ngIf=" form.controls['app_name'].hasError('maxlength')" class="form-message text-danger">Your App name is exceeds Google Play Store & Apple App Store Appname criteria </small>
+                                        <small *ngIf="form.controls['app_name'].hasError('minlength')" class="form-message text-danger">Please enter a valid app name</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" name="term_condition" [formControl]="form.controls['term_condition']" type="checkbox">
+                                                <span>By registering you agree to our Privacy Policy and Terms of Service</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="register_btn">
+                                        <button type="submit" class="btn btn-default" [disabled]="!form.valid || is_plan_set || button_disable">Register</button>
+                                        <span>Already have an account?
+                                            <a href="javascript:void(0);" routerLink="/sign-in">Sign In</a>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--row end-->
+                <!-- <div class="row" *ngIf="!customActive"> -->
+                <!--footer section start-->
+                <!-- <div class="col-sm-12">
+                        <div class="copyright_sec">
+                            <h6>By registering you agree to our Privacy Policy and Terms of Service</h6>
+                        </div>
+                    </div> -->
+                <!--col-sm-12 end-->
+                <!-- </div> -->
+                <!--footer section end-->
+            </div>
+        </div>
+        <!--container end-->
+    </div>
+    <!--app_section end-->
+</div>
+<!--bg_top end-->

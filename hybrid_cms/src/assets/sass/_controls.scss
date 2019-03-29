@@ -1,0 +1,240 @@
+.cb-wrap {
+  float: right;
+  width: 26%;
+  transition: transform 250ms;
+
+  &.pull-left {
+    .form-actions {
+      float: left;
+    }
+  }
+
+  h4 {
+    margin-top: 0;
+    color: $grey;
+  }
+
+  @include breakpoint('phone-lrg') {
+    [class^="icon-"]:before, [class*=" icon-"]:before {
+      font-family: "form-builder-font";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: .2em;
+      text-align: center;
+      /* opacity: .8; */
+
+      /* For safety - reset parent styles, that can break glyph codes*/
+      font-variant: normal;
+      text-transform: none;
+
+      /* fix buttons height, for twitter bootstrap */
+      line-height: 1em;
+
+      /* Animation center compensation - margins should be symmetric */
+      /* remove if not needed */
+      margin-left: .2em;
+
+      /* you can be more comfortable with increased icons size */
+      /* font-size: 120%; */
+      color: #0190fe;
+
+      /* Font smoothing. That was taken from TWBS */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      /* Uncomment for 3D effect */
+      /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+    }
+
+    .icon-autocomplete:before { content: '\e800'; } /* '' */
+    .icon-date:before { content: '\e801'; } /* '' */
+    .icon-checkbox:before { content: '\e802'; } /* '' */
+    .icon-checkbox-group:before { content: '\e803'; } /* '' */
+    .icon-radio-group:before { content: '\e804'; } /* '' */
+    .icon-rich-text:before { content: '\e805'; } /* '' */
+    .icon-select:before { content: '\e806'; } /* '' */
+    .icon-textarea:before { content: '\e807'; } /* '' */
+    .icon-textbox:before { content: '\e807'; } /* '' */
+    .icon-slideshow:before { 
+      content: "";
+      width: 18px;
+      height: 14px;
+      background-image: url(/assets/images/icon-slideshow.png);
+      background-size: cover;
+      top: 14px;
+    } /* '' */
+    .icon-text:before { content: '\e808'; } /* '' */
+    .icon-pencil:before { content: '\e809'; } /* '' */
+    .icon-file:before { 
+      content: "";
+      width: 18px;
+      height: 14px;
+      background-image: url(/assets/images/icon-image.png);
+      background-size: cover;
+      top: 14px;
+    } /* '' */
+    .icon-hidden:before { content: '\e80b'; } /* '' */
+    .icon-cancel:before {
+      content: '\e80c';
+    }
+
+    /* '' */
+    .icon-button:before { content: '\e80d'; } /* '' */
+    .icon-header:before { content: '\e80f'; } /* '' */
+    .icon-paragraph:before { content: '\e810'; } /* '' */
+    .icon-number:before { content: '\e811'; } /* '' */
+    .icon-copy:before { content: '\f24d'; } /* '' */
+      
+    width: 64px;
+
+    h4 {
+      display: none;
+    }
+  }
+}
+
+.frmb-control {
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+
+  li {
+    cursor: move;
+    list-style: none;
+    margin: 0 0 -1px 0;
+    padding: 10px;
+    text-align: left;
+    background: $white;
+    user-select: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px $input-border-color;
+
+    .control-icon {
+      width: 16px;
+      height: auto;
+      margin-right: 10px;
+      margin-left: 0.2em;
+      display: inline-block;
+
+      img,
+      svg {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    &:first-child {
+      border-radius: 5px 5px 0 0;
+      margin-top: 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 5px 5px;
+    }
+
+    &::before {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: darken($white, 5%);
+    }
+
+    &.ui-sortable-helper {
+      border-radius: 5px;
+      transition: box-shadow 250ms;
+      box-shadow: 2px 2px 6px 0 $grey;
+      border: 1px solid $white;
+    }
+
+    &.ui-state-highlight {
+      width: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      border: 0 none;
+    }
+
+    &.moving {
+      opacity: .6;
+    }
+
+    &.fb-separator {
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0;
+      cursor: default;
+
+      hr {
+        margin: 10px 0;
+      }
+    }
+
+    @include breakpoint('phone-lrg') {
+      &::before {
+        font-size: 30px;
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  &.sort-enabled {
+    li.ui-state-highlight {
+      box-shadow: none;
+      height: 0;
+      width: 100%;
+      background: radial-gradient(ellipse at center, rgba(84, 84, 84, 1) 0%, rgba(0, 0, 0, 0) 75%);
+      border: 0 none;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      visibility: visible;
+      overflow: hidden;
+      margin: 1px 0 3px;
+      animation: PLACEHOLDER 250ms forwards;
+    }
+  }
+}
+
+.fb-mobile {
+  .form-actions {
+    width: 100%;
+
+    button {
+      width: 100%;
+      font-size: .85em !important;
+      display: block !important;
+      border-radius: 0 !important;
+      margin-top: -1px;
+      margin-left: 0 !important;
+
+      &:first-child {
+        border-radius: 5px 5px 0 0 !important;
+        margin-top: 0 !important;
+        border-bottom: 0 none;
+      }
+
+      &:last-child {
+        border-radius: 0 0 5px 5px !important;
+      }
+    }
+  }
+}
+
+.form-actions {
+  float: right;
+  margin-top: 5px;
+
+  button {
+    border: 0 none;
+  }
+}

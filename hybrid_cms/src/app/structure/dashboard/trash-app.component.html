@@ -1,0 +1,32 @@
+<section class="card">
+            <div class="card-header">
+        		<span class="cat__core__title">
+            		<strong>Trash App</strong>
+        		</span>
+    		</div>
+    		<div class="card-block">
+        		<div class="row">
+        			<div *ngFor="let data of appData" class="col-xl-2">
+	                    <div class="cat__core__widget cat__core__widget--border cat__core__widget__1 px-3 py-5">
+	                        <a class="cat__core__avatar cat__core__avatar--90 cat__core__avatar--border d-block mx-auto" href="javascript:void(0);">
+	                            <!-- <img src="assets/modules/dummy-assets/common/img/app-icon.png" alt="Alternative text to the image"> -->
+
+	                            <img *ngIf="data.basicDetail.app_icon.app_icon_thumb_url"  src="{{data.basicDetail.app_icon.app_icon_thumb_url}}" alt="Alternative text to the image">
+
+
+	                        </a>
+	                        <div class="my-3 text-center">
+	                            <strong class="font-size-18">{{data.app_name}}</strong>
+	                        </div>
+                            <div class="text-center">
+                            	<button type="button" class="btn btn-sm"  (click)="restoreApp(data)"><i class="fa fa-recycle"></i></button>
+                                <button type="button" class="btn btn-sm"  (click)="deleteApp(data)"><i class="fa fa-trash-o"></i></button>
+                            </div>
+	                    </div>
+	                </div>
+	                <div *ngIf="appData?.length == 0" class="col-xl-2">
+                    	No record found.
+                    </div>
+	            </div>
+            </div>
+</section>

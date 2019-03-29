@@ -1,0 +1,77 @@
+<section class="card">
+
+	<!-- <div class="card-header card_custome_header">
+    <span class="cat__core__title card_custome_cat_core_title">
+			<strong>Configuration options for : Website</strong>
+		</span>
+		<span class="custom_icon custom_icon_">
+      <i class="icmn-sphere"></i>
+    </span>
+	</div> -->
+
+	<div class="card-block">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="mb-5 sub-menu-css-field-part">
+
+					<!-- <input type="hidden" name="cssDemo" value="{{getMenuSubCssJsonData | json}}"> -->
+
+					<!-- <div class="form-group row">
+						<label class="col-md-3 col-form-label" for="title">Title</label>
+						<div class="col-md-8">
+							<input id="title" name="title"
+							[(ngModel)]="typeMenuform.title"
+							(ngModelChange)="sendMenuTypeWebsiteFormData($event)"
+							class="form-control" placeholder="Enter Title" type="text"/>
+						</div>
+					</div> -->
+					<form #menuTypeWebsite="ngForm" novalidate>
+						<div class="form-group row">
+							<label class="col-md-3 col-form-label" for="web_url">Web URL</label>
+							<div class="col-md-8">
+
+								<!-- <input id="web_url" name="web_url" pattern="(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/){1}[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?"
+								placeholder="Enter Web URL" type="url"
+						    [(ngModel)]="typeMenuform.web_url"  class="form-control"
+								(cut)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+								/> -->
+
+								<input class="form-control custom_css_field_url_type" value="http://" name="url_type" id="url_type" [disabled]="true" type="text">
+
+								<input id="web_url" name="web_url" placeholder="Enter Web URL" type="text"
+						    class="form-control custom_css_field_url_text"
+						    appAllowValidUrl
+						    [(ngModel)]="typeMenuform.web_url"
+						    (ngModelChange)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)" (blur)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+						    #url="ngModel" />
+
+								<!-- (ngModelChange)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+								(cut)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+								(paste)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+								(copy)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+								(blur)="sendMenuTypeWebsiteFormData($event,menuTypeWebsite)"
+								" -->
+								<!-- <label class="text-danger" for="error" *ngIf="errorFormBool">
+									Please provide correct url for ex. http://example.com or https://example.com or http://www.example.com
+								</label> -->
+								<label class="text-danger" for="error" *ngIf="url.errors && (url.dirty || url.touched)">
+									<p *ngIf="url.errors.appAllowValidUrl">Please enter correct url. ex. www.example.com</p>
+								</label>
+							</div>
+						</div>
+					</form>
+					<!-- <div class="form-group row" *ngFor="let cssData of subMenuCssJsonData; let i = index ">
+						<label class="col-md-3 col-form-label" for="{{cssData.key}}">{{cssData.key}}</label>
+						<div class="col-md-4">
+							<input id="{{cssData.key}}" name="{{cssData.key}}"
+							[(ngModel)]="subMenuCssJsonData[i]['value']"
+							(ngModelChange)="sendMenuTypeWebsiteFormData($event)"
+							class="form-control" placeholder="{{cssData.key}}" type="text"/>
+						</div>
+					</div> -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,678 @@
+<section class="card">
+  <div class="card-header">
+      <span class="cat__core__title">
+          <strong>Prompts</strong>
+          <div class="pull-right">
+          <button type="submit" #saveTabBtnDisable [disabled]="flag ? !autoupgradeForm.valid :!ratepopupform.valid" class="btn btn-primary mr-3" (click)="saveTabs()">Save</button>
+
+          <!-- <button type="submit" #reviewBtnDisable [disabled]="!ratepopupform.valid" class="btn btn-primary mr-3">Save</button> -->
+        </div>
+      </span>
+  </div>
+
+  <div class="card-block">
+    <!-- <div class="row" [hidden]=notificationFlag>
+      <div 
+        class="cat__app-loader" 
+        style="position: relative; margin-top: 180px;margin-bottom: 180px;">
+      </div>
+    </div> -->
+
+    <!-- <div class="row" [hidden]=!notificationFlag> -->
+      <div class="col-lg-12">
+        <div class="mb-5">
+          <div class="nav-tabs-horizontal">
+
+            <ul class="nav nav-tabs mb-4" role="tablist">
+              <!-- gjc disable notification -->
+              <!-- <li class="nav-item col-md-4 padding-remove">
+                  <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#notificationpopupform" role="tab">
+                      <i class="icmn-database"></i>
+                      Notifications
+                  </a>
+              </li> -->
+              
+              <li class="nav-item col-md-4 padding-remove" (click)="f1()">
+                <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#autoupgradepopupform" role="tab">
+                  <i class="icmn-home"></i>
+                  Force Update
+                </a>
+              </li>
+              
+              <li class="nav-item col-md-4 padding-remove" (click)="f2()">
+                <a class="nav-link" href="javascript: void(0);" data-toggle="tab" data-target="#ratepopupform" role="tab">
+                  <i class="icmn-users"></i>
+                  Review App
+                </a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <!-- gjc 0411 protect display notification -->
+              <!-- <div class="tab-pane active" id="notificationpopupform" role="tabcard">
+                  <div class="row"> -->
+                      <!-- <div class="col-md-8">
+
+                          <div class="accordion accordion-margin-bottom" id="accordion2">
+                              <div class="card">
+
+                              </div>
+                          </div>
+
+                          <form #notificationForm="ngForm" (ngSubmit)="notificationSubmit(notificationForm)" [formGroup]="notificationform">
+
+                              <div class="col-md-12">
+                                  <label class="form-label">The notifications prompt will display when you have notifications enabled in the menu.</label>
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="title">Enabled
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="You can enable or disable the notifications prompt using this checkbox"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6" style="padding-top: 15px;">
+                                          <div *ngIf="isShowData == true ">
+                                              <input type="checkbox" name="enable" value="true" checked (change)="radioSave($event,'notificationForm')">
+                                          </div>
+                                          <div *ngIf="isShowData == false">
+                                              <input type="checkbox" name="enable" value="false" (change)="radioSave($event,'notificationForm')">
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="title">Title&nbsp;
+
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The title of the notifications prompt"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+
+                                      <div class="col-md-6">
+                                          <input type="text" class="form-control" name="title" placeholder="Enter title" [formControl]="notificationform.controls['title']"
+                                              (ngModelChange)="setModelData($event,'messageTitle')">
+                                          <small *ngIf="notificationform.controls['title'].hasError('required') && notificationform.controls['title'].touched" class="form-message text-danger">You must include an app title.</small>
+                                          <small *ngIf="notificationform.controls['title'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid app title</small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="message">Message
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The message of the notifications prompt"></i>
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+
+                                      <div class="col-md-6">
+                                          <textarea class="form-control" name="message" [formControl]="notificationform.controls['messageNotification']" rows="4" placeholder="Enter Message"
+                                              (ngModelChange)="setModelData($event,'messageNotification')"></textarea>
+                                              <small *ngIf="notificationform.controls['messageNotification'].hasError('required') && notificationform.controls['messageNotification'].touched" class="form-message text-danger">You must include a message.
+                                              </small>
+                                              <small *ngIf="notificationform.controls['messageNotification'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid message</small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="button1">Continue Button Text
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of the button to accept the notifications prompt"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter continue button text value" name="button1" [formControl]="notificationform.controls['button1']"
+                                              type="text" (ngModelChange)="setModelData($event,'buttonOne')">
+                                          <small *ngIf="notificationform.controls['button1'].hasError('required') && notificationform.controls['button1'].touched"
+                                              class="form-message text-danger">You must include a button1 name.
+                                          </small>
+                                          <small *ngIf="notificationform.controls['button1'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid button name</small>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="button2">Manage Notifications Button Text
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of the button to manage notification settings"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter manage notifications button text" [formControl]="notificationform.controls['button2']"
+                                              name="button2" type="text" (ngModelChange)="setModelData($event,'buttonTwo')">
+                                          <small *ngIf="notificationform.controls['button2'].hasError('required') && notificationform.controls['button2'].touched"
+                                              class="form-message text-danger">You must include a button2 name.
+                                          </small>
+                                          <small *ngIf="notificationform.controls['button2'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid button name
+                                          </small>
+                                      </div>
+                                  </div>
+
+                              </div>
+
+                              <div class="form-actions">
+                                  <button type="submit" #notificationBtnDisable [disabled]="!notificationform.valid" class="btn btn-primary mr-3">Save</button>
+                              </div>
+                          </form>
+
+                      </div> -->
+                      <!-- <div class="col-md-4">
+                          <div class="screen_outer">
+                              <img src="assets/modules/dummy-assets/common/img/iphone.png">
+                              <div class="screen_inner dragscroll">
+                                  <div class="" [style.background]="statusBarColorCss">
+                                      <img src="assets/modules/dummy-assets/common/img/statusbar.png">
+                                  </div>
+                                  <div style="height: 100%;position: relative;">
+                                      <div class="mob_header sidemenuGeneral" [style.border-bottom]="borderSize" [style.background-color]="headerBackgroundColor"
+                                          [style.height]="heightData" [style.border-color]="headerBorderColor"
+                                          style="solid #000;"> -->
+                                          <!-- (click)="toggleMenuGeneral()" -->
+                                          <!-- <i [style.color]="menuIconCssColor" class="fa fa-bars"></i>
+                                          <img src="{{appIconUrl}}">
+                                      </div>
+                                      <div class="left_menu sidemenu1">
+
+                                          <div style="position: relative; height: 100%; width:100%; padding: 0; margin: 0; display: block;">
+                                              <div style="min-height:25px;" [style.background-color]="statusBarColorCss"></div>
+                                          </div>
+                                      </div>
+                                      <div class="prompt" style="height: 84%; width: 100%;">
+                                          <div>
+                                              <div style="">
+
+                                                  <div class="msg_noti">
+                                                      <h2>{{messageTitle}}</h2>
+                                                      {{messageNotificationDisplay}}
+                                                  </div>
+                                                  <div class="manag_noti" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{modelOneData}}
+                                                  </div>
+                                                  <div class="cont_btn" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{modelTwoData}}
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+
+                              </div>
+
+                          </div>
+                      </div> -->
+                  <!-- </div>
+              </div> -->
+
+              <div class="tab-pane active" id="autoupgradepopupform" role="tabcard">
+                  <div class="row">
+                      <div class="col-md-8">
+
+                          <div class="accordion accordion-margin-bottom" id="accordion1">
+                              <div class="card">
+
+                              </div>
+                          </div>
+
+                          <form #autoupgradepopupForm="ngForm" (ngSubmit)="autoupgradeSubmit(autoupgradepopupForm)" [formGroup]="autoupgradeForm">
+
+                              <div class="col-md-12">
+
+                                  <label class="form-label">From this page you can configure Force Update popup using below parameters.
+                                  This popup will be appeared when new version of App available.</label>
+
+                                  <div class="form-group row">
+
+                                      <label class="col-md-6 col-form-label" for="title">Enabled
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="You can enable or disable Force Update using this checkbox."></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6" style="padding-top: 15px;">
+                                          <div *ngIf="isUpgradeShowData == true ">
+                                              <input type="checkbox" name="enable" value="true" checked (change)="radioSave($event,'autoupgradeForm')">
+                                          </div>
+                                          <div *ngIf="isUpgradeShowData == false">
+                                              <input type="checkbox" name="enable" value="false" (change)="radioSave($event,'autoupgradeForm')">
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Title
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The value of this field will be displayed as Force Update title in the App."></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input type="text" class="form-control" name="title" placeholder="Enter title" [formControl]="autoupgradeForm.controls['title']"
+                                              (ngModelChange)="setModelData($event,'updateTitle')">
+                                          <small *ngIf="autoupgradeForm.controls['title'].hasError('required') && autoupgradeForm.controls['title'].touched" class="form-message text-danger">You must include an app title.</small>
+                                          <small *ngIf="autoupgradeForm.controls['title'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid button name
+                                          </small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Message
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The message of the force update prompt."></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <textarea class="form-control" [formControl]="autoupgradeForm.controls['messageAutoupgrade']" name="message" id="autoupgradepopupform" rows="4" placeholder="Enter Message"
+                                              (ngModelChange)="setModelData($event,'updateMessage')"> {{autoUpgradeMessage}}</textarea>
+                                          <small *ngIf="autoupgradeForm.controls['messageAutoupgrade'].hasError('required') && autoupgradeForm.controls['messageAutoupgrade'].touched" class="form-message text-danger">You must include an Message.</small>    
+                                          <small *ngIf="autoupgradeForm.controls['messageAutoupgrade'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid message
+                                          </small>    
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Update Button Text
+                                          <i class="fa fa-question-circle"
+                                              data-toggle="tooltip"
+                                              data-placement="right"
+                                              title="The name of the button to update the app.">
+                                          </i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter Update Button Text" name="ok_button_text" [formControl]="autoupgradeForm.controls['ok_button_text']"
+                                              type="text" (ngModelChange)="setModelData($event,'okButton')">
+                                          <small *ngIf="autoupgradeForm.controls['ok_button_text'].hasError('required') && autoupgradeForm.controls['ok_button_text'].touched"
+                                              class="form-message text-danger">You must include a Ok Button Text.</small>
+                                          <small *ngIf="autoupgradeForm.controls['ok_button_text'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid button name
+                                          </small>    
+                                      </div>
+                                  </div>
+                                  <!-- gjc insert part of current app version -->
+                                  <!-- <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Android App Id
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter Android App id."></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter Android App Id" [formControl]="autoupgradeForm.controls['andr_app_id']" name="andr_app_id" type="text">
+                                          <small *ngIf="autoupgradeForm.controls['andr_app_id'].hasError('required') && autoupgradeForm.controls['andr_app_id'].touched" class="form-message text-danger">You must include a android app Id.</small>
+                                      </div>
+                                  </div> 
+
+                                                                                      
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">iOS App Id
+                                      <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter iOS App Id."></i>
+
+                                      <span class="mandatory-field">*</span>
+                                  </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter iOS App Id" [formControl]="autoupgradeForm.controls['ios_app_id']" name="ios_app_id" type="text">
+                                          <small *ngIf="autoupgradeForm.controls['ios_app_id'].hasError('required') && autoupgradeForm.controls['ios_app_id'].touched" class="form-message text-danger">You must include a ios app Id.</small>
+                                      </div>
+                                  </div> -->
+                                  
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Current Android Version
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter Android App Version."></i>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input 
+                                            class="form-control" 
+                                            placeholder="Enter Android Version" 
+                                            [formControl]="autoupgradeForm.controls['android_version']" 
+                                            name="android_version" 
+                                            type="text">
+
+                                          <small *ngIf="autoupgradeForm.controls['android_version'].hasError('matchCorrectVersion') && autoupgradeForm.controls['android_version'].touched" class="form-message text-danger">You must include a valid android version.</small>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Current iOS Version
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter iOS App Version."></i>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input 
+                                            class="form-control" 
+                                            placeholder="Enter iOS Version" 
+                                            [formControl]="autoupgradeForm.controls['ios_version']" 
+                                            name="android_version" 
+                                            type="text">
+                                          <small *ngIf="autoupgradeForm.controls['ios_version'].hasError('required') && autoupgradeForm.controls['ios_version'].touched" class="form-message text-danger">You must include a ios version.</small>
+
+                                          <small *ngIf="autoupgradeForm.controls['ios_version'].hasError('matchCorrectVersion') && autoupgradeForm.controls['ios_version'].touched" class="form-message text-danger">You must include a valid ios version.</small>
+
+                                      </div>
+                                  </div> 
+
+                              </div>
+
+                              <div class="form-actions" style="display: none;">
+                                  <button type="submit" #forceUpdateBtnDisable [disabled]="!autoupgradeForm.valid" class="btn btn-primary mr-3">Save</button>
+                              </div>
+
+                          </form>
+
+                      </div>
+                      <!-- <div class="col-md-4">
+                          <div class="sticky_class" style="width: 360px; box-shadow: 0px 5px 33px 0px rgba(0,0,0,0.25); border-radius: 10px; padding: 40px 10px; transform: scale(0.8);">
+                                  <div style="position: relative;padding-bottom: 124.777777%; box-shadow: inset 0px 0px 3px 0px rgba(79,79,79,0.5);">
+                                      <div style="position: absolute;top:0;left:0;right:0;bottom:0;display:block;height: 100%;width: 100%;margin:0;padding:0;border:none;">
+                                          <div style="position: relative;height: 100%;width:100%;padding:0;margin:0;display: block;">
+                                              <div style="min-height:25px;"  [style.background-color] = "statusBarColorCss" ></div>
+                                              <div class="prompt" style="height: 100%; width: 100%;">
+                                                  <div style="text-align: center;position: relative;">
+                                                      <div style="position: absolute;content: '';" >
+
+                                                      <div class="msg_noti" style="">
+                                                          <h2>{{titleUpdatePre}}</h2>
+                                                          {{msgRateUpdatePre}}
+                                                      </div>
+                                                      <div class="cont_btn" style="color: #0079bf; padding: 5px; background-color: white">
+                                                          {{updatePre}}
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> -->
+                  <!-- //// -->
+                      <div class="col-md-4">
+                          <div class="screen_outer">
+                              <img src="assets/modules/dummy-assets/common/img/iphone.png">
+                              <div class="screen_inner dragscroll">
+                                  <div class="" [style.background]="statusBarColorCss">
+                                      <img src="assets/modules/dummy-assets/common/img/statusbar.png">
+                                  </div>
+                                  <div style="height: 100%;position: relative;">
+                                      <div class="mob_header sidemenuGeneral" [style.border-bottom]="borderSize" [style.background-color]="headerBackgroundColor"
+                                          [style.height]="heightData" [style.border-color]="headerBorderColor"
+                                          style="solid #000;">
+                                          <i [style.color]="menuIconCssColor" class="fa fa-bars" (click)="toggleMenuGeneral()"></i>
+                                          <img src="{{appIconUrl}}">
+                                      </div>
+                                      <div class="left_menu sidemenu1">
+
+                                          <div style="position: relative; height: 100%; width: 100%; padding: 0; margin:0; display: block;">
+                                              <div style="min-height:25px;" [style.background-color]="statusBarColorCss"></div>
+                                          </div>
+                                      </div>
+                                      <div class="prompt" style="height: 84%; width: 100%;">
+                                          <div>
+                                              <div>
+
+                                                  <div class="msg_noti" style="">
+                                                      <h2>{{titleUpdatePre}}</h2>
+                                                      {{msgRateUpdatePre}}
+                                                  </div>
+                                                  <div class="cont_btn" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{updatePre}}
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="tab-pane" id="ratepopupform" role="tabcard">
+                  <div class="row">
+                      <div class="col-md-8">
+
+                          <div class="accordion accordion-margin-bottom" id="accordion1">
+                              <div class="card">
+
+                              </div>
+                          </div>
+
+                          <form #rateForm="ngForm" (ngSubmit)="ratepopupSubmit(rateForm)" [formGroup]="ratepopupform">
+
+                              <div class="col-md-12">
+
+                                  <label class="form-label">The review app prompt displays to encourage users to review the app in the App Store and Google Play Store.</label>
+
+                                  <div class="form-group row">
+
+                                      <label class="col-md-6 col-form-label" for="title">Enabled
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="You can enable or disable the review app prompt using this checkbox"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6" style="padding-top: 15px;">
+                                          <div *ngIf="isRateShowData == true ">
+                                              <input type="checkbox" name="enable" value="true" checked (change)="radioSave($event,'rateForm')">
+                                          </div>
+                                          <div *ngIf="isRateShowData == false">
+                                              <input type="checkbox" name="enable" value="false" (change)="radioSave($event,'rateForm')">
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="title">Title
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The title of the review app prompt"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter Title" [formControl]="ratepopupform.controls['rateTitle']" name="title" type="text"
+                                              (ngModelChange)="setModelData($event,'title')">
+                                          <small *ngIf="ratepopupform.controls['rateTitle'].hasError('required') && ratepopupform.controls['rateTitle'].touched" class="form-message text-danger">You must include Title.</small>
+
+                                          <small *ngIf="ratepopupform.controls['rateTitle'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid title.</small>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="rate_text">Message
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The message of the review app prompt"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <textarea class="form-control" [formControl]="ratepopupform.controls['messageRatepopUp']" name="rate_text" rows="4" (ngModelChange)="setModelData($event,'messageRate')"
+                                              placeholder="Enter Message">{{rateMessage}}</textarea>
+
+                                              <small *ngIf="ratepopupform.controls['messageRatepopUp'].hasError('required') && ratepopupform.controls['messageRatepopUp'].touched" class="form-message text-danger">You must include message.</small>
+
+                                              <small *ngIf="ratepopupform.controls['messageRatepopUp'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid message.</small>
+                                      </div>
+                                  </div>
+                                  <!--
+                                  <div class="form-group row">
+
+                                      <label class="col-md-6 col-form-label" for="andr_app_id">Android App Id
+                                      <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter Android App Id."></i>
+
+                                      <span class="mandatory-field">*</span>
+                                                                                          </label>
+                                                                                          <div class="col-md-6">
+                                                                                              <input type="text" class="form-control" name="andr_app_id" placeholder="Enter Android App id" [formControl]="ratepopupform.controls['rate_andr_app_id']">
+                                                                                              <small *ngIf="ratepopupform.controls['rate_andr_app_id'].hasError('required') && ratepopupform.controls['rate_andr_app_id'].touched" class="form-message text-danger">You must include an Android App Id.</small>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                      <div class="form-group row">
+                                                                                          <label class="col-md-6 col-form-label" for="ios_app_id">iOS App Id
+                                      <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Enter iOS App Id."></i>
+
+                                      <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input type="text" class="form-control" name="ios_app_id" placeholder="Enter iOS App Id" [formControl]="ratepopupform.controls['rate_ios_app_id']">
+                                          <small *ngIf="ratepopupform.controls['rate_ios_app_id'].hasError('required') && ratepopupform.controls['rate_ios_app_id'].touched" class="form-message text-danger">You must include IOS App Id.</small>
+                                      </div>
+                                  </div> -->
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Uses Until Prompt
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The number of times the app is loaded before review app prompt is displayed"></i>
+
+                                          <span class="mandatory-field">*</span>
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input appOnlyNum class="form-control" placeholder="Enter Until Prompt" name="uses_until_prompt" [formControl]="ratepopupform.controls['uses_until_prompt']"
+                                              type="text">
+                                          <small *ngIf="ratepopupform.controls['uses_until_prompt'].hasError('required') && ratepopupform.controls['uses_until_prompt'].touched"
+                                              class="form-message text-danger">You must include a Uses until Prompt.</small>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Agree Button Text
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of the button to accept the review app prompt and review the app"></i>
+
+                                          <span class="mandatory-field">*</span>
+
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter Agree Button Text" [formControl]="ratepopupform.controls['agree_label']" name="agree_label"
+                                              type="text" (ngModelChange)="setModelData($event,'agree')">
+                                          <small *ngIf="ratepopupform.controls['agree_label'].hasError('required') && ratepopupform.controls['agree_label'].touched"
+                                              class="form-message text-danger">You must include Agree Label.</small>
+                                          <small *ngIf="ratepopupform.controls['agree_label'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid message.</small>    
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="l0">Remind Button Text
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of the button to remind the user to review the app later"></i>
+
+                                          <span class="mandatory-field">*</span>
+
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input class="form-control" placeholder="Enter Remind Button Text" [formControl]="ratepopupform.controls['remind_label']"
+                                              name="remind_label" type="text" (ngModelChange)="setModelData($event,'remind')">
+                                          <small *ngIf="ratepopupform.controls['remind_label'].hasError('required') && ratepopupform.controls['remind_label'].touched"
+                                              class="form-message text-danger">You must include Remind Label.</small>
+
+                                          <small *ngIf="ratepopupform.controls['remind_label'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid message.</small>        
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-6 col-form-label" for="decline">Decline Button Text
+                                          <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="The name of the button to decline the review app prompt"></i>
+
+                                          <span class="mandatory-field">*</span>
+
+                                      </label>
+                                      <div class="col-md-6">
+                                          <input type="text" class="form-control" placeholder="Enter Decline Button Text" [formControl]="ratepopupform.controls['decline_text']"
+                                              name="decline_text" (ngModelChange)="setModelData($event,'decline')">
+                                          <small *ngIf="ratepopupform.controls['decline_text'].hasError('required') && ratepopupform.controls['decline_text'].touched"
+                                              class="form-message text-danger">You must include Decline Label.</small>
+
+                                          <small *ngIf="ratepopupform.controls['decline_text'].hasError('matchCorrectSpace')" class="form-message text-danger">Please enter a valid message.</small>            
+                                      </div>
+                                  </div>
+
+
+                              </div>
+
+                              <div class="form-actions" style="display: none;">
+                                  <button type="submit" #reviewBtnDisable [disabled]="!ratepopupform.valid" class="btn btn-primary mr-3">Save</button>
+                              </div>
+
+                          </form>
+
+                      </div>
+                      <!--  <div class="col-md-4">
+                          <div class="sticky_class" style="width: 360px; box-shadow: 0px 5px 33px 0px rgba(0,0,0,0.25); border-radius: 10px; padding: 40px 10px; transform: scale(0.8);">
+                              <div style="position: relative;padding-bottom: 124.777777%; box-shadow: inset 0px 0px 3px 0px rgba(79,79,79,0.5);">
+                                  <div style="position: absolute;top:0;left:0;right:0;bottom:0;display:block;height: 100%;width: 100%;margin:0;padding:0;border:none;">
+                                      <div style="position: relative;height: 100%;width:100%;padding:0;margin:0;display: block;">
+                                          <div style="min-height:25px;"  [style.background-color] = "statusBarColorCss" ></div>
+                                          <div class="prompt" style="height: 100%; width: 100%;">
+                                              <div style="text-align: center;position: relative;">
+                                                  <div style="position: absolute;content: '';" >
+
+
+                                                  <div class="msg_noti">
+                                                      <h2 style="">{{titlePre}}</h2>
+                                                      {{msgRatePre}}
+                                                  </div>
+                                                  <div class="manag_noti" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{agreePre}}
+                                                  </div>
+                                                  <div class="manag_noti" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{declinePre}}
+                                                  </div>
+                                                  <div class="cont_btn" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{remindPre}}
+                                                  </div>
+
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                  </div>
+                      </div> -->
+                      <div class="col-md-4">
+                          <div class="screen_outer">
+                              <img src="assets/modules/dummy-assets/common/img/iphone.png">
+                              <div class="screen_inner dragscroll">
+                                  <div class="" [style.background]="statusBarColorCss">
+                                      <img src="assets/modules/dummy-assets/common/img/statusbar.png">
+                                  </div>
+                                  <div style="height: 100%;position: relative;">
+                                      <div class="mob_header sidemenuGeneral" [style.border-bottom]="borderSize" [style.background-color]="headerBackgroundColor"
+                                          [style.height]="heightData" [style.border-color]="headerBorderColor"
+                                          style="solid #000;">
+                                          <i [style.color]="menuIconCssColor" class="fa fa-bars" (click)="toggleMenuGeneral()"></i>
+                                          <img src="{{appIconUrl}}">
+                                      </div>
+                                      <div class="left_menu sidemenu1">
+
+                                          <div style="position: relative;height: 100%;width:100%;padding:0;margin:0;display: block;">
+                                              <div style="min-height:25px;" [style.background-color]="statusBarColorCss"></div>
+                                          </div>
+                                      </div>
+                                      <div class="prompt" style="height: 84%; width: 100%;">
+                                          <div>
+                                              <div style="">
+
+
+                                                  <div class="msg_noti">
+                                                      <h2 style="">{{titlePre}}</h2>
+                                                      {{msgRatePre}}
+                                                  </div>
+                                                  <div class="manag_noti" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{agreePre}}
+                                                  </div>
+                                                  <div class="manag_noti" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{declinePre}}
+                                                  </div>
+                                                  <div class="cont_btn" style="color: #0079bf; padding: 5px; background-color: white">
+                                                      {{remindPre}}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+  </div>
+</section>

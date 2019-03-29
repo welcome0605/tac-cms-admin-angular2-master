@@ -1,0 +1,7 @@
+#my_screen .not-showtab {
+  opacity: 0.5;
+}
+
+#my_screen .not-showtab span.menuIconType {
+  color: #514d6a;
+}

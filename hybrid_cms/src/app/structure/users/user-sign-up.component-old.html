@@ -1,0 +1,186 @@
+<!-- START: pages/login-alpha -->
+<div class="cat__pages__login cat__pages__login--fullscreen" style="background-image: url(assets/modules/pages/common/img/login/1.jpg)">
+    <div class="cat__pages__login__header">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cat__pages__login__header__logo">
+                    <a href="javascript: history.back();">
+                        <img src="assets/modules/dummy-assets/common/img/logo-inverse.png" alt="The APP Company" />
+                    </a>
+                    <!-- <a href="javascript: void(0);" class="btn btn-sm btn-outline ml-3 switch-to-fullscreen">Switch Fullscreen / Windowed</a> -->
+                    <!-- <a href="javascript: void(0);" class="btn btn-sm btn-outline ml-3 random-bg-image" data-img="1">Randomize Background Image</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cat__pages__login__block" id="login_block_id">
+        <div class="row">
+            <div class="cat__pricing-table__item">
+                <div class="cat__pages__login__block__inner">
+                    <div class="cat__pages__login__block__form">
+
+                        <h4>
+                            <strong>Start building your first app today!</strong>
+                        </h4>
+                        <div class="form-group row mt-5">
+                            <label class="col-md-5 col-form-label" for="plan change">Change Plan Selection
+                            </label>
+                            <div class="col-md-7">
+                                <select class="form-control show-tick" id="l13" (ngModelChange)="setPlan(PackageList.value)" [(ngModel)]="plan_form_unique_id" #PackageList>
+                                    <option *ngFor="let data of packagesList; let i = index " value="{{data.unique_id}}" [selected]="data.unique_id === plan_form_unique_id">
+                                        {{data.pa_name}}              
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <h5 *ngIf='!is_plan_set'>
+                            <div class="alert alert-primary">
+                                <strong class="row">
+                                    <span class="col-sm-7 pull-left">Current Plan:&nbsp;&nbsp;{{plan}}</span>
+                                    <span class=" col-sm-5">
+                                        <a class="pull-right" href="http://theappcompany.com/app-platform-sales-page/">want to change</a>
+                                    </span>
+                                </strong>
+                            </div>
+                        </h5> -->
+                        <h5 *ngIf="is_loading">
+                            <div class="alert alert-default">
+                                <strong class="row">
+                                    <span class="col-sm-7 pull-left">Please Wait....</span>
+                                    <span class=" col-sm-5">
+                                        <a class="pull-right" href="javascript: void(0);">
+                                            <i class="fa fa-spinner fa-spin fa-2x"></i>
+                                        </a>
+                                    </span>
+                                </strong>
+                            </div>
+                        </h5>
+                        <h6 *ngIf='is_plan_set'>
+                            <div class="alert alert-danger alert-close">
+                                <button type="button" class="close">
+                                    &times;
+                                </button>
+                                <strong class="row">
+                                    <span class="col-sm-7 pull-left">Please Select Plan First</span>
+                                    <span class=" col-sm-5">
+                                        <a class="pull-right" href="http://theappcompany.com/app-platform-sales-page/">Browse Plans</a>
+                                    </span>
+                                </strong>
+                            </div>
+                        </h6>
+                        <br />
+                        <div class="alert alert-success alert-close" *ngIf='is_success'>
+                            <button type="button" class="close">
+                                &times;
+                            </button>
+                            <strong>{{success_message}}</strong>
+                        </div>
+                        <div class="alert alert-danger alert-close" *ngIf='is_error'>
+                            <button type="button" class="close">
+                                &times;
+                            </button>
+                            <strong>{{error_message}}</strong>
+                        </div>
+                        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" [formGroup]="form" method="POST">
+                            <div class="form-group">
+                                <div class="form-input-icon form-input-icon-right">
+                                    <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" placeholder="First Name" name="first_name" type="text" [formControl]="form.controls['first_name']">
+                                    <small *ngIf="form.controls['first_name'].hasError('required') && form.controls['first_name'].touched" class="form-message text-danger">You must include a first name.</small>
+                                    <small *ngIf="form.controls['first_name'].hasError('pattern')" class="form-message text-danger">Please enter valid first name</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-input-icon form-input-icon-right">
+                                    <input class="form-control" placeholder="Last Name" pattern="[a-zA-Z][a-zA-Z ]+" name="last_name" type="text" [formControl]="form.controls['last_name']">
+                                    <small *ngIf="form.controls['last_name'].hasError('pattern')" class="form-message text-danger">Please enter valid last name</small>
+                                    <small *ngIf="form.controls['last_name'].hasError('required') && form.controls['last_name'].touched" class="form-message text-danger">You must include a last name.</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-input-icon form-input-icon-right">
+                                    <i class="icmn-mail2"></i>
+                                    <input class="form-control" placeholder="Email" name="email" type="email" [formControl]="form.controls['email']">
+
+                                    <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">You must include an email address.</small>
+                                    <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">You must include a valid email address.</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control password" name="password" type="password" placeholder="Password" [formControl]="form.controls['password']">
+                                <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="form-message text-danger">You must include password.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Repeat Password" [formControl]="form.controls['cnf_password']">
+
+                                <small *ngIf="form.controls['cnf_password'].hasError('required') && form.controls['cnf_password'].touched" class="form-message text-danger">You must include confirm password.</small>
+                                <small *ngIf="form.controls['cnf_password'].errors?.equalTo" class="form-message text-danger">Passwords do not match.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="us-phone-mask-input" (ngModelChange)="chkPh($event)" minlength="10" placeholder="Mobile Number"
+                                    [formControl]="form.controls['mob_number']">
+                                <small *ngIf="form.controls['mob_number'].hasError('required') && form.controls['mob_number'].touched" class="form-message text-danger">You must include a valid 10 digit mobile number.</small>
+                                <small *ngIf="is_mob_false" class="form-message text-danger">Only allow 10 digit number</small>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="App Name" [formControl]="form.controls['app_name']">
+                                <small *ngIf="form.controls['app_name'].hasError('required') && form.controls['app_name'].touched" class="form-message text-danger">You must give a application name.</small>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <input type="text" class="form-control" placeholder="App Category" [formControl]="form.controls['app_category']">
+                                <small *ngIf="form.controls['app_category'].hasError('required') && form.controls['app_category'].touched" class="form-message text-danger">You must include a valid application category.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="App Short Description" [formControl]="form.controls['app_description']">
+                                <small *ngIf="form.controls['app_description'].hasError('required') && form.controls['app_description'].touched" class="form-message text-danger">You must give a application short brief.</small>
+                            </div> -->
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary mr-3" [disabled]="!form.valid || is_mob_false || is_plan_set || button_disable">Register</button>
+                                <span class="register-link">
+                                    Already have an account?
+                                    <a routerLink="/sign-in" class="cat__core__link--blue cat__core__link--underlined">Sign In</a>
+                                </span>
+
+                            </div>
+
+                        </form>
+                        <span> By register you agree to our
+                            <a href="/privacy-policy" class="cat__core__link--blue cat__core__link--underlined">Privacy Policy</a> &
+                            <a href="" class="cat__core__link--blue cat__core__link--underlined">Terms of Service</a>.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cat__pricing-table__item" *ngIf="setting_plan">
+
+                <div class="cat__pricing-table__header mt-5">
+                    <div class="cat__pricing-table__pricing__price">
+                        <span class="cat__pricing-table__pricing__currency">$</span>
+                        <span class="cat__pricing-table__pricing__amount">{{setting_plan.pa_price}}</span>
+                    </div>
+                    <div class="cat__pricing-table__header__title">
+                        <span class="cat_service-contract">$149 Monthly Service Contract</span>
+                    </div>
+                    <div class="cat__pricing-table__header__title">{{setting_plan.pa_name}}</div>
+                </div>
+                <ul class="cat__pricing-table__features" [innerHtml]='setting_plan.pa_desc'>
+                </ul>
+                <!-- <div class="cat__pricing-table__footer">
+                    <a href="javascript: void(0);" (click)="openHandler(d)" class="btn btn-outline-success btn-lg" role="button">
+                        <i class="icmn-download mr-3" aria-hidden="true"></i>
+                        Buy Now
+                    </a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END: pages/login-alpha -->

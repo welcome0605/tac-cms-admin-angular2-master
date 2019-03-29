@@ -1,0 +1,21 @@
+<div class="spinner-container" [ngClass]="{'show': busy}">
+  <div class="spinner" *ngIf="busy">
+    <!-- <div class="app-circle1 app-child"></div>
+    <div class="app-circle2 app-child"></div>
+    <div class="app-circle3 app-child"></div>
+    <div class="app-circle4 app-child"></div>
+    <div class="app-circle5 app-child"></div>
+    <div class="app-circle6 app-child"></div>
+    <div class="app-circle7 app-child"></div>
+    <div class="app-circle8 app-child"></div>
+    <div class="app-circle9 app-child"></div>
+    <div class="app-circle10 app-child"></div>
+    <div class="app-circle11 app-child"></div>
+    <div class="app-circle12 app-child"></div>     -->
+    <div class="cat__app-loader"><div><!-- --></div></div>
+  </div>
+  <div class="spinner-message">{{message}}</div>
+  <!-- <div class="content" [ngClass]="{'opaque':busy}">
+    <ng-content></ng-content>  
+  </div> -->
+</div>

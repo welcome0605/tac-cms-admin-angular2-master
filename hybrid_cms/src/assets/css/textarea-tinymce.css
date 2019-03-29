@@ -1,0 +1,7 @@
+.textarea-field .form-group.value-wrap {
+	display: none;
+}
+
+.textarea-field .mce-statusbar {
+	display: none;
+}

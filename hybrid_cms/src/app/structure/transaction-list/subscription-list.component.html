@@ -1,0 +1,65 @@
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Subscription History</strong>
+        </span>
+        <span>
+
+            <i name="daterangeInput" id="reservation" class="fa fa-1x fa-calendar"></i>
+            <input class="transactionDate" type="text" name="daterangeInput" id="reservation_sub" daterangepicker [options]="options"
+                (selected)="selectedDate_sub($event, daterange)" style="width: 160px;" />
+
+
+            <!-- <div class="input-group" daterangepicker [options]="{startDate:dateInput.start, endDate:dateInput.end }" (selected)="selectedDate($event, dateInput)" >
+              <span class="form-control uneditable-input"  name="daterange" >
+                  {{ dateInput.start | date:'M/dd/y' }} - {{ dateInput.end| date:'M/dd/y' }}
+              </span>
+              <span class="input-group-btn">
+                asd  <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></a>
+              </span>
+          </div> -->
+        </span>
+
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5" style="width: 100%; overflow: auto;">
+                    <table class="table table-hover" id="SubscriptionDatatable" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Invoice ID</th>
+                                <th>Stripe Customer ID</th>
+                                <th>Stripe Subscription ID</th>
+                                <th>Subscription Amount</th>
+                                <th>Subscription Payment Status</th>
+                                <th>Date and Time</th>
+                            </tr>
+                        </thead>
+ 			            <tbody>
+                            <ng-container *ngFor="let pitem of rdataSub; let i = index">
+                                <tr *ngFor="let item of pitem.invoice.data">
+                                    <td>{{item.order_num}}</td>
+                                    <td>{{pitem.first_name}}</td>
+                                    <td>{{pitem.last_name}}</td>
+                                    <td>{{pitem.email}}</td>
+                                    <td>{{item.id}}</td>
+                                    <td>{{pitem.stripe_id}}</td>
+                                    <td>{{pitem.subscription_id}}</td>
+                                    <td>${{item.amount_due/100}}</td>
+                                    <td *ngIf="item.paid; else elsePaid " style="color: green;">PAID</td>
+                                    <ng-template #elsePaid style="color: red;"><td>NOT PAID</td></ng-template>
+                                    <td style="min-width:100px;">{{item.date}}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

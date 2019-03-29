@@ -1,0 +1,111 @@
+<!-- START: forms/basic-forms-elements -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Account Settings</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <!-- Horizontal Form -->
+                    <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)" [formGroup]="form">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">First Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" [formControl]="form.controls['first_name']">
+                                <small *ngIf="form.controls['first_name'].hasError('required') && form.controls['first_name'].touched" class="form-message text-danger">Please provide a valid first name</small>
+                                <small *ngIf="form.controls['first_name'].hasError('pattern') && form.controls['first_name'].touched" class="form-message text-danger">Please provide a valid first name</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Last Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" [formControl]="form.controls['last_name']">
+                                <small *ngIf="form.controls['last_name'].hasError('required') && form.controls['last_name'].touched" class="form-message text-danger">Please provide a valid lastname</small>
+                                <small *ngIf="form.controls['last_name'].hasError('pattern') && form.controls['last_name'].touched" class="form-message text-danger">Please provide a valid lastname</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l2">Email Address</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icmn-mail2"></i>
+                                    </span>
+                                    <input type="email" class="form-control" name="email" placeholder="Email Address" [formControl]="form.controls['email']">
+                                    <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">Please provide an valid email address</small>
+                                    <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">Please provide an valid email address</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" class="btn btn-primary" #accountSettingdBtn [disabled]="!form.valid">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- End Horizontal Form -->
+
+                    <!-- Horizontal Form -->
+                    <form #changePasswordForm="ngForm" (ngSubmit)="onSubmitChangePassword(changePasswordForm)" [formGroup]="cpform">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="Old Password">Old Password</label>
+                            <div class="col-md-9">
+                                <app-show-hide-container [input_group_show]=true>
+                                    <input type="password" #showhideinput name="o_password" class="form-control" placeholder="Enter Old Password" [formControl]="cpform.controls['o_password']">
+                                </app-show-hide-container>
+                                <small *ngIf="cpform.controls['o_password'].touched && cpform.controls['o_password'].hasError('required')" class="form-message text-danger">Please enter valid old password.</small>
+                                <small *ngIf="cpform.controls['o_password'].touched && cpform.controls['o_password'].hasError('minlength')" class="form-message text-danger">Please enter valid old password</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">New Password</label>
+                            <div class="col-md-9">
+                                <app-show-hide-container [input_group_show]=true>
+                                    <input type="password" #showhideinput name="n_password" class="form-control" placeholder="Enter New Password" [formControl]="cpform.controls['n_password']">
+                                </app-show-hide-container>
+                                <small *ngIf="cpform.controls['n_password'].hasError('required') && cpform.controls['n_password'].touched" class="form-message text-danger">Please enter valid new password.</small>
+                                <small *ngIf="cpform.controls['n_password'].hasError('NotEqualToOldPass') && cpform.controls['n_password'].touched " class="form-message text-danger">Old Password and New Password won't same</small>
+                                <small *ngIf="cpform.controls['n_password'].hasError('minlength') && cpform.controls['n_password'].touched" class="form-message text-danger">Please enter a password with at least 6 characters</small>
+                                <small class="form-message text-danger" *ngIf="cpform.controls['n_password'].touched && cpform.controls['n_password'].hasError('matchCorrectPass')">Your password contain atleast one Uppercase Letter,
+                                        <br/> and one number</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="l0">Confirm Password</label>
+                            <div class="col-md-9">
+                                <app-show-hide-container [input_group_show]=true>
+                                    <input type="password" #showhideinput name="cn_password" class="form-control" placeholder="Enter Confirm Password" [formControl]="cpform.controls['cn_password']">
+                                </app-show-hide-container>
+                                <small *ngIf="cpform.controls['cn_password'].hasError('required') && cpform.controls['cn_password'].touched" class="form-message text-danger">You must include confirm password.</small>
+                                <small *ngIf="cpform.controls['cn_password'].errors?.equalTo" class="form-message text-danger">Passwords do not match.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" class="btn btn-primary" #updatePwdBtn [disabled]="!cpform.valid">Update Password</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- End Horizontal Form -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END: forms/basic-forms-elements -->

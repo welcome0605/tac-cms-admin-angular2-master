@@ -1,0 +1,11 @@
+.select-app-div {
+  .bootstrap-select.btn-group {
+    .dropdown-toggle {
+      .filter-option {
+        input[type=checkbox] {
+          display: none !important;
+        }
+      }
+    }
+  }
+}

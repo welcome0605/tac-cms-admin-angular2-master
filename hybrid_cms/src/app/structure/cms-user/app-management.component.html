@@ -1,0 +1,93 @@
+<!-- START: forms/basic-forms-elements -->
+<section class="card">
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <!-- Horizontal Form -->
+                    <form #addUserForm="ngForm" (ngSubmit)="onSubmit(addUserForm)" [formGroup]="form">
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="status">Select App</label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="app_basic_id" [formControl]="form.controls['app_basic_id']">
+                                   <option value="null">Select App</option>
+                                   <option *ngFor="let data of appData" value="{{data.id}}">{{data.app_name}}</option>
+                                </select>
+                                <small *ngIf="form.controls['app_basic_id'].hasError('required') && form.controls['app_basic_id'].touched" class="form-message text-danger">You must select at least one option .</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="status">Select User</label>
+                            <div class="col-md-4">
+                                <select class="form-control"  name="user_id" [formControl]="form.controls['user_id']">
+                                    <option value="null">Select User</option>
+                                    <option *ngFor="let data of userData" value="{{data.id}}">{{data.first_name}} {{data.last_name}}</option>
+                                </select>
+                                <small *ngIf="form.controls['user_id'].hasError('required') && form.controls['user_id'].touched" class="form-message text-danger">You must select at least one option .</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- START: tables/datatables -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Assigned Users to App</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <table class="table table-hover" id="usersTemplateDatatable" width="100%">
+                        <thead>
+                          <tr>
+                              <th>App Id</th>
+                              <th>App Name</th>
+                              <th>Assigned User</th>
+                              <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                             <th>App Id</th>
+                              <th>App Name</th>
+                              <th>Assigned User</th>
+                              <th>Action</th>
+                          </tr>
+                        </tfoot>
+                        <tbody>
+                          <tr *ngFor="let data of appUserAssignData">
+                            <td>{{data.app_id}}</td>
+                            <td>{{data.app_name}}</td>
+                            <td>{{data.user_name}}</td>
+                            <td>
+                              <span class="btn-cursor-pointer swal-btn-cancel" (click)="removeAppAssignUser(data.id)"><i class="i_delete fa fa-trash"></i></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+<!-- END: tables/datatables -->
+
+
+<!-- END: forms/basic-forms-elements -->

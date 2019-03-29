@@ -1,0 +1,162 @@
+<!-- START: forms/basic-forms-elements -->
+<style>
+  .bootstrap-select.btn-group .dropdown-toggle .filter-option input{
+    display: none;
+  }
+</style>
+
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>User Management</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="card">
+            <div class="card-header">
+                <span class="cat__core__title">
+                    <strong>Edit User Information</strong>
+                </span>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            <!-- Horizontal Form -->
+                            <form #addUserForm="ngForm" (ngSubmit)="onSubmit(addUserForm)" [formGroup]="form">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="email">First Name</label>
+                                    <div class="col-md-6">
+                                        <div class="form-input-icon form-input-icon-right">
+                                            <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" placeholder="Enter First Name" name="first_name" type="text" [formControl]="form.controls['first_name']">
+                                            <small *ngIf="form.controls['first_name'].hasError('pattern')" class="form-message text-danger">Please enter valid first name</small>
+                                            <small *ngIf="form.controls['first_name'].hasError('required') && form.controls['first_name'].touched" class="form-message text-danger">Please enter a valid first name</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="email">Last Name</label>
+                                    <div class="col-md-6">
+                                        <div class="form-input-icon form-input-icon-right">
+                                            <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" placeholder="Enter Last Name" name="last_name" type="text" [formControl]="form.controls['last_name']">
+                                            <small *ngIf="form.controls['last_name'].hasError('pattern')" class="form-message text-danger">Please enter valid last name</small>
+                                            <small *ngIf="form.controls['last_name'].hasError('required') && form.controls['last_name'].touched" class="form-message text-danger">Please enter a valid last name</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="email">Email</label>
+                                    <div class="col-md-6">
+                                        <div class="form-input-icon form-input-icon-right">
+                                            <i class="icmn-mail2"></i>
+                                            <input class="form-control" placeholder="Enter Email" name="email" type="email" [formControl]="form.controls['email']">
+                                            <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">You must include an email address.</small>
+                                            <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">You must include a valid email address.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--password move to #cgpassForm-->
+                                <div class="select-app-div form-group row">
+                                    <label class="col-md-3 col-form-label" for="status">Select App</label>
+                                    <div class="col-md-6">
+                                <!-- 2018-2-3 -->
+                                
+                                      <select 
+                                        id="abc"
+                                        name="app_basic_id" 
+                                        [formControl]="form.controls['app_basic_id']" 
+                                        class="form-control selectpicker show-tick" 
+                                        multiple
+                                        data-selected-text-format="text" 
+                                        data-live-search="true" 
+                                        ata-live-search-placeholder="Search" 
+                                        [ngModel]="appMyData" 
+                                        (ngModelChange)="itemSelected($event)">
+                                            <option *ngFor="let data of appMyData" value="{{data.id}}">
+                                                <input type="checkbox" [ngModel]="data" *ngIf="data.checked == true" [ngModelOptions]="{standalone: true}" checked/>
+                                                <input type="checkbox" [ngModel]="data" *ngIf="data.checked == false" [ngModelOptions]="{standalone: true}" />
+                                                {{data.app_name}}
+                                            </option>
+                                        </select>
+                              <!-- 2018-2-2 -->
+                                      <!-- <select id="abc" name="app_basic_id" [formControl]="form.controls['app_basic_id']" class="form-control selectpicker show-tick" multiple
+                                       data-selected-text-format="text" data-live-search="true">
+                                           <option *ngFor="let data of appMyData" value="{{data.id}}">
+                                              {{data.app_name}}
+                                           </option>
+                                       </select> -->
+                                        <!-- <select id="abc" name="app_basic_id" [formControl]="form.controls['app_basic_id']" class="form-control">
+                                            <option *ngFor="let data of myapp" value="{{data.id}}" [selected]="data.is_mine == data.id">
+                                               {{data.app_name}}
+                                            </option>
+                                        </select> -->
+                              <!-- Kwai -->
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="status">Status</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="status" [formControl]="form.controls['status']">
+                                            <option *ngFor="let status of statusArray" value="{{status.key}}">{{status.name}}</option>
+                                        </select>
+                                        <small *ngIf="form.controls['status'].hasError('required') && form.controls['status'].touched" class="form-message text-danger">You must select at least one option .</small>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button routerLink="/users" type="button" class="btn btn-primary pull-left">Cancel</button>
+                                            <button type="submit" #submitBtn class="btn btn-primary pull-right" [disabled]="!form.valid">Submit</button>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="gpassFormid" (ngSubmit)="submitMethod(cgpassform)" #cgpassform="ngForm" [formGroup]="cgpassForm">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="Change Password ">Change Password</label>
+                                <div class="col-md-6">
+                                    <app-show-hide-container [input_group_show]=true>
+                                        <input class="form-control" name="password" type="password" #showhideinput placeholder="Enter Password" [formControl]="cgpassForm.controls['password']">
+                                    </app-show-hide-container>
+                                    <!-- <small *ngIf="cgpassForm.controls['password'].hasError('minlength')" class="form-message text-danger">Please enter a password with at least 6 characters.</small> -->
+                                    <small class="form-message text-danger" *ngIf="cgpassForm.controls['password'].touched && cgpassForm.controls['password'].hasError('matchCorrectPass')">Please enter a password with at least 6 characters. Your password must contain at least one uppercase letter and one number.</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="password">Confirm Password</label>
+                                <div class="col-md-6">
+                                    <!-- <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                        <span class="input-group-addon">.00</span>
+                                    </div> -->
+                                    <app-show-hide-container [input_group_show]=true>
+                                        <input class="form-control" #showhideinput name="confirmpassword" type="password" placeholder="Confirm Password" [formControl]="cgpassForm.controls['confirmpassword']">
+                                    </app-show-hide-container>
+                                    <small *ngIf="cgpassForm.controls['confirmpassword'].errors?.equalTo" class="form-message text-danger">Confirm Password.</small>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <button routerLink="/users" type="button" class="btn btn-primary pull-left">Cancel</button>
+                                        <button type="submit" class="btn btn-primary pull-right" #changePwdBtn [disabled]="!cgpassForm.valid">Change</button>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--end basic information card -->
+    </div>
+</section>
+<!-- END: forms/basic-forms-elements -->

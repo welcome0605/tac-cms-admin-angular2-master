@@ -1,0 +1,80 @@
+<div class="cat__top-bar cat_custom_top_bar_stick">
+  <!-- left aligned items -->
+  <div class="cat__top-bar__left">
+    <div class="cat__top-bar__logo">
+      <a href="dashboards-alpha.html">
+        <img src="assets/modules/dummy-assets/common/img/logo.png" />
+      </a>
+    </div>
+    <div style="position: absolute;left: 20%;">
+
+      <h4 *ngIf=" delFlag == true ">
+         <!-- App Building CMS -->
+      </h4>
+      <h4 *ngIf=" delFlag == false ">
+         <!-- {{headerTitle}} -->
+      </h4>
+  </div>
+    <div style="position: absolute;left: 55%;">
+      <img style=" width: 41px; height: 41px; " *ngIf="imgFlag == true " src="{{imgUrl}}">
+    </div>
+    <div style="position: absolute;left: 55%; font-size: 22px;" *ngIf="imgFlag == false && delFlag == false ">
+      {{name}}
+    </div>
+    <div style="position: absolute;left: 55%; font-size: 22px;" *ngIf="delFlag == true ">
+      {{headerTitleMain}}
+    </div>
+
+  </div>
+
+  <!-- right aligned items -->
+  <div class="cat__top-bar__right">
+    <!-- <input type="hidden" value="{{setHeader}}"> -->
+
+    <!-- <div class="cat__top-bar__item hidden-xxl-down hidden-sm-down">
+      <div class="cat__top-bar__mini-chart">
+        Server Load:
+        <div class="cat__top-bar__mini-chart__inner">
+          <i style="height: 30%;"></i>
+          <i style="height: 78%;"></i>
+          <i style="height: 10%;"></i>
+          <i style="height: 46%;"></i>
+          <i style="height: 26%;"></i>
+          <i style="height: 29%;"></i>
+          <i style="height: 50%;"></i>
+          <i style="height: 89%;"></i>
+          <i style="height: 30%;"></i>
+        </div>
+        20%
+      </div>
+    </div> -->
+
+    <div class="cat__top-bar__item">
+      <div class="dropdown cat__top-bar__avatar-dropdown">
+      <span>{{userData.first_name}}&nbsp;{{userData.last_name}}</span>
+
+        <a style="vertical-align: middle;" href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="cat__top-bar__avatar" href="javascript:void(0);">
+                <img src="assets/modules/dummy-assets/common/img/avatars/user_default.png" />
+            </span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="" role="menu">
+          <a class="dropdown-item" routerLink="/profile"><i class="dropdown-icon icmn-user"></i> Profile</a>
+          
+          <a class="dropdown-item" routerLink="/email-template"><i class="dropdown-icon icmn-envelop"></i>Emails<div class="num_wrapper" *ngIf="emails_number > 0"><span class="num">{{emails_number}}</span></div></a>
+          <a class="dropdown-item" routerLink="/contact-us"><i class="dropdown-icon icmn-bubbles4"></i>Contact Us<div class="num_wrapper" *ngIf="contact_number > 0"><span class="num">{{contact_number}}</span></div></a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/logout"><i class="dropdown-icon icmn-exit"></i> Logout</a>
+        </ul>
+      </div>
+    </div>
+    <!--
+    <div class="cat__top-bar__item">
+      <div class="cat__top-bar__menu-button cat__menu-right__action--menu-toggle">
+        <i class="fa fa-bars"></i>
+      </div>
+    </div>
+    -->
+  </div>
+</div>

@@ -1,0 +1,205 @@
+<section id="section-google-analytics" class="card">
+  <div class="card-header">
+    <span class="cat__core__title">
+      <strong>App Analytics</strong>
+    </span>
+    <span class="pull-right">
+      <i class="fa fa-1x fa-calendar"></i>
+      <input 
+        id="ga-rangepicker" 
+        class="transactionDate" 
+        style="width:160px;" 
+        type="text" 
+        name="daterangeInput" 
+        daterangepicker [options]="daterangepickerOptions" 
+        (selected)="selectedDate($event, daterange)"/>
+    </span>
+  </div>
+
+  <div class="ga-row row">
+    <div class="col-md-6">
+      <div id="ga-app-session" class="card-block ga-panel-1">
+        <div class="loadig-div" [hidden]="!appSessionGraph.is_loading_app_session">
+          <img src="./assets/images/loader.gif">
+        </div>
+        <h5 class="card-title text-center">APP SESSIONS</h5>
+        <div class="panel-content">
+          <!-- <div class="device-radio-content">
+            <label class="device-label" for="as-device-ios">iOS</label>
+            <input 
+              id="as-device-ios"                
+              type="radio" 
+              name="radiogroup"
+              [value]="1"  
+              [(ngModel)]="appSessionGraph.platform_kind"
+              (change)="changeASDevice($event)" >
+              <label class="device-label" for="as-device-android">ANDROID</label>
+            <input 
+              id="as-device-android"                
+              type="radio" 
+              name="radiogroup"
+              [value]="2"  
+              [(ngModel)]="appSessionGraph.platform_kind" 
+              (change)="changeASDevice($event)" >
+            <div class="clearfix"></div>
+          </div> -->
+          <div id="app-session-graph-content">
+            <app-session-graph #appSessionGraph class="graph-component"></app-session-graph>
+          </div>          
+        </div>
+      </div>
+    </div>    
+    <div class="col-md-6">
+      <div id="ga-app-featurevisit" class="card-block ga-panel-1">
+        <div class="loadig-div" [hidden]="!featureVisitGraph.is_loading_app_feature">
+          <img src="./assets/images/loader.gif">
+        </div>    
+        <h5 class="card-title text-center">FEATURE VISIT</h5>
+        <div class="panel-content">
+          <!-- <div class="device-radio-content">
+            <label class="device-label" for="fv-device-ios">iOS</label>
+            <input 
+              id="fv-device-ios"                
+              type="radio" 
+              name="radiogroup1"
+              [value]="1"  
+              [(ngModel)]="featureVisitGraph.platform_kind" 
+              (change)="changeFVDevice($event)" >
+            <label class="device-label" for="fv-device-android">ANDROID</label>
+            <input 
+              id="fv-device-android"                
+              type="radio" 
+              name="radiogroup1"
+              [value]="2"  
+              [(ngModel)]="featureVisitGraph.platform_kind" 
+              (change)="changeFVDevice($event)" >
+            <div class="clearfix"></div>
+          </div> -->
+          <div id="feature-visit-graph-content">
+            <feature-visit-graph #featureVisitGraph class="graph-component"></feature-visit-graph>
+          </div>          
+        </div>
+      </div>
+    </div>    
+  </div>
+
+  <div class="ga-row row">
+    
+    <div class="col-md-4">
+      <div id="ga-apptype" class="card-block ga-panel-2">
+        <div class="loadig-div" [hidden]="!appDownloadGraph.is_loading_app_type">
+          <img src="./assets/images/loader.gif">
+        </div>
+        <h5 class="card-title text-center">APP TYPE</h5>
+        <div class="apptype-content">
+          <p class="text-center" [hidden]="!appDownloadGraph.chart_data.length == 0">
+            <img src="./assets/images/default-graph.svg">
+          </p>
+          <p class="no-device-text text-center" [hidden]="!appDownloadGraph.chart_data.length == 0">
+            No Devices
+          </p>
+          <app-download-graph #appDownloadGraph class="graph-component"></app-download-graph>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div id="ga-ios-download" class="card-block ga-panel-2">
+        <div class="loadig-div" [hidden]="!appDownloadGraph.is_loading_app_type">
+          <img src="./assets/images/loader.gif">
+        </div>    
+        <h5 class="card-title text-center">iOS DOWNLOADS</h5>
+        <div class="mobile-brand-div">
+          <div class="horizontal-line"></div>        
+          <div class="mobile-brand">
+            <img src="./assets/images/apple-icon.svg">
+          </div>
+          <div class="horizontal-line"></div>        
+        </div>
+        <p class="download-count">{{getiOSDownloadCount()}}</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div id="ga-android-download" class="card-block ga-panel-2">
+        <div class="loadig-div" [hidden]="!appDownloadGraph.is_loading_app_type">
+          <img src="./assets/images/loader.gif">
+        </div>    
+        <h5 class="card-title text-center">ANDROID DOWNLOADS</h5>
+        <div class="mobile-brand-div">
+          <div class="horizontal-line"></div>   
+          <div class="mobile-brand">
+              <img src="./assets/images/android-icon.svg">
+          </div>                 
+          <div class="horizontal-line"></div>        
+        </div>
+        <p class="download-count">{{getAndroidDownloadCount()}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="ga-row row">
+    <div class="col-md-4">
+      <div class="average-time" class="card-block ga-panel-2">
+        <div class="loadig-div" [hidden]="is_loading_average_time">
+          <img src="./assets/images/loader.gif">
+        </div>    
+        <h5 class="card-title text-center">AVERATE TIME</h5>
+        <div class="row average-time-content">
+          <div class="averate-time-value col-md-4 col-xs-4">
+            <p class="text-center">N/A</p>
+          </div>
+          <div class="averate-time-value col-md-4 col-xs-4">
+              <p class="text-center">N/A</p>
+          </div>
+          <div class="averate-time-value col-md-4 col-xs-4">
+            <p class="text-center">N/A</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="devices" class="card-block ga-panel-2">
+        <div class="loadig-div" [hidden]="is_loading_devices">
+          <img src="./assets/images/loader.gif">
+        </div>        
+        <h5 class="card-title text-center">DEVICES</h5>
+        <div class="devices-content">            
+          <p class="text-center">N/A</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="google-map-language card-block ga-panel-2">
+        <div class="loadig-div" [hidden]="is_loading_language">
+          <img src="./assets/images/loader.gif">
+        </div>        
+        <h5 class="card-title text-center">LANGUAGE</h5>
+        <div class="language-content">
+          <p class="text-center">N/A</p>
+        </div>
+      </div>
+    </div>
+  
+  </div> -->
+
+  <div class="ga-row row">
+    <div class="col-md-12">
+      <div class="google-map-chart card-block ga-panel-3">
+        <div class="loadig-div" [hidden]="!is_loading_map">
+          <img src="./assets/images/loader.gif">
+        </div>        
+        <h5 class="card-title text-center">COUNTRIES</h5>
+        <div 
+          id="map_chart" 
+          [chartData]="map_ChartData" 
+          [chartOptions] = "map_ChartOptions" 
+          chartType="GeoChart" GoogleChart>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>

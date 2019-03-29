@@ -1,0 +1,171 @@
+<!-- START: forms/basic-forms-elements -->
+
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>User Management</strong>
+        </span>
+    </div>
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Add User</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <!-- Horizontal Form -->
+                    <form #addUserForm="ngForm" (ngSubmit)="onSubmit(addUserForm)" [formGroup]="form">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="email">First Name</label>
+                            <div class="col-md-9">
+                                <div class="form-input-icon form-input-icon-right">
+                                    <input class="form-control" placeholder="Enter First Name" name="first_name" type="text" [formControl]="form.controls['first_name']">
+
+                                    <small *ngIf="form.controls['first_name'].hasError('required') && form.controls['first_name'].touched" class="form-message text-danger">Please provide valid first name</small>
+                                    <small *ngIf="form.controls['first_name'].hasError('pattern') && form.controls['first_name'].touched" class="form-message text-danger">Please provide valid first name</small>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="email">Last Name</label>
+                            <div class="col-md-9">
+                                <div class="form-input-icon form-input-icon-right">
+                                    <input class="form-control" placeholder="Enter Last Name" name="last_name" type="text" [formControl]="form.controls['last_name']">
+                                    <small *ngIf="form.controls['last_name'].hasError('pattern') && form.controls['last_name'].touched" class="form-message text-danger">Please provide valid last name</small>
+                                    <small *ngIf="form.controls['last_name'].hasError('required') && form.controls['last_name'].touched" class="form-message text-danger">You must include a last name.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="email">Email</label>
+                            <div class="col-md-9">
+                                <div class="form-input-icon form-input-icon-right">
+                                    <i class="icmn-mail2"></i>
+                                    <input class="form-control" placeholder="Enter Email" name="email" type="email" [formControl]="form.controls['email']">
+
+                                    <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">Please provide an valid email address</small>
+                                    <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">Please provide an valid email address</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="password">Password</label>
+                            <div class="col-md-9">
+                                <app-show-hide-container [input_group_show]=true>
+                                    <input #showhideinput class="form-control password" name="password" type="password" placeholder="Enter Password" [formControl]="form.controls['password']">
+                                </app-show-hide-container>
+                                <!-- <small *ngIf="(form.controls['password'].hasError('required') && form.controls['password'].touched) || (form.controls['password'].hasError('minlength') && form.controls['first_name'].touched)"
+                                    class="form-message text-danger">Please enter a password with at least 6 characters.</small> -->
+                                <small class="form-message text-danger" *ngIf="form.controls['password'].touched && form.controls['password'].hasError('matchCorrectPass')">Please enter a password with at least 6 characters. Your password must contain at least one uppercase letter and one number.</small>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="password">Confirm Password</label>
+                            <div class="col-md-9">
+                                <app-show-hide-container [input_group_show]=true>
+                                    <!-- <input #showhideinput class="form-control password" name="password" type="password" placeholder="Enter Password" [formControl]="form.controls['password']"> -->
+
+                                    <input type="password" #showhideinput class="form-control" id="rpwd" placeholder="Confirm Password" [formControl]="form.controls['cnf_password']"
+                                    />
+                                </app-show-hide-container>
+
+                                <small *ngIf="form.controls['cnf_password'].hasError('required') && form.controls['cnf_password'].touched" class="form-message text-danger">Please enter a confirm password.</small>
+                                <small *ngIf="form.controls['cnf_password'].errors?.equalTo" class="form-message text-danger">Confirm Password.</small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="usertype">User Role</label>
+                          <div class="col-md-9">
+                              <select 
+                                class="form-control" 
+                                name="usertype" 
+                                [(ngModel)] = "userTypeModel"
+                                (change) = "changeUserType()"
+                                [formControl]="form.controls['usertype']">
+                                  <option 
+                                    *ngFor="let userType of userTypeArray" 
+                                    value="{{userType.key}}">
+                                    {{userType.name}}
+                                  </option>
+                              </select>
+                              <small 
+                                *ngIf="form.controls['usertype'].hasError('required') && form.controls['usertype'].touched" 
+                                class="form-message text-danger">
+                                You must select at least one option.
+                              </small>
+                          </div>
+                        </div>
+
+                        <div class="form-group row select-app-div" [hidden]="selectAppDisabled">
+                            <label class="col-md-3 col-form-label" for="status">Select App</label>
+                            <div class="col-md-9">
+                                <select 
+                                  id="abc" 
+                                  name="app_basic_id" 
+                                  [formControl]="form.controls['app_basic_id']" 
+                                  class="form-control selectpicker show-tick" 
+                                  multiple
+                                  data-selected-text-format="text" 
+                                  data-live-search="true" 
+                                  ata-live-search-placeholder="Search" 
+                                  [ngModel]="appMyData" 
+                                  (ngModelChange)="itemSelected($event)">
+                                    <option *ngFor="let data of appMyData" value="{{data.id}}">
+                                        <input 
+                                          type="checkbox" 
+                                          [ngModel]="data" 
+                                          *ngIf="data.checked == true" 
+                                          [ngModelOptions]="{standalone: true}" 
+                                          style="cursor: move" 
+                                          checked/>
+                                        <input 
+                                          type="checkbox" 
+                                          [ngModel]="data" 
+                                          *ngIf="data.checked == false" 
+                                          [ngModelOptions]="{standalone: true}" 
+                                          style="cursor: move"/>
+                                          {{data.app_name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="status">Status</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="status" [formControl]="form.controls['status']">
+                                    <option *ngFor="let status of statusArray" value="{{status.key}}">{{status.name}}</option>
+                                </select>
+                                <small *ngIf="form.controls['status'].hasError('required') && form.controls['status'].touched" class="form-message text-danger">You must select at least one option .</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button routerLink="/users" type="button" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" #saveUserData class="btn btn-primary pull-right" [disabled]="!form.valid">Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END: forms/basic-forms-elements -->

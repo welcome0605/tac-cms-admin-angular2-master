@@ -1,0 +1,58 @@
+
+.img-msg-owner-avarta{
+    display: block;
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+}
+.img-msg-list-avarta{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+    height: 50px;
+}
+.msg-content-other{
+    background-color: rgb(230, 200, 189);
+}
+.msg-content-user{
+    border: 1px solid;
+    border-color: lightgrey lightgrey lightgrey lightgrey;
+}
+.msg-edit{
+    border-bottom: 2px solid;
+    border-color: lightgrey lightgrey #ca1a1a lightgrey;
+}
+.btn-custom{
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 3px 70px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+}
+.btn-custom:hover{
+    background-color: #777777;
+}
+.msg-btn-attach{
+    font-size: 12px;
+    padding: 3px 15px;
+}
+.msg_list{
+    margin-top: 10px;
+}
+/* 0320 test responsive */
+.left_msg_div{
+    border-right: 1px solid #112233;
+}
+.right_msg_div{
+    border-left: 1px solid #112233;
+}
+.support_msg{
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 25px;
+}

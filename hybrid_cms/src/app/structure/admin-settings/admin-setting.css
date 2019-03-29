@@ -1,0 +1,35 @@
+.firebase-upload-file {
+  display: block;
+  position: relative;
+}
+
+.firebase-upload-file .file-upload{
+  left: 0;
+  top: 0;
+  position: absolute;
+  visibility: hidden;
+}
+
+.firebase-upload-file button, 
+.firebase-upload-file p {
+  float: left;  
+}
+
+.firebase-upload-file p {
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.download-btn {
+  display: block;
+  color: #0190fe;
+  font-size: 20px;
+  line-height: 45px;
+  margin-left: 10px;
+}
+
+.download-btn:hover {
+  color: #1f9dfe;
+}

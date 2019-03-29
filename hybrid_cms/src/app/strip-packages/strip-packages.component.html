@@ -1,0 +1,85 @@
+<!-- Pricing Tables -->
+<div class="container">
+  <div class="cat__pricing-table mb-5">
+    <div class="cat__pricing-table__item" *ngFor="let d of packagesList" >
+      <div class="cat__pricing-table__header">
+        <div class="cat__pricing-table__pricing__price">
+          <span class="cat__pricing-table__pricing__currency">$</span>
+          <span class="cat__pricing-table__pricing__amount">{{d.pa_price}}</span>
+          <span class="cat__pricing-table__pricing__period">/ One Time Only</span>
+        </div>
+        <div class="cat__pricing-table__header__title">{{d.pa_name}}</div>
+      </div>
+      <ul class="cat__pricing-table__features">
+        <li>{{d.pa_desc}}</li>
+      </ul>
+      <div class="cat__pricing-table__footer">
+        <a href="javascript: void(0);" (click)="openHandler(d)"class="btn btn-outline-success btn-lg" role="button">
+          <i class="icmn-download mr-3" aria-hidden="true"></i>
+          Buy Now
+        </a>
+      </div>
+    </div>
+
+    <!-- <div class="cat__pricing-table__item cat__pricing-table__item--featured">
+      <div class="cat__pricing-table__header">
+        <div class="cat__pricing-table__pricing__price">
+          <span class="cat__pricing-table__pricing__currency">$</span>
+          <span class="cat__pricing-table__pricing__amount">60</span>
+          <span class="cat__pricing-table__pricing__period">/ mo</span>
+        </div>
+        <div class="cat__pricing-table__header__title">Medium</div>
+      </div>
+      <ul class="cat__pricing-table__features">
+        <li>
+          <strong>20GB</strong> of Bandwidth</li>
+        <li>
+          <strong>400MB</strong> Max File Size</li>
+        <li>
+          <strong>2GHZ</strong> CPU</li>
+        <li>
+          <strong>512</strong> Memory</li>
+        <li>
+          <strong>2 GB</strong> Storage</li>
+      </ul>
+      <div class="cat__pricing-table__footer">
+        <a href="javascript: void(0);" class="btn btn-danger btn-lg" role="button">
+          <i class="icmn-download" aria-hidden="true"></i>
+          Buy Item
+        </a>
+      </div>
+    </div>
+
+
+    <div class="cat__pricing-table__item">
+      <div class="cat__pricing-table__header">
+        <div class="cat__pricing-table__pricing__price">
+          <span class="cat__pricing-table__pricing__currency">$</span>
+          <span class="cat__pricing-table__pricing__amount">40</span>
+          <span class="cat__pricing-table__pricing__period">/ mo</span>
+        </div>
+        <div class="cat__pricing-table__header__title">Performance</div>
+      </div>
+      <ul class="cat__pricing-table__features">
+        <li>
+          <strong>30GB</strong> of Bandwidth</li>
+        <li>
+          <strong>600MB</strong> Max File Size</li>
+        <li>
+          <strong>2GHZ</strong> CPU</li>
+        <li>
+          <strong>1024MB</strong> Memory</li>
+        <li>
+          <strong>4 GB</strong> Storage</li>
+      </ul>
+      <div class="cat__pricing-table__footer">
+        <a href="javascript: void(0);" class="btn btn-outline-success btn-lg" role="button">
+          <i class="icmn-download mr-3" aria-hidden="true"></i>
+          Buy Item
+        </a>
+      </div>
+    </div> -->
+
+  </div>
+</div>
+<!-- END: pages/pricing-tables -->

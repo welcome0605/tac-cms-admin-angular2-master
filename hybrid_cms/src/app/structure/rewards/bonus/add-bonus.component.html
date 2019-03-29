@@ -1,0 +1,57 @@
+<h1>Add Reward</h1>
+
+<div class="add-bonus-container">
+  	<form #addBonusForm="ngForm" (ngSubmit)="onSubmit(addBonusForm)" [formGroup]="form" class="add-bonus-form">
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Name</label>
+			<div class="col-md-8">
+				<input type="text" class="form-control" name="name"
+				placeholder="Name" [formControl]="form.controls['name']">
+				<small *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="form-message text-danger">You must include name.</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Description</label>
+			<div class="col-md-8">
+				<textarea class="form-control" name="description" rows="3"
+				[formControl]="form.controls['description']"></textarea>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Cost</label>
+			<div class="col-md-8">
+				<input type="number" class="form-control" name="cost" [formControl]="form.controls['cost']">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-md-3 col-form-label">Image</label>
+			<div class="col-md-8">
+				<div class="form-group image-dropify">
+					<input type="file" accept="image/*"
+					class="dropify"
+					id="imageHeader"
+					name="image"
+					[formControl]="form.controls['image']"
+					(change)="imageFileChange($event)"
+					data-height="140"
+					data-max-file-size="10M"
+					data-allowed-file-extensions="png jpeg jpg"
+					data-min-width="24" data-max-width="6000"
+					data-min-height="24" data-max-height="6000"
+					#fileInput
+					/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-actions">
+			<div class="form-group row">
+				<div class="col-md-12">
+					<button routerLink="/rewards/index" type="button" class="btn btn-primary">cancel</button>
+					<button type="submit" #addBonusBtn class="btn btn-primary" [disabled]="!form.valid">save</button>
+				</div>
+			</div>
+		</div>	
+  	</form>
+</div>

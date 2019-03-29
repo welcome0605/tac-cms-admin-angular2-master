@@ -1,0 +1,20 @@
+ngb-tabset {
+	.nav-tabs {
+		li.nav-item {
+			a.nav-link {
+				&.active {
+					border-color: transparent;
+    				border-bottom: 3px solid #0190fe !important;
+				}
+				&:hover,
+				&:focus {
+					border-color: transparent;
+				}
+			}
+		}
+	}
+	.tab-content {
+		padding: 20px;
+	}	
+}
+

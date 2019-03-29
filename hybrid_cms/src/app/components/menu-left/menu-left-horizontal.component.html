@@ -1,0 +1,583 @@
+<nav class="cat__menu-left">
+    <div class="cat__menu-left__lock cat__menu-left__action--menu-toggle">
+        <div class="cat__menu-left__pin-button">
+            <div><!-- --></div>
+        </div>
+    </div>
+    <div class="cat__menu-left__logo">
+        <a [routerLink]="['/']">
+            <img src="assets/modules/dummy-assets/common/img/logo-inverse.png" />
+        </a>
+    </div>
+    <div class="cat__menu-left__inner">
+        <ul class="cat__menu-left__list cat__menu-left__list--root">
+            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a href="javascript: void(0);" class="cat__menu-right__action--menu-toggle">
+                    <span class="cat__menu-left__icon icmn-cog cat__core__spin-delayed--pseudo-selector"></span>
+                    Settings
+                </a>
+            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['documentation/index']">
+				    <span class="cat__menu-left__icon icmn-books"></span>
+                    Documentation
+                </a>
+            </li>
+            <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a href="javascript: void(0);">
+                    <span class="cat__menu-left__icon icmn-loop"></span>
+                    Pages
+                </a>
+                <ul class="cat__menu-left__list">
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['dashboards/alpha']">
+                            <span class="cat__menu-left__icon icmn-home"></span>
+                            <span class="badge badge-primary pull-right">New</span>
+                            Dashboard Alpha
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['dashboards/beta']">
+                            <span class="cat__menu-left__icon icmn-home"></span>
+                            Dashboard Beta
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__divider"><!-- --></li>
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-file-text"></span>
+                            Default Pages
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/login-alpha']">
+                                    <span class="cat__menu-left__icon">LA</span>
+                                    Login Alpha
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/login-beta']">
+                                    <span class="cat__menu-left__icon">LB</span>
+                                    Login Beta
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/register']">
+                                    <span class="cat__menu-left__icon">R</span>
+                                    Register
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/lockscreen']">
+                                    <span class="cat__menu-left__icon">LS</span>
+                                    Lockscreen
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/pricing-tables']">
+                                    <span class="cat__menu-left__icon">PT</span>
+                                    Pricing Tables
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/invoice']">
+                                    <span class="cat__menu-left__icon">I</span>
+                                    Invoice
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/page-404']">
+                                    <span class="cat__menu-left__icon">P4</span>
+                                    Page 404
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['pages/page-500']">
+                                    <span class="cat__menu-left__icon">P5</span>
+                                    Page 500
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-download"></span>
+                            Ecommerce
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/dashboard']">
+                                    <span class="cat__menu-left__icon">DB</span>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/products-catalog']">
+                                    <span class="cat__menu-left__icon">PC</span>
+                                    Products Catalog
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/product-details']">
+                                    <span class="cat__menu-left__icon">PD</span>
+                                    Product Details
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/product-edit']">
+                                    <span class="cat__menu-left__icon">PE</span>
+                                    Product Edit
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/products-list']">
+                                    <span class="cat__menu-left__icon">PL</span>
+                                    Products List
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/orders']">
+                                    <span class="cat__menu-left__icon">O</span>
+                                    Orders
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['ecommerce/cart-checkout']">
+                                    <span class="cat__menu-left__icon">CC</span>
+                                    Cart / Checkout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['apps/profile']">
+                            <span class="cat__menu-left__icon icmn-profile"></span>
+                            Profile
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['apps/messaging']">
+                            <span class="cat__menu-left__icon icmn-bubbles4"></span>
+                            <span class="badge badge-danger pull-right">768</span>
+                            Messaging
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['apps/mail']">
+                            <span class="cat__menu-left__icon icmn-envelop"></span>
+                            <span class="badge badge-success pull-right">84</span>
+                            Mail
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['apps/calendar']">
+                            <span class="cat__menu-left__icon icmn-calendar"></span>
+                            Calendar
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['apps/gallery']">
+                            <span class="cat__menu-left__icon icmn-images"></span>
+                            Gallery
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a href="javascript: void(0);">
+                    <span class="cat__menu-left__icon icmn-loop"></span>
+                    Components
+                </a>
+                <ul class="cat__menu-left__list">
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-list"></span>
+                            Forms
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/basic-form-elements']">
+                                    <span class="cat__menu-left__icon">BF</span>
+                                    Basic Form Elements
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/buttons']">
+                                    <span class="cat__menu-left__icon">B</span>
+                                    Buttons
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/dropdowns']">
+                                    <span class="cat__menu-left__icon">D</span>
+                                    Dropdowns
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/selectboxes']">
+                                    <span class="cat__menu-left__icon">SB</span>
+                                    Selectboxes
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/checkboxes-radio']">
+                                    <span class="cat__menu-left__icon">CR</span>
+                                    Checkboxes / Radio
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/form-wizard']">
+                                    <span class="cat__menu-left__icon">FW</span>
+                                    Form Wizard
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/form-validation']">
+                                    <span class="cat__menu-left__icon">FV</span>
+                                    Form Validation
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/autocomplete']">
+                                    <span class="cat__menu-left__icon">AC</span>
+                                    Autocomplete
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/input-mask']">
+                                    <span class="cat__menu-left__icon">IM</span>
+                                    Input Mask
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/file-uploads']">
+                                    <span class="cat__menu-left__icon">FU</span>
+                                    File Uploads
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['forms/extras']">
+                                    <span class="cat__menu-left__icon">E</span>
+                                    Extras
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-loop"></span>
+                            Components
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/date-picker']">
+                                    <span class="cat__menu-left__icon">DP</span>
+                                    Date Picker
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/calendar']">
+                                    <span class="cat__menu-left__icon">CL</span>
+                                    Calendar
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/carousel']">
+                                    <span class="cat__menu-left__icon">CR</span>
+                                    Carousel
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/media-players']">
+                                    <span class="cat__menu-left__icon">MP</span>
+                                    Media Players
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/slider']">
+                                    <span class="cat__menu-left__icon">SL</span>
+                                    Slider
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/modal']">
+                                    <span class="cat__menu-left__icon">M</span>
+                                    Modal
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/tooltips-popovers']">
+                                    <span class="cat__menu-left__icon">TP</span>
+                                    Tooltips & Popovers
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/notifications-alerts']">
+                                    <span class="cat__menu-left__icon">NA</span>
+                                    Notifications & Alerts
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/loading-progress']">
+                                    <span class="cat__menu-left__icon">LP</span>
+                                    Loading Progress
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/progress-bars']">
+                                    <span class="cat__menu-left__icon">PB</span>
+                                    Progress Bars
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/badges-labels']">
+                                    <span class="cat__menu-left__icon">BL</span>
+                                    Badges & Labels
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/steps']">
+                                    <span class="cat__menu-left__icon">S</span>
+                                    Steps
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/breadcrumbs']">
+                                    <span class="cat__menu-left__icon">B</span>
+                                    Breadcrumbs
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/pagination']">
+                                    <span class="cat__menu-left__icon">P</span>
+                                    Pagination
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/collapse']">
+                                    <span class="cat__menu-left__icon">C</span>
+                                    Collapse
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/tabs']">
+                                    <span class="cat__menu-left__icon">T</span>
+                                    Tabs
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/text-editor']">
+                                    <span class="cat__menu-left__icon">TE</span>
+                                    Text Editor
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['components/nestable']">
+                                    <span class="cat__menu-left__icon">N</span>
+                                    Nestable
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-table"></span>
+                            Tables
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['tables/basic-tables']">
+                                    <span class="cat__menu-left__icon">BT</span>
+                                    Basic Tables
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['tables/datatables']">
+                                    <span class="cat__menu-left__icon">DT</span>
+                                    DataTables
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['tables/editable-tables']">
+                                    <span class="cat__menu-left__icon">ET</span>
+                                    Editable Tables
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-stats-bars"></span>
+                            Charts
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['charts/chartistjs']">
+                                    <span class="cat__menu-left__icon">CT</span>
+                                    Chartist.js
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['charts/chartjs']">
+                                    <span class="cat__menu-left__icon">CR</span>
+                                    Chart.js
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['charts/c3']">
+                                    <span class="cat__menu-left__icon">C3</span>
+                                    C3
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['charts/peity']">
+                                    <span class="cat__menu-left__icon">PT</span>
+                                    Peity
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['components/mail-templates']">
+                            <span class="cat__menu-left__icon icmn-envelop"></span>
+                            Mail Templates
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a href="javascript: void(0);">
+                            <span class="cat__menu-left__icon icmn-star-full"></span>
+                            Icons
+                        </a>
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['icons/fontawesome']">
+                                    <span class="cat__menu-left__icon">FA</span>
+                                    FontAwesome
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['icons/linear-icons-free']">
+                                    <span class="cat__menu-left__icon">LI</span>
+                                    Linearicons Free
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                                <a [routerLink]="['icons/icomoon-free']">
+                                    <span class="cat__menu-left__icon">IC</span>
+                                    Icomoon Free
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="cat__menu-left__item cat__menu-left__submenu" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a href="javascript: void(0);">
+                    <span class="cat__menu-left__icon icmn-checkbox-unchecked"></span>
+                    Layout
+                </a>
+                <ul class="cat__menu-left__list">
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['layout/grid']">
+                            <span class="cat__menu-left__icon">G</span>
+                            Grid
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['layout/cards']">
+                            <span class="cat__menu-left__icon">PC</span>
+                            Cards / Panels
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['layout/sidebars']">
+                            <span class="cat__menu-left__icon">SB</span>
+                            Sidebars
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['layout/utilities']">
+                            <span class="cat__menu-left__icon">U</span>
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                        <a [routerLink]="['layout/typography']">
+                            <span class="cat__menu-left__icon icmn-font-size"></span>
+                            Typography
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="cat__menu-left__item cat__menu-left__item--disabled">
+                <a href="javascript: void(0);">
+                    <span class="cat__menu-left__icon">D</span>
+                    Disabled Item
+                </a>
+            </li>
+            <li class="cat__menu-left__item cat__menu-left__submenu">
+                <a href="javascript: void(0);">
+                    <span class="cat__menu-left__icon">IN</span>
+                    Infinity Nested
+                </a>
+                <!-- level 1 -->
+                <ul class="cat__menu-left__list">
+                    <li class="cat__menu-left__item cat__menu-left__submenu">
+                        <a href="javascript: void(0);">
+                            Level 1
+                        </a>
+                        <!-- level 2 -->
+                        <ul class="cat__menu-left__list">
+                            <li class="cat__menu-left__item cat__menu-left__submenu">
+                                <a href="javascript: void(0);">
+                                    Level 1.2
+                                </a>
+                                <!-- level 3 -->
+                                <ul class="cat__menu-left__list">
+                                    <li class="cat__menu-left__item">
+                                        <a href="javascript: void(0);">
+                                            Level 1.2.3
+                                        </a>
+                                    </li>
+                                    <li class="cat__menu-left__item cat__menu-left__submenu">
+                                        <a href="javascript: void(0);">
+                                            Level 1.2.3
+                                        </a>
+                                        <!-- level 4 -->
+                                        <ul class="cat__menu-left__list">
+                                            <li class="cat__menu-left__item">
+                                                <a href="javascript: void(0);">
+                                                    Level 1.2.3.4
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="cat__menu-left__item">
+                                <a href="javascript: void(0);">
+                                    Level 1.2
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item">
+                                <a href="javascript: void(0);">
+                                    Level 1.2
+                                </a>
+                            </li>
+                            <li class="cat__menu-left__item">
+                                <a href="javascript: void(0);">
+                                    Level 1.2
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="cat__menu-left__item">
+                        <a href="javascript: void(0);">
+                            Level 1
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

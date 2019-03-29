@@ -1,0 +1,515 @@
+<!-- NG Bootstrap -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Ng-Bootstrap — Angular Directives for Bootstrap 4</strong>
+            <a href="https://ng-bootstrap.github.io/#/home" target="_blank" class="btn btn-sm btn-primary ml-2">Official Documentation</a>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Accordion</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/accordion" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>The NgbAccordion directive is a collection of panels. It can assure that only panel can be opened at a time.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Accordion -->
+                    <ngb-accordion [closeOthers]="true" activeIds="1">
+                        <ngb-panel id="1" title="Simple">
+                            <template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+                                aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+                                craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                                occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                                labore sustainable VHS.
+                            </template>
+                        </ngb-panel>
+                        <ngb-panel id="2">
+                            <template ngbPanelTitle>
+                                <span>&#9733; <b>Fancy</b> title &#9733;</span>
+                            </template>
+                            <template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+                                aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+                                craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                                occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                                labore sustainable VHS.
+                            </template>
+                        </ngb-panel>
+                        <ngb-panel id="3" title="Disabled" [disabled]="true">
+                            <template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+                                aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+                                craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                                occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                                labore sustainable VHS.
+                            </template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                    <!-- End Accordion -->
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Alert</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/alert" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>Alerts can be used to provide feedback messages.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Alert -->
+                    <ngb-alert [dismissible]="false">
+                      <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                    </ngb-alert>
+                    <ngb-alert [dismissible]="true" type="success">
+                      <strong>Success!</strong> This is an success alert
+                    </ngb-alert>
+                    <ngb-alert [dismissible]="true" type="info">
+                      <strong>Info!</strong> This is an info alert
+                    </ngb-alert>
+                    <ngb-alert [dismissible]="true" type="warning">
+                      <strong>Warning!</strong> This is a warning alert
+                    </ngb-alert>
+                    <ngb-alert [dismissible]="true" type="danger">
+                      <strong>Danger!</strong> This is a danger alert
+                    </ngb-alert>
+                    <!-- End Alert -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Buttons</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/buttons" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>Easily create Bootstrap-style radio buttons. A value of a selected button is bound to a variable specified via ngModel.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Buttons -->
+                    <p>Radio Buttons</p>
+                    <div ngbRadioGroup name="radioBasic">
+                        <label class="btn btn-primary">
+                            <input type="radio" [value]="1"> Left (pre-checked)
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" value="middle"> Middle
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" [value]="false"> Right
+                        </label>
+                    </div>
+
+                    <br />
+                    <br />
+                    <p>Checkboxes</p>
+                    <div class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-default">
+                        <input type="checkbox"> Left
+                      </label>
+                      <label class="btn btn-default">
+                        <input type="checkbox"> Middle
+                      </label>
+                      <label class="btn btn-default">
+                        <input type="checkbox"> Right
+                      </label>
+                    </div>
+                    <!-- End Buttons -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Carousel</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/carousel" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>Directive to easily create carousels based on Bootstrap's markup.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Carousel -->
+                    <ngb-carousel>
+                        <template ngbSlide>
+                            <img src="http://lorempixel.com/900/500?r=1" alt="Random first slide">
+                            <div class="carousel-caption">
+                                <h3>First slide label</h3>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            </div>
+                        </template>
+                        <template ngbSlide>
+                            <img src="http://lorempixel.com/900/500?r=2" alt="Random second slide">
+                            <div class="carousel-caption">
+                                <h3>Second slide label</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </template>
+                        <template ngbSlide>
+                            <img src="http://lorempixel.com/900/500?r=3" alt="Random third slide">
+                            <div class="carousel-caption">
+                                <h3>Third slide label</h3>
+                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            </div>
+                        </template>
+                    </ngb-carousel>
+                    <!-- End Carousel -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Collapse</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/collapse" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>The NgbCollapse directive provides a simple way to hide and show an element with animations.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Collapse -->
+                    <p>
+                        <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+                                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                            Toggle
+                        </button>
+                    </p>
+                    <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                        <div class="card">
+                            <div class="card-block">
+                                You can collapse this card by clicking Toggle
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Collapse -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Datepicker</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/datepicker" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A lightweight and highly configurable datepicker directive</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Datepicker -->
+                    <ngb-datepicker #dp (navigate)="date = $event.next"></ngb-datepicker>
+                    <!-- End Datepicker -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Dropdown</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/dropdown" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>Transforms a node into a dropdown.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Dropdown -->
+                    <p>Dropdown</p>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-default" id="dropdownMenu1" ngbDropdownToggle>Toggle dropdown</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <button class="dropdown-item">Action - 1</button>
+                        <button class="dropdown-item">Another Action</button>
+                        <button class="dropdown-item">Something else is here</button>
+                      </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <p>Dropup</p>
+                    <div ngbDropdown [up]="true" class="d-inline-block">
+                      <button class="btn btn-default" id="dropdownMenu2" ngbDropdownToggle>Toggle dropup</button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item">Action - 1</button>
+                        <button class="dropdown-item">Another Action</button>
+                        <button class="dropdown-item">Something else is here</button>
+                      </div>
+                    </div>
+                    <!-- End Dropdown -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Modal</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/modal" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A service to open modal windows. Creating a modal is straightforward: create a template and pass it as an argument to the "open" method!</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Modal -->
+                    <template #content let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Modal title</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" (click)="c()">Close</button>
+                      </div>
+                    </template>
+                    <template ngbModalContainer></template>
+                    <button class="btn btn-default" (click)="openModal(content)">Launch demo modal</button>
+                    <!-- End Modal -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Pagination</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/pagination" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A directive that will take care of visualising a pagination bar and enable / disable buttons correctly!</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Pagination -->
+                    <p>Default pagination</p>
+                    <ngb-pagination [collectionSize]="70" [(page)]="paginationCurrent"></ngb-pagination>
+
+                    <p>directionLinks = false</p>
+                    <ngb-pagination [collectionSize]="70" [(page)]="paginationCurrent" [directionLinks]="false"></ngb-pagination>
+
+                    <p>boundaryLinks = true</p>
+                    <ngb-pagination [collectionSize]="70" [(page)]="paginationCurrent" [boundaryLinks]="true"></ngb-pagination>
+                    <!-- End Pagination -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Popover</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/popover" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A lightweight, extensible directive for fancy popover creation.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Popover -->
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-default" placement="top"
+                                ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on top">
+                          Popover on top
+                        </button>
+
+                        <button type="button" class="btn btn-default" placement="right"
+                                ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on right">
+                          Popover on right
+                        </button>
+                    </div>
+
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-default" placement="bottom"
+                                ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on bottom">
+                          Popover on bottom
+                        </button>
+                        <button type="button" class="btn btn-default" placement="left"
+                                ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on left">
+                          Popover on left
+                        </button>
+                    </div>
+                    <!-- End Popover -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Progressbar</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/progressbar" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>Directive that can be used to provide feedback on the progress of a workflow or an action.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Progressbar -->
+                    <p><ngb-progressbar type="success" [value]="25">25</ngb-progressbar></p>
+                    <p><ngb-progressbar type="info" [value]="50">Copying file <b>2 of 4</b>...</ngb-progressbar></p>
+                    <p><ngb-progressbar type="warning" [value]="75" [striped]="true" [animated]="true"><i>50%</i></ngb-progressbar></p>
+                    <p><ngb-progressbar type="danger" [value]="100" [striped]="true">Completed!</ngb-progressbar></p>
+                    <!-- End Progressbar -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Rating</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/rating" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>Rating directive that will take care of visualising a star rating bar.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Rating -->
+                    <style>
+                        .ngb-rating-example .star {
+                          font-size: 1.5rem;
+                          color: #b0c4de;
+                        }
+                        .ngb-rating-example .filled {
+                          color: #1e90ff;
+                        }
+                    </style>
+                    <div class="ngb-rating-example">
+                        <ngb-rating [(rate)]="ratingCurrent">
+                            <template let-fill="fill">
+                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                            </template>
+                        </ngb-rating>
+                    </div>
+                    <!-- End Rating -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Tabs</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/tabs" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A component that makes it easy to create tabbed interface.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Tabs -->
+                    <ngb-tabset>
+                      <ngb-tab title="Simple">
+                        <template ngbTabContent>
+                          <div class="p-3">
+                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                              master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+                              dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+                              iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                          </div>
+                        </template>
+                      </ngb-tab>
+                      <ngb-tab>
+                        <template ngbTabTitle><b>Fancy</b> title</template>
+                        <template ngbTabContent>
+                          <div class="p-3">
+                            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                            <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
+                              craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+                              cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
+                              yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+                              shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
+                              sint qui sapiente accusamus tattooed echo park.</p>
+                          </div>
+                        </template>
+                      </ngb-tab>
+                      <ngb-tab title="Disabled" [disabled]="true">
+                        <template ngbTabContent>
+                          <div class="p-3">
+                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                              master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+                              dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+                              iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                          </div>
+                        </template>
+                      </ngb-tab>
+                    </ngb-tabset>
+                    <!-- End Tabs -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                    <strong>Timepicker</strong>
+                    <a href="https://ng-bootstrap.github.io/#/components/timepicker" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A lightweight & configurable timepicker directive.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Timepicker -->
+                    <ngb-timepicker [(ngModel)]="timepickerModel"></ngb-timepicker>
+                    <!-- End Timepicker -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                  <strong>Tooltip</strong>
+                  <a href="https://ng-bootstrap.github.io/#/components/tooltip" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>A lightweight, extensible directive for fancy tooltip creation.</p>
+                <br />
+                <div class="mb-5">
+
+                    <!-- Tooltip -->
+                    <div class="mb-2">
+                      <button type="button" class="btn btn-default" placement="top" ngbTooltip="Tooltip on top">
+                        Tooltip on top
+                      </button>
+                      <button type="button" class="btn btn-default" placement="right" ngbTooltip="Tooltip on right">
+                        Tooltip on right
+                      </button>
+                    </div>
+
+                    <div class="mb-2">
+                      <button type="button" class="btn btn-default" placement="bottom" ngbTooltip="Tooltip on bottom">
+                        Tooltip on bottom
+                      </button>
+                      <button type="button" class="btn btn-default" placement="left" ngbTooltip="Tooltip on left">
+                        Tooltip on left
+                      </button>
+                    </div>
+                    <!-- End Tooltip -->
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h4 class="text-black">
+                  <strong>Typeahead</strong>
+                  <a href="https://ng-bootstrap.github.io/#/components/typeahead" target="_blank" class="btn btn-sm ml-2">Detailed Documentation</a>
+                </h4>
+                <p>NgbTypeahead directive provides a simple way of creating powerful typeaheads from any text input</p>
+                <br />
+                <div class="mb-5">
+
+                  <!-- Typeahead -->
+                  <input type="text" class="form-control" [(ngModel)]="typeaheadModel" [ngbTypeahead]="typeaheadSearch" />
+                  <!-- End Typeahead -->
+
+                </div>
+              </div>
+        </div>
+    </div>
+</section>
+<!-- End NG Bootstrap -->

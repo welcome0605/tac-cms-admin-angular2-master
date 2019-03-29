@@ -1,0 +1,203 @@
+
+<style>
+	.frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    /* -ms-transform: scale(0.25);
+    -moz-transform: scale(0.25);
+    -o-transform: scale(0.25);
+    -webkit-transform: scale(0.25);
+    transform: scale(0.25);
+    
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0; */
+	}
+
+	.loading {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
+	.loading .bullet {
+		position: absolute;
+		padding: 5px;
+		border-radius: 50%;
+		background: #65a3ff;
+		-webkit-animation: animIn 1s ease-in-out 0s infinite;
+		animation: animIn 1s ease-in-out 0s infinite;
+	}
+	.loading .bullet:nth-child(1) {
+		-webkit-animation-delay: 0s;
+		animation-delay: 0s;
+	}
+	.loading .bullet:nth-child(2) {
+		-webkit-animation-delay: 0.15s;
+		animation-delay: 0.15s;
+	}
+	.loading .bullet:nth-child(3) {
+		-webkit-animation-delay: 0.3s;
+		animation-delay: 0.3s;
+	}
+	.loading .bullet:nth-child(4) {
+		-webkit-animation-delay: 0.45s;
+		animation-delay: 0.45s;
+	}
+	@-webkit-keyframes animIn {
+		0% {
+			-webkit-transform: translateX(-100px);
+			transform: translateX(-100px);
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			-webkit-transform: translateX(100px);
+			transform: translateX(100px);
+			opacity: 0;
+		}
+	}
+	@keyframes animIn {
+		0% {
+			-webkit-transform: translateX(-100px);
+			transform: translateX(-100px);
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			-webkit-transform: translateX(100px);
+			transform: translateX(100px);
+			opacity: 0;
+		}
+	}
+
+	preview{
+		z-index: 100000000000;
+		right: 0px !important;
+	}
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    position: fixed;
+    top: 0;
+	right: 0;
+    background-color:#02242f; 
+    overflow-x: hidden;
+    transition: 0.5s;
+	z-index: 10000000;
+	display: block !important;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    /* position: absolute; */
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.screen_outer {
+	left: 13px;
+    top: calc( 50% - 370px);
+    width: 440px !important;
+    height: 850px !important;
+}
+.screen_inner{
+	overflow: hidden;
+    position: absolute;
+    left: 13.5px;
+    top: 90px;
+    width: 375px;
+    height: 667px;
+	 /* -moz-transform: scale(0.64);
+	 -o-transform: scale(0.64); */
+	 /* -webkit-transform: scale(0.64); */
+	 /* transform: scale(0.64); */
+}
+.tabbar{
+	position: fixed;
+    right: -80px;
+    top: calc( 50% - 50px);
+    transform: scale(1.1,1.1) rotate(-90deg);
+	-moz-transform: scale(1.1,1.1) rotate(-90deg);
+	-o-transform: scale(1.1,1.1) rotate(-90deg);
+	-webkit-transform: scale(1.1,1.1) rotate(-90deg);
+	transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	z-index: 999999999;
+}
+.tabbartext{
+    right: -29px;
+    top: calc( 50% - 47px);
+    transform: scale(1.1,1.1) rotate(-90deg);
+	-moz-transform: scale(1.1,1.1) rotate(-90deg);
+	-o-transform: scale(1.1,1.1) rotate(-90deg);
+	-webkit-transform: scale(1.1,1.1) rotate(-90deg);
+	transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	font-size: 17px;
+    color: rgb(255, 255, 255);
+	cursor:pointer;
+	position: fixed;
+	z-index: 999999999;
+}
+.frame_prev {
+	border: none;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+<img class = "tabbar" src="assets/modules/dummy-assets/common/img/tabbar.svg">
+<span class="tabbartext">App Preview</span>
+
+<div id="mySidenav" class="sidenav" style="position:fixed; right:0px; font-size:30px;cursor:pointer;display:block!important;">
+	
+	<div class="screen_outer">
+		<img src="assets/modules/dummy-assets/common/img/iphone.png">
+		<div class="screen_inner" >
+			<div class = 'loadingbar' style="height: 100%;background: #19181d;">
+				<div class='loading'>
+					<div class='bullet'></div>
+					<div class='bullet'></div>
+					<div class='bullet'></div>
+					<div class='bullet'></div>
+				</div>
+			</div>
+			<iframe id = "native_preview"  class = "frame_prev" width="100%" height="100% !important">
+				<p>Your browser does not support iframes.</p>
+			</iframe>
+		</div>
+	</div>
+</div>
+
+
+     
+

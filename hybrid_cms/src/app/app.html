@@ -1,0 +1,18 @@
+<div *ngIf="is_login; then withLogin else withoutLogin"></div>
+
+<ng-template #withoutLogin>
+  <app-spinner-component [busy]="isActiveSpinner" *ngIf="isActiveSpinner" message="{{spinnerMsg}}"></app-spinner-component>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #withLogin>
+  <app-spinner-component [busy]="isActiveSpinner" *ngIf="isActiveSpinner" message="{{spinnerMsg}}"></app-spinner-component>
+  <cat-menu-right></cat-menu-right>
+  <cat-menu-left></cat-menu-left>
+  <cat-top-bar></cat-top-bar>
+  <div class="cat__content">
+    <router-outlet></router-outlet>
+    <cat-footer></cat-footer>
+  </div>
+  <previewbar *ngIf="is_app_name" id="previewbar"></previewbar>
+</ng-template>

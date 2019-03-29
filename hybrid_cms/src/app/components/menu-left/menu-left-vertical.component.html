@@ -1,0 +1,182 @@
+<nav class="cat__menu-left">
+    <div class="cat__menu-left__lock cat__menu-left__action--menu-toggle">
+        <div class="cat__menu-left__pin-button">
+            <div>
+                <!-- -->
+            </div>
+        </div>
+    </div>
+    <div class="cat__menu-left__logo">
+        <a [routerLink]="['/']">
+            <img src="assets/modules/dummy-assets/common/img/logo-inverse.png" />
+        </a>
+    </div>
+    <div class="cat__menu-left__inner">
+        <ul class="cat__menu-left__list cat__menu-left__list--root">
+
+            <li *ngIf="showDashboardOption" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['dashboard']" (click)="setHeader()">
+                    <span class="cat__menu-left__icon icmn-home"></span>
+                    Dashboard
+                </a>
+            </li>
+
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['users']" (click)="setHeader()">
+                    <span class="cat__menu-left__icon">UM</span>
+                    User Management
+                </a>
+            </li>
+
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['email-template']" (click)="setHeader()">
+                    <span class="cat__menu-left__icon icmn-envelop">
+                        <div class="num_wrapper" *ngIf="emails_number > 0">
+                            <span class="num" *ngIf="emails_number > 0">
+                                {{emails_number}}
+                            </span>
+                        </div>
+                    </span>
+                    Email Template
+                </a>
+            </li>
+
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['super-admin-setting']" (click)="setHeader()">
+                    <span class="cat__menu-left__icon icmn-envelop"></span>
+                    Super Admin Settings
+                </a>
+            </li>
+
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['transaction-list']" (click)="setHeader()">
+                    <span class="cat__menu-left__icon icmn-calendar"></span>
+                    Transaction History
+                </a>
+            </li>
+
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['subscription-list']" (click)="setHeader()">
+                    <span class="cat__menu-left__icon icmn-calendar"></span>
+                    Subscription History
+                </a>
+            </li>
+            <!-- gjc 03/20 -->
+            <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['contact-us']" (click)="setHeaderMain()">
+                    <span class="cat__menu-left__icon icmn-bubbles4">
+                        <div class="num_wrapper" *ngIf="contact_number > 0">
+                            <span class="num">
+                                {{contact_number}}
+                            </span>
+                        </div>
+                    </span>
+                    Contact Us
+                </a>
+            </li>
+
+            <li class="cat__menu-left__divider"></li>
+
+            <div *ngIf="is_app_name" id="vertical_left_menu">
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <div class="cat__menu-left__logo">
+                        <a [routerLink]="['apps/screen']">
+                            <img src="{{select_app_icon_url}}" />&nbsp; {{ (select_app_name.length>14)? (select_app_name | slice:0:14)+'..':(select_app_name)
+                            }}
+                        </a>
+                        &nbsp;&nbsp;&nbsp;
+                        <span *ngIf="showDashboardOption" (click)="closeApp(data)" style="cursor: pointer;padding: 5px;" class="badge badge-info mr-6 mb-6">Close App</span>
+                    </div>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['apps/screen']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-cogs"></span>
+                        Settings
+                    </a>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['apps/startup-configuration']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-stack"></span>
+                        Prompts
+                    </a>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['apps/style-configuration']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-svg"></span>
+                        Design
+                    </a>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['menu-configuration']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-menu"></span>
+                        Menu
+                    </a>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['version-management']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-download3"></span>
+                        Publish App and Changes
+                    </a>
+                </li>
+
+                <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['admin-setting']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-envelop"></span>
+                        Admin Settings
+                    </a>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['push-notification']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-notification"></span>
+                        Push Notification
+                    </a>
+                </li>
+                
+                <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['rewards/setting']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-calendar"></span>
+                        Rewards
+                    </a>
+                </li>
+
+                <li class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                    <a [routerLink]="['google-analytics']" (click)="setHeaderMain()">
+                        <span class="cat__menu-left__icon icmn-google"></span>
+                        App Analytics
+                    </a>
+                </li>
+
+            </div>
+            <!--<li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['trash-app']">
+                    <span class="cat__menu-left__icon icmn-cogs"></span>
+                    Trash App
+                </a>
+            </li>-->
+            <!-- <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['fitness-challenge']">
+                    <span class="cat__menu-left__icon icmn-cogs"></span>
+                    Fitness Challenge
+                </a>
+            </li>
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['fitness-challenge-day']">
+                    <span class="cat__menu-left__icon icmn-cogs"></span>
+                    Fitness Challenge Day
+                </a>
+            </li>
+            <li *ngIf="is_access_menu" class="cat__menu-left__item" [routerLinkActive]="['cat__menu-left__item--active']">
+                <a [routerLink]="['fitness-challenge-loops']">
+                    <span class="cat__menu-left__icon icmn-cogs"></span>
+                    Fitness Challenge Loops
+                </a>
+            </li> -->
+        </ul>
+    </div>
+</nav>

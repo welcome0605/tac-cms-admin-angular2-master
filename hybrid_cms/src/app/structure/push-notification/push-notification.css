@@ -1,0 +1,113 @@
+.selected_list_div{
+  display:flex; 
+  justify-content:center; 
+  text-align:center; 
+  border-right: solid 1px #D2D2D2;
+}
+
+#selected_list {
+  display:block; 
+  width:100%;
+  min-height: 330px;
+  border-bottom: none;
+}
+
+#selected_list .device-kind-li {
+  height:50px; 
+  font-size:15px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+}
+
+#selected_list .device-kind-li.active a{
+  color: #0088ff;
+}
+
+.no-message {
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  padding-top: 30px;
+}
+
+.message_content {
+  border-top: solid 1px #D2D2D2;  
+  padding:20px;
+  cursor: pointer;
+}
+
+.message_content:first-child {
+  border-top: none;
+}
+
+.message_content .message_content_div {
+  display:flex; 
+  align-items:center; 
+  font-size:17px;
+}
+
+.message_content_div .push-message-time {
+  right: 1%; 
+  position:absolute;
+}
+
+.message_content .select_item_checkbox {
+  margin-top: 6px;
+  margin-right: 10px;
+  display: none;
+}
+
+.message_content:hover .select_item_checkbox {
+  display: block;
+}
+
+#footer_support { 
+  z-index:1000; 
+  height: 10%;
+  bottom: 0;
+  width: 100%; 
+  box-shadow: 0px 1px 10px 2px #888888; 
+  position: fixed; 
+  background-color: white; 
+  right:0%; 
+  display:flex; 
+  align-items:center;
+}
+
+#footer_support .message-selected-div {
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:2em;
+}
+
+#footer_support .message-selected-div>span {
+  width: 40px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  background-color: #1fa1cb;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+}
+
+#footer_support .message-selected-div {
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:2em;
+}
+
+.device-radio-content input, .device-radio-content label {
+  cursor: pointer;
+}
+
+.send-pushnotification-div .required-text {
+  display: block;
+  font-size: 14px;
+  color: #d9534f!important;
+  text-align: left;
+}

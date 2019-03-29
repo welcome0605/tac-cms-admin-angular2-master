@@ -1,0 +1,144 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "version": "1.0.0-beta.32.3",
+    "name": "clean-ui"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+        "../node_modules/froala-editor/css/froala_style.min.css",
+        "assets/preloader.css",
+        "assets/vendors/by_bower/bootstrap/dist/css/bootstrap.min.css",
+        "assets/vendors/by_bower/jscrollpane/style/jquery.jscrollpane.css",
+        "assets/vendors/by_bower/ladda/dist/ladda-themeless.min.css",
+        "assets/vendors/by_bower/bootstrap-select/dist/css/bootstrap-select.min.css",
+        "assets/vendors/by_bower/select2/dist/css/select2.min.css",
+        "assets/vendors/by_bower/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
+        "assets/vendors/by_bower/bootstrap-sweetalert/dist/sweetalert.css",
+        "assets/vendors/by_bower/summernote/dist/summernote.css",
+        "assets/vendors/by_bower/owl.carousel/dist/assets/owl.carousel.min.css",
+        "assets/vendors/by_bower/nprogress/nprogress.css",
+        "assets/vendors/by_hands/dropify/dist/css/dropify.min.css",
+        "assets/vendors/by_hands/font-linearicons/style.css",
+        "assets/vendors/by_hands/font-icomoon/style.css",
+        "assets/vendors/by_hands/font-awesome/css/font-awesome.min.css",
+        "assets/modules/core/common/core.cleanui.css",
+        "assets/modules/vendors/common/vendors.cleanui.css",
+        "assets/modules/layouts/common/layouts-pack.cleanui.css",
+        "assets/modules/themes/common/themes.cleanui.css",
+        "assets/modules/menu-left/common/menu-left.cleanui.css",
+        "assets/modules/menu-right/common/menu-right.cleanui.css",
+        "assets/modules/top-bar/common/top-bar.cleanui.css",
+        "assets/modules/footer/common/footer.cleanui.css",
+        "assets/modules/pages/common/pages.cleanui.css",
+        "assets/modules/apps/common/apps.cleanui.css",
+        "assets/vendors/by_bower/tags/jquery.tag-editor.css",
+        "assets/modules/custom-assets/common/custom.cleanui.css",
+        "assets/vendors/by_hands/datatables/media/css/dataTables.bootstrap4.min.css",
+        "assets/vendors/by_hands/datatables/media/css/responsive.bootstrap4.min.css",
+        "assets/vendors/by_hands/datatables/media/css/buttons.dataTables.min.css",
+        "assets/vendors/by_hands/image-crop/css/jquery.Jcrop.css",
+        "assets/vendors/by_hands/image-crop/css/style-example.css",
+        "assets/vendors/by_hands/image-crop/css/style.css",
+        "styles.css",
+        "./assets/sass/form-builder.scss",
+        "./assets/sass/form-render.scss",
+        "./assets/sass/manual.scss",
+        "./assets/sass/ngb-tab.scss",
+        "./assets/sass/user-edit.scss",
+        "./assets/sass/tac-pagination.scss"
+      ],
+      "scripts": [
+        "assets/vendors/by_bower/jquery/dist/jquery.js",
+        "assets/vendors/by_bower/tether/dist/js/tether.min.js",
+        "assets/vendors/by_bower/jquery-ui/jquery-ui.min.js",
+        "assets/vendors/by_bower/bootstrap/dist/js/bootstrap.min.js",
+        "assets/vendors/by_bower/jquery-mousewheel/jquery.mousewheel.min.js",
+        "assets/vendors/by_bower/jscrollpane/script/jquery.jscrollpane.min.js",
+        "assets/vendors/by_hands/datatables/media/js/jquery.dataTables.min.js",
+        "assets/vendors/by_hands/datatables/media/js/dataTables.buttons.min.js",
+        "assets/vendors/by_hands/datatables/media/js/buttons.flash.min.js",
+        "assets/vendors/by_hands/datatables/media/js/jszip.min.js",
+        "assets/vendors/by_hands/datatables/media/js/pdfmake.min.js",
+        "assets/vendors/by_hands/datatables/media/js/vfs_fonts.js",
+        "assets/vendors/by_hands/datatables/media/js/buttons.html5.min.js",
+        "assets/vendors/by_hands/datatables/media/js/buttons.print.min.js",
+        "assets/vendors/by_hands/datatables/media/js/dataTables.bootstrap4.min.js",
+        "assets/vendors/by_hands/datatables/media/js/dataTables.responsive.min.js",
+        "assets/vendors/by_hands/datatables/media/js/responsive.bootstrap4.min.js",
+        "assets/vendors/by_bower/spin.js/spin.js",
+        "assets/vendors/by_bower/ladda/dist/ladda.min.js",
+        "assets/vendors/by_bower/bootstrap-select/dist/js/bootstrap-select.min.js",
+        "assets/vendors/by_bower/select2/dist/js/select2.full.min.js",
+        "assets/vendors/by_bower/jquery-mask-plugin/dist/jquery.mask.min.js",
+        "assets/vendors/by_bower/html5-form-validation/dist/jquery.validation.min.js",
+        "assets/vendors/by_bower/autosize/dist/autosize.min.js",
+        "assets/vendors/by_bower/bootstrap-show-password/bootstrap-show-password.min.js",
+        "assets/vendors/by_bower/moment/min/moment.min.js",
+        "assets/vendors/by_bower/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+        "assets/vendors/by_bower/bootstrap-sweetalert/dist/sweetalert.min.js",
+        "assets/vendors/by_bower/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js",
+        "assets/vendors/by_bower/summernote/dist/summernote.min.js",
+        "assets/vendors/by_bower/owl.carousel/dist/owl.carousel.min.js",
+        "assets/vendors/by_bower/nestable/jquery.nestable.js",        
+        "assets/vendors/by_bower/jquery-countTo/jquery.countTo.js",
+        "assets/vendors/by_bower/jquery-steps/build/jquery.steps.min.js",
+        "assets/vendors/by_bower/nprogress/nprogress.js",
+        "assets/vendors/by_bower/jquery-dragarrange/drag-arrange.min.js",
+        "assets/vendors/by_hands/dropify/src/js/dropify.js",
+        "assets/vendors/by_bower/tags/jquery.caret.min.js",
+        "assets/vendors/by_bower/tags/jquery.tag-editor.js",
+        "assets/vendors/by_hands/dragscroll/dragscroll.js",
+        "assets/vendors/by_hands/image-crop/scripts/jquery.Jcrop.js",
+        "assets/vendors/by_hands/image-crop/scripts/jquery.SimpleCropper.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "files": "src/**/*.ts",
+      "project": "src/tsconfig.json"
+    },
+    {
+      "files": "e2e/**/*.ts",
+      "project": "e2e/tsconfig.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {},
+    "serve": {
+      "port": 4300,
+      "host": "0.0.0.0"
+    }
+  }
+}

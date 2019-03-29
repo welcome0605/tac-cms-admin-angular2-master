@@ -1,0 +1,94 @@
+<div id="login-panel" class="login_bg">
+    <div class="container">
+        <div class="login-content">
+            <div class="login-container">
+              <div class="login_row">
+                <div class="login_left">
+                    <div class="login_title">
+                        <h1>Start building</h1>
+                        <h1> your app today!</h1>
+                    </div>
+                    <div class="login_left_content">
+                        <p>The most advanced app technology</p>
+                        <p>for small to large businesses</p>
+                        <div class="logo_wrapper">
+                            <img src="assets/modules/sign-in/img/TAC-logo.png">
+                        </div>
+                    </div>
+                    <div class="social_links">
+                        <div>
+                            <h6>990 Paseo La Cresta
+                                <br> Palos Verdes Estates, CA 90274</h6>
+                            <span class="location-icon">
+                                <img src="assets/modules/sign-in/img/Location.png">
+                            </span>
+                        </div>
+                        <div>
+                            <a href="mailto:support@theappcompany.com">support@theappcompany.com</a>
+                            <span>
+                                <img src="assets/modules/sign-in/img/Mail.png">
+                            </span>
+                        </div>
+                        <!-- <div>
+                            <h6>(11)2626-9058</h6>
+                            <span>
+                                <img src="assets/modules/sign-in/img/Phone.png">
+                            </span>
+                        </div> -->
+                    </div>
+
+                </div>
+                <!--login_left end-->
+                <div class="login_right">
+                    <div class="login_form">
+                        <h2>Welcome</h2>
+                        <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas</p> -->
+                        <p>Login to prepare your app and make changes that take effect in real time. If you have any questions,
+                            once you have logged in, please access the Contact Us section of the platform.</p>
+                        <div *ngIf=" is_error == true " class="alert alert-danger alert-close alertFontSize ">
+                            <button class="close" type="button">
+                                ×
+                            </button>
+                            <strong>{{error_message}}</strong>
+                        </div>
+                        <form #signinForm="ngForm" (ngSubmit)="onSubmit(signinForm)" [formGroup]="form">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" [formControl]="form.controls['email']">
+                                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">Please enter an email address</small>
+                                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">Please enter a valid email address</small>
+                            </div>
+                            <div class="form-group pwd">
+                                <app-show-hide-container [input_group_show]=true>
+                                    <input type="password" #showhideinput class="form-control password" id="pwd" placeholder="Password" name="pwd" [formControl]="form.controls['password']">
+                                </app-show-hide-container>
+                                <!-- <img src="assets/modules/sign-in/img/eye.png"> -->
+                                <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="form-message text-danger">Please enter a valid password</small>
+                            </div>
+                            <!-- <div class="checkbox_round">
+                                <input type="checkbox" id="c1" name="cc" />
+                                <label for="c1">
+                                    <span></span>Keep me Sign in</label>
+                            </div> -->
+                            <button type="submit" class="btn btn-default form-control" [disabled]="!form.valid">Sign In</button>
+                            <div class="bottom_links">
+                                <a href="javascript:void(0);" routerLink="/forgot-password">Forgot Password?</a>
+                                <a href="javascript:void(0);" routerLink="/sign-up" [queryParams]="{ set: 'W06_oe' }">create account</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!--login_form end-->
+                </div>
+                <!--login_right end-->
+            </div>
+            </div>
+            <!--login_row end-->
+
+            <footer class="tac-sign-footer">
+                <p>By using The APP Company Platform you agree to our Privacy Policy & Terms of Service.</p>
+            </footer>
+        </div>
+        <!--row end-->
+    </div>
+    <!--container end-->
+</div>
+<!--login_bg end-->

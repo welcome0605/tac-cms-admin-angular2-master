@@ -1,0 +1,64 @@
+<!-- START: tables/datatables -->
+<section class="card">
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Fitness Challenge Day Loop</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <h5 class="text-black clearfix">
+                  <strong>Fitness Challenge Day Loop Listing</strong>
+                  <a routerLink="/fitness-challenge-loop/add" class="btn add-btn-primary btn-primary pull-right ml-2">Add</a>
+                </h5>
+
+                <div class="mb-5">
+                    <table class="table table-hover" id="fitnessDatatable" width="100%">
+                        <thead>
+                          <tr>
+                              <th>Day</th>
+                              <th>Loop Name</th>
+                              <th>Loop ID</th>
+                              <th>Video URL</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                            <th>Day</th>
+                            <th>Loop Name</th>
+                            <th>Loop ID</th>
+                            <th>Video URL</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </tfoot>
+                        <tbody>
+                          <tr *ngFor="let fitnessdata of fitnessloopData">
+                            <td>{{fitnessdata.day}}</td>
+                            <td>{{fitnessdata.loop_name}}</td>
+                            <td>{{fitnessdata.loop_id}}</td>
+                            <td>{{fitnessdata.video_url}}</td>
+                            <td>
+                              <i *ngIf="fitnessdata.status == '1'" class="s_active fa fa-square"></i>
+                              <i *ngIf="fitnessdata.status == '2'" class="s_inactive fa fa-square"></i>
+                            </td>
+                            <td>
+                              <a routerLink="/fitness-challenge-loop/edit/{{fitnessdata.id}}"><i class="i_delete fa fa-edit"></i>&nbsp;&nbsp;</a>
+
+                              <span class="btn-cursor-pointer swal-btn-cancel" (click)="deleteFitnessLoop(fitnessdata.id)"><i class="i_delete fa fa-trash"></i></span>
+
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+<!-- END: tables/datatables -->
+

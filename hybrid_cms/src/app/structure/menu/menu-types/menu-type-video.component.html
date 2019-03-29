@@ -1,0 +1,46 @@
+<section class="card">
+
+	<div class="card-block">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="mb-5 sub-menu-css-field-part">
+					<form #menuTypeVideo="ngForm">
+						<!-- <div class="form-group row">
+						<label class="col-md-3 col-form-label" for="video_type">Select Video Type</label>
+						<div class="col-md-4">
+						<select class="form-control" id="video_type" name="video_type"
+						[(ngModel)]="typeMenuform.video_type"
+						(ngModelChange)="sendMenuTypeVideoData($event)"
+						>
+						<option value="" selected>Select Video Type</option>
+						<option value="single">Single</option>
+						<option value="play list">Play List</option>
+						</select>
+						</div>
+					</div> -->
+						<!-- <pre>
+						{{getMenuSubCssJsonData | json}}
+					</pre> -->
+
+						<!-- <input type="hidden" name="cssDemo" value="{{getMenuSubCssJsonData | json}}"> -->
+
+						<input type="hidden" name="menuTypeMenuSlugId" value="{{getMenuTypeMenuSlugId}}">
+
+						<div class="form-group row">
+
+							<label class="col-md-3 col-form-label" for="video_url">YouTube Video URL
+								<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="To find your YouTube Video ID, go to the desired YouTube video and look at the URL. After the equals sign (=) you will see a combination of letters and numbers. For example, if the URL was https://www.youtube.com/watch?v=Sj8DD0T7I2k the YouTube Video ID would be Sj8DD0T7I2k."></i>
+							</label>
+							<div class="col-md-8">
+								<input id="video_url" name="video_url" [(ngModel)]="typeMenuform.video_url" class="form-control" placeholder="Enter YouTube Video Url"
+								    type="text" (paste)="sendMenuTypeVideoData($event,null,null,menuTypeVideo)" (ngModelChange)="sendMenuTypeVideoData($event,null,null,menuTypeVideo)"
+								/>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>

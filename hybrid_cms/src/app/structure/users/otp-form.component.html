@@ -1,0 +1,124 @@
+<!-- START: pages/lockscreen -->
+<div class="cat__pages__login cat__pages__login--fullscreen" style="background-image: url(assets/modules/pages/common/img/login/1.jpg)">
+    <div class="cat__pages__login__block cat_page_otp_custom">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="cat__pages__login__block__inner">
+                    <div class="cat__pages__login__block__form otp_matchForm" *ngIf="showOtpForm">
+
+                        <form #otpForm="ngForm" (ngSubmit)="onSubmit(otpForm)" [formGroup]="form" method="POST">
+
+                            <h2 class="text-center">
+                                <i class="fa fa-check"></i>
+                                <strong>Enter Your Otp</strong>
+                            </h2>
+                            <br />
+
+                            <div class="alert alert-success"  *ngIf='is_success'>
+                                <button type="button" class="close">
+                                    &times;
+                                </button>
+                                <strong>{{success_message}}</strong>
+                            </div>
+
+                            <div class="alert alert-danger"  *ngIf='is_error'>
+                                <button type="button" class="close">
+                                   &times;
+                                </button>
+                                <strong>{{error_message}}</strong>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control"
+                                       placeholder="Please enter your otp"
+                                       name="otp"
+                                       type="text"
+                                       [formControl]="form.controls['otp']">
+                                <small *ngIf="form.controls['otp'].hasError('required') && form.controls['otp'].touched" class="form-message text-danger">You must enter otp</small>
+                            </div>
+
+                            <p class="text-left small">Enter your otp that you have received in your email.</p>
+
+                            <div class="form-actions text-center">
+                                <button type="submit" class="btn btn-success" [disabled]="!form.valid">Submit</button>
+                            </div>
+                            <div class="form-group text-center">
+                                <a  routerLink="/sign-in">Sign In</a>
+                                <span class="divider"></span>
+                                <a routerLink="/sign-up">Sign up</a>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="cat__pages__login__block__form otp_matchForm" *ngIf="showPasswordForm">
+
+                        <form #newPassForm="ngForm" (ngSubmit)="onNewPasswordSubmit(newPassForm)" [formGroup]="form1" method="POST">
+
+                            <h2 class="text-center">
+                                <i class="fa fa-check"></i>
+                                <strong>Please enter your new password</strong>
+                            </h2>
+                            <br />
+
+                            <div class="alert alert-success" role="alert" *ngIf='is_success'>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>{{success_message}}</strong>
+                            </div>
+
+                            <div class="alert alert-danger" role="alert" *ngIf='is_error'>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>{{error_message}}</strong>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">New Password</label>
+                                <input class="form-control password"
+                                        name="new_passowrd"
+                                        type="password"
+                                        placeholder="Enter your new password"
+                                        [formControl]="form1.controls['new_passowrd']">
+                                <small *ngIf="form1.controls['new_passowrd'].hasError('required') && form1.controls['new_passowrd'].touched" class="form-message text-danger">You must enter new password</small>
+                                <small class="form-message text-danger" *ngIf="form1.controls['new_passowrd'].touched && form1.controls['new_passowrd'].hasError('matchCorrectPass')">Your password contain atleast one Uppercase Letter,
+                                        <br/> and one number</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Confirm New Password</label>
+                                <input class="form-control password"
+                                       name="new_cnf_password"
+                                       type="password"
+                                       placeholder="Confirm new Password"
+                                       [formControl]="form1.controls['new_cnf_password']">
+
+                                <small *ngIf="form1.controls['new_cnf_password'].hasError('required') && form1.controls['new_cnf_password'].touched" class="form-message text-danger">You must enter new onfirm password</small>
+                                <small *ngIf="form1.controls['new_cnf_password'].errors?.equalTo" class="form-message text-danger">Passwords do not match</small>
+                            </div>
+
+                            <p class="text-left small">Please choose your new password.</p>
+
+                            <div class="form-actions text-center">
+                                <button type="submit" class="btn btn-success" [disabled]="!form1.valid">Submit</button>
+                            </div>
+                            <div class="form-group text-center">
+                                <a routerLink="/sign-in">Sign In</a>
+                                <span class="divider"></span>
+                                <a routerLink="/sign-up">Sign up</a>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cat__pages__login__footer text-center">
+
+    </div>
+</div>
+<!-- END: pages/lockscreen -->

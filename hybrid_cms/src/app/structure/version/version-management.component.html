@@ -1,0 +1,196 @@
+<!-- START: tables/datatables -->
+<section class="card" *ngIf="versionManagementData" >
+
+    <div class="card-header">
+        <span class="cat__core__title">
+            <strong>Publish Management</strong>
+        </span>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <label class="form-label">
+                            The App Publishing Process
+                            <br/>
+                            <br/>1. The first time you publish your app, the status will show as Processing as The APP Company
+                            handles the process of submitting and getting your app approved for the App Store and Google
+                            Play Store.
+                            <br/>2. Once your app is live on the App Store and Google Play Store, you will receive a notification
+                            to your email and the status will change to Published.
+                            <br/>3. With your app now live, you are able to use our platform to make changes to your app's design
+                            and content/features. Changes will reflect immediately upon hitting the Publish Changes button
+                            <br/>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" *ngIf="roleAdminActive">
+                        <button type="button" *ngIf="!show_Publish_btn" class="btn btn-primary pull-right ml-2" data-toggle="modal" data-target="#selectversion">Generate New Version</button>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <button id="publishAppFirst" type="button" class="btn btn-primary mt-2 ml-2" *ngIf="show_Publish_btn" (click)="publishApp()">Publish Now</button>
+                </div>
+
+                <div class="mb-5" *ngIf="!show_Publish_btn && roleAdminActive ">
+                    <span style="font-size: 16px;">Available Versions</span>
+                    <table class="table table-hover" id="versionDatatable" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Version Name</th>
+                                <th>Working Copy</th>
+                                <th>Export</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let versionData of versionManagementData">
+                                <td [ngClass]="{'text-success': versionData.status == 1}">{{versionData.version}}</td>
+                                <td>
+                                    <button *ngIf="versionData.status == 1" class="btn btn-md btn-info-custom mr-2 mb-2">Selected</button>
+                                    <button *ngIf="versionData.status == 4" (click)="publishVersion(versionData.app_unique_id,versionData.id,versionData.version)"
+                                        class="btn btn-sm btn-danger mr-2 mb-2">Select This</button>
+                                </td>
+                                <td>
+                                    <button 
+                                      id="{{versionData.id}}_export"  
+                                      class="btn btn-md btn-warning-custom mr-2 mb-2" 
+                                      [disabled]=" versionData.status == '4' " 
+                                      (click)="GenerateJson(versionData.id)">
+                                      Export JSON                                      
+                                    </button>
+                                </td>
+                                <!-- <td>
+                                     <button class="btn btn-sm btn-warning mr-2 mb-2" (click)="uploadOnFTP(versionData.id)">Publish</button> 
+                                    <button class="btn btn-sm btn-warning mr-2 mb-2">{{versionData.app_publish_status_text}}</button>
+                                </td> -->
+                                <td>
+                                    <!-- (ngModelChange)="changeStatus(ChangeStatusVersion.value)" -->
+                                    <select 
+                                      class="custom-select" 
+                                      id="ChangeStatusVersion" 
+                                      [(ngModel)]="versionData.app_publish_status" 
+                                      (change)="changeStatus(versionData.app_publish_status)"                                      
+                                      #ChangeStatusVersion>
+                                        <option 
+                                          *ngFor="let data of statusList; let i = index" 
+                                          value="{{data.status}}">
+                                            {{data.text}}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <!-- *ngIf=" versionData.version !== '1.0' " [disabled] = " versionData.status == '4' " -->
+                                    <!-- <button type="button" class="btn btn-sm btn-success" [disabled] = " versionData.status == '4' " (click)="changeStatus(ChangeStatusVersion.value)">Publish Now</button> -->
+                                    <button id="{{versionData.id}}_publish" type="button" class="btn btn-md btn-primary btn-primary-custom" [disabled]=" versionData.status == '4'"
+                                        (click)="publishApp()">Publish Changes</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--For user-->
+                <div class="mb-5" *ngIf="!show_Publish_btn && !roleAdminActive">
+                    <span style="font-size: 16px;">Available Versions</span>
+                    <table class="table table-hover" id="versionDatatable" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Version Name</th>
+                                <th>Working Copy</th>
+                                <th>Export</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let versionData of versionManagementData">
+                                <td [ngClass]="{'text-success': versionData.status == 1}">{{versionData.version}}</td>
+                                <td>
+                                    <button *ngIf="versionData.status == 1" class="btn btn-md btn-info-custom mr-2 mb-2">Selected</button>
+                                    <button *ngIf="versionData.status == 4" (click)="publishVersion(versionData.app_unique_id,versionData.id,versionData.version)"
+                                        class="btn btn-sm btn-danger mr-2 mb-2">Select This</button>
+                                </td>
+                                <td>
+                                    <button  
+                                      id="{{versionData.id}}_export"
+                                      class="btn btn-md btn-warning-custom mr-2 mb-2" 
+                                      [disabled]=" versionData.status == '4' " 
+                                      (click)="GenerateJson(versionData.id)">
+                                      Export JSON
+                                    </button>
+                                </td>
+                                <!-- <td>
+                                     <button class="btn btn-sm btn-warning mr-2 mb-2" (click)="uploadOnFTP(versionData.id)">Publish</button> 
+                                    <button class="btn btn-sm btn-warning mr-2 mb-2">{{versionData.app_publish_status_text}}</button>
+                                </td> -->
+                                <td>
+                                    <button class="btn btn-md btn-info-custom  mr-2 mb-2">
+                                      {{versionData.app_publish_status_text}}
+                                    </button>
+                                </td>
+                                <td>
+                                    <!-- *ngIf=" versionData.version !== '1.0' " [disabled] = " versionData.status == '4' " -->
+                                    <!-- <button type="button" class="btn btn-sm btn-success" [disabled] = " versionData.status == '4' " (click)="changeStatus(ChangeStatusVersion.value)">Publish Now</button> -->
+                                    <button id="{{versionData.id}}_publish" type="button" class="btn btn-md btn-primary btn-primary-custom" [disabled]=" versionData.status == '4' || versionData.app_publish_status === 4"
+                                        (click)="publishApp()">Publish Changes</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="selectversion" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Generate New Version</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form #versionForm="ngForm" (ngSubmit)="generateNewJSON(versionForm)" [formGroup]="form">
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-md-6 col-form-label" for="l0">Select Base Version</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="base_version" id="base_version" [formControl]="form.controls['base_version']">
+                                    <option *ngFor="let versionData of versionManagementData" value="{{versionData.version}}">{{versionData.version}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-6 col-form-label" for="l0">New Version Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="new_version" id="new_version" [formControl]="form.controls['new_version']"
+                                    placeholder="Enter Version Name">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="form-group row">
+
+                                <div class="col-md-9">
+                                    <button type="submit" class="btn btn-primary pull-right" [disabled]="!form.valid">Generate Version</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- END: tables/datatables -->
